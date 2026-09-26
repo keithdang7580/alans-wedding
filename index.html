@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp Mời Đám Cưới · Alan & WIFE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Vietnamese:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ─── */
+    :root {
+      --gold:         #c9a84c;
+      --gold-light:   #e8d5a3;
+      --gold-dark:    #8b6914;
+      --red:          #8b1a1a;
+      --red-soft:     #c0392b;
+      --cream:        #faf7f0;
+      --cream-dark:   #f0e8d5;
+      --ivory:        #fffef9;
+      --brown-dark:   #2c1810;
+      --glass-bg:     rgba(255,252,240,0.65);
+      --glass-border: rgba(201,168,76,0.35);
+      --shadow-gold:  0 8px 32px rgba(201,168,76,0.18);
+    }
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'EB Garamond', 'Noto Serif Vietnamese', serif;
+      background: var(--cream);
+      color: var(--brown-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: center; gap: 2rem;
+      padding: 1rem 2rem;
+      background: rgba(250,247,240,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--gold-dark);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--red); }
+
+    /* ─── Hero Section ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 0%, #f5ead0 0%, var(--cream) 65%);
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+    }
+
+    /* Lotus petals background */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60px 90px at 10% 20%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 80px 60px at 90% 15%, rgba(139,26,26,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50px 70px at 80% 80%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 70px 50px at 15% 75%, rgba(139,26,26,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cross-icon {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 2px 8px rgba(201,168,76,0.4));
+      animation: fadeDown 1s ease both;
+    }
+
+    /* ─── Couple Portraits ─── */
+    .couple-portraits {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 2rem 0 1.5rem;
+    }
+    .portrait-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .portrait-card img {
+      width: 180px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 50% 50% 48% 48% / 40% 40% 60% 60%;
+      border: 4px solid var(--gold);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35), 0 2px 8px rgba(44,24,16,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .portrait-card img:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.45);
+    }
+    .portrait-card .portrait-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+    }
+    .portrait-ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      color: var(--gold);
+      align-self: center;
+      line-height: 1;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+    @media (max-width: 480px) {
+      .couple-portraits { gap: 1rem; }
+      .portrait-card img { width: 130px; height: 175px; }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      animation: fadeDown 1s 0.1s ease both;
+    }
+
+    .divider-ornament {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin: 1rem auto;
+      width: fit-content;
+      animation: fadeIn 1s 0.3s ease both;
+    }
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: '';
+      display: block; width: 60px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .divider-ornament span { color: var(--gold); font-size: 1.2rem; }
+
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 300;
+      color: var(--brown-dark);
+      line-height: 1.05;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-names .amp {
+      display: block;
+      font-style: italic;
+      font-size: 0.45em;
+      color: var(--gold);
+      margin: 0.1em 0;
+    }
+
+    .hero-date {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    .hero-location {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--brown-dark);
+      opacity: 0.75;
+      font-style: italic;
+      animation: fadeUp 1s 0.45s ease both;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.85rem 2.5rem;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--ivory);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+      transition: all 0.3s ease;
+      animation: fadeUp 1s 0.55s ease both;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.5);
+    }
+
+    /* Floating lotus */
+    .lotus-float {
+      position: absolute;
+      opacity: 0.08;
+      font-size: 8rem;
+      pointer-events: none;
+      animation: floatSlow 8s ease-in-out infinite;
+    }
+    .lotus-float.left  { left: -1rem; top: 30%; }
+    .lotus-float.right { right: -1rem; bottom: 20%; animation-delay: -4s; }
+
+    /* ─── Countdown ─── */
+    #countdown {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--red) 0%, #5c0e0e 100%);
+      text-align: center;
+      color: var(--gold-light);
+    }
+    .countdown-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+    .countdown-grid {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .countdown-unit {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .countdown-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--gold-light);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .countdown-word {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-top: 0.4rem;
+    }
+
+    /* ─── Section Base ─── */
+    section { padding: 5rem 1.5rem; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      text-align: center;
+      color: var(--brown-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── Story / Our Journey ─── */
+    #story { background: var(--ivory); }
+    .story-grid {
+      max-width: 860px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 640px) {
+      .story-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .story-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-gold);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .story-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .story-card:hover { transform: translateY(-4px); }
+    .story-card-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .story-card-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0.4rem 0 0.6rem;
+      color: var(--brown-dark);
+    }
+    .story-card-body {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #5a3e2b;
+      font-style: italic;
+    }
+
+    /* ─── Schedule / Program ─── */
+    #schedule {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+    }
+    .schedule-list {
+      max-width: 640px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .schedule-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      align-items: start;
+      opacity: 0; transform: translateX(-20px);
+    }
+    .schedule-item.visible {
+      opacity: 1; transform: translateX(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .schedule-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--gold-dark);
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      padding-top: 0.15rem;
+    }
+    .schedule-icon {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .schedule-event-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--brown-dark);
+    }
+    .schedule-event-desc {
+      font-size: 0.85rem;
+      color: #7a5a3e;
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+    .schedule-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.15rem 0.6rem;
+      background: var(--red);
+      color: var(--gold-light);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ─── Venue ─── */
+    #venue { background: var(--ivory); }
+    .venue-cards {
+      max-width: 860px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .venue-cards { grid-template-columns: 1fr 1fr; }
+    }
+    .venue-card {
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: var(--shadow-gold);
+    }
+    .venue-card-header {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      padding: 1.2rem 1.5rem;
+      color: var(--ivory);
+    }
+    .venue-card-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+    .venue-card-header p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .venue-card-body {
+      padding: 1.5rem;
+      background: var(--glass-bg);
+    }
+    .venue-info-row {
+      display: flex; gap: 0.7rem; align-items: flex-start;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: #5a3e2b;
+    }
+    .venue-info-row .icon { flex-shrink: 0; font-size: 1rem; }
+    .venue-map-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.8rem;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold-dark);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .venue-map-btn:hover {
+      background: var(--gold);
+      color: var(--ivory);
+    }
+
+    /* ─── Gallery ─── */
+    #gallery {
+      background: var(--cream-dark);
+      padding: 5rem 1.5rem;
+    }
+    .gallery-scroll {
+      display: flex; gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      max-width: 960px; margin: 0 auto;
+    }
+    .gallery-scroll::-webkit-scrollbar { height: 4px; }
+    .gallery-item {
+      flex: 0 0 280px;
+      height: 360px;
+      border-radius: 4px;
+      scroll-snap-align: start;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .gallery-item-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover .gallery-item-img { transform: scale(1.05); }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--cream-dark), var(--gold-light));
+      color: var(--gold-dark);
+      gap: 0.5rem;
+    }
+    .gallery-placeholder span {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      opacity: 0.7;
+    }
+
+    /* ─── RSVP / Guest Management ─── */
+    #rsvp {
+      background: linear-gradient(180deg, var(--cream) 0%, #f5ead0 100%);
+    }
+    .rsvp-wrapper {
+      max-width: 680px; margin: 0 auto;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex; border-bottom: 2px solid var(--glass-border);
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 0.9rem 1rem;
+      border: none; background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--brown-dark);
+      opacity: 0.5;
+      cursor: pointer;
+      transition: all 0.25s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active {
+      opacity: 1;
+      color: var(--gold-dark);
+      border-bottom-color: var(--gold);
+    }
+    .tab-btn:hover { opacity: 0.85; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 3px;
+      background: rgba(255,252,240,0.8);
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--brown-dark);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+    .form-textarea { resize: vertical; min-height: 90px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+
+    .radio-group {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .radio-label {
+      display: flex; align-items: center; gap: 0.5rem;
+      cursor: pointer; font-size: 0.95rem;
+    }
+    .radio-label input { accent-color: var(--gold-dark); }
+
+    .rsvp-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--ivory);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    .rsvp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.45);
+    }
+    .rsvp-btn:active { transform: translateY(0); }
+
+    /* Success toast */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: #1a5c2a;
+      color: #d4f5de;
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 200;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ─── Guest Dashboard (Admin) ─── */
+    #admin { background: var(--ivory); }
+    .admin-unlock {
+      max-width: 400px; margin: 0 auto; text-align: center;
+    }
+    .admin-pin-row {
+      display: flex; gap: 0.5rem; margin: 1.5rem 0;
+    }
+    .admin-pin-row .form-input {
+      font-size: 1.4rem;
+      text-align: center;
+      letter-spacing: 0.3em;
+    }
+    .admin-unlock-btn {
+      padding: 0.8rem 2rem;
+      background: var(--red);
+      color: var(--ivory);
+      border: none; border-radius: 3px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; letter-spacing: 0.15em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .admin-unlock-btn:hover { background: var(--red-soft); }
+
+    .dashboard { display: none; }
+    .dashboard.active { display: block; }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      max-width: 860px; margin: 0 auto 2.5rem;
+    }
+    .stat-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-gold);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--gold-dark);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #7a5a3e;
+      margin-top: 0.3rem;
+    }
+
+    /* Guest table */
+    .guest-table-wrapper {
+      max-width: 960px; margin: 0 auto;
+      overflow-x: auto;
+      border-radius: 4px;
+      box-shadow: var(--shadow-gold);
+      border: 1px solid var(--glass-border);
+    }
+    .guest-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: var(--glass-bg);
+    }
+    .guest-table thead tr {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    }
+    .guest-table th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      color: var(--ivory);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .guest-table td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      color: var(--brown-dark);
+      vertical-align: middle;
+    }
+    .guest-table tr:last-child td { border-bottom: none; }
+    .guest-table tr:hover td { background: rgba(201,168,76,0.06); }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+    .badge-attending { background: #d4f5de; color: #1a5c2a; }
+    .badge-declined  { background: #fde8e8; color: #8b1a1a; }
+    .badge-pending   { background: #fff3d4; color: #7a5a00; }
+
+    /* Actions */
+    .table-actions {
+      max-width: 960px; margin: 1.5rem auto 0;
+      display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+    }
+    .filter-select {
+      padding: 0.55rem 1rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 3px;
+      background: rgba(255,252,240,0.9);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--brown-dark);
+      cursor: pointer;
+      outline: none;
+    }
+    .export-btn {
+      padding: 0.55rem 1.2rem;
+      background: var(--red);
+      color: var(--ivory);
+      border: none; border-radius: 3px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .export-btn:hover { background: var(--red-soft); }
+    .search-input {
+      flex: 1; min-width: 180px;
+      padding: 0.55rem 1rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 3px;
+      background: rgba(255,252,240,0.9);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--brown-dark);
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .del-btn {
+      background: none; border: none;
+      color: var(--red); cursor: pointer;
+      font-size: 1rem; padding: 0.2rem 0.4rem;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+    .del-btn:hover { background: #fde8e8; }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--brown-dark);
+      color: var(--gold-light);
+    }
+    footer .footer-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    footer p {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      letter-spacing: 0.1em;
+    }
+    footer .footer-cross { color: var(--gold); font-size: 1.4rem; margin-bottom: 0.8rem; }
+
+    /* ─── Animations ─── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-20px) rotate(5deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 480px) {
+      nav { gap: 1rem; font-size: 0.72rem; }
+      .countdown-grid { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <a href="#hero">Home</a>
+  <a href="#story">Câu Chuyện</a>
+  <a href="#schedule">Chương Trình</a>
+  <a href="#venue">Địa Điểm</a>
+  <a href="#gallery">Ảnh</a>
+  <a href="#rsvp">RSVP</a>
+  <a href="#admin">Quản Lý</a>
+</nav>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="lotus-float left">🪷</div>
+  <div class="lotus-float right">🌸</div>
+
+  <div class="cross-icon">✝</div>
+  <p class="hero-eyebrow">Thiệp Mời Hôn Lễ Công Giáo</p>
+
+  <div class="divider-ornament">
+    <span>✦</span>
+  </div>
+
+  <!-- Couple Portraits -->
+  <div class="couple-portraits">
+    <div class="portrait-card">
+      <img src="alan_portrait.jpg" alt="Alan - Groom" />
+      <span class="portrait-name">Alan</span>
+    </div>
+    <div class="portrait-ampersand">&</div>
+    <div class="portrait-card">
+      <img src="wife_portrait.jpg" alt="WIFE - Bride" />
+      <span class="portrait-name">WIFE</span>
+    </div>
+  </div>
+
+  <h1 class="hero-names">
+    Alan
+    <span class="amp">&amp;</span>
+    WIFE
+  </h1>
+
+  <div class="divider-ornament">
+    <span>❧</span>
+  </div>
+
+  <p class="hero-date">Thứ Bảy · 14 Tháng 2 · 2026</p>
+  <p class="hero-location">Nhà Thờ Đức Bà · Thành Phố Hồ Chí Minh</p>
+
+  <a href="#rsvp" class="hero-cta">Xác Nhận Tham Dự →</a>
+</section>
+
+<!-- ── Countdown ── -->
+<div id="countdown">
+  <p class="countdown-label">Đếm Ngược Đến Ngày Trọng Đại</p>
+  <div class="countdown-grid">
+    <div class="countdown-unit"><div class="countdown-num" id="cd-days">--</div><div class="countdown-word">Ngày</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-word">Giờ</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-word">Phút</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-word">Giây</div></div>
+  </div>
+</div>
+
+<!-- ── Our Story ── -->
+<section id="story">
+  <p class="section-subtitle">✦ Our Journey ✦</p>
+  <h2 class="section-title">Câu Chuyện Của Chúng Tôi</h2>
+
+  <div class="story-grid">
+    <div class="story-card" data-animate="fade-up">
+      <div class="story-card-year">2019</div>
+      <div class="story-card-title">✝ Gặp Gỡ Tại Giáo Xứ</div>
+      <div class="story-card-body">Chúng tôi gặp nhau trong đội ca đoàn giáo xứ. Tiếng hát của WIFE đã chạm đến trái tim Alan ngay từ buổi đầu tiên.</div>
+    </div>
+    <div class="story-card" data-animate="fade-up" style="transition-delay:0.1s">
+      <div class="story-card-year">2020</div>
+      <div class="story-card-title">🌸 Tình Yêu Nảy Nở</div>
+      <div class="story-card-body">Qua những buổi cầu nguyện chung, những chuyến thăm từ thiện và những tách trà chiều — tình yêu lặng lẽ nảy mầm.</div>
+    </div>
+    <div class="story-card" data-animate="fade-up" style="transition-delay:0.2s">
+      <div class="story-card-year">2023</div>
+      <div class="story-card-title">💍 Cầu Hôn</div>
+      <div class="story-card-body">Trước mặt gia đình hai bên, bên ngọn nến lung linh của bàn thờ Đức Mẹ, Alan quỳ xuống và WIFE đã nói "Con đồng ý".</div>
+    </div>
+    <div class="story-card" data-animate="fade-up" style="transition-delay:0.3s">
+      <div class="story-card-year">2026</div>
+      <div class="story-card-title">🕊️ Hôn Lễ Thiêng Liêng</div>
+      <div class="story-card-body">Trước Thiên Chúa và những người thân yêu, chúng tôi nguyện yêu thương nhau đến trọn đời — mãi mãi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Schedule ── -->
+<section id="schedule">
+  <p class="section-subtitle">✦ Chương Trình ✦</p>
+  <h2 class="section-title">Ngày Trọng Đại</h2>
+
+  <div class="schedule-list">
+    <div class="schedule-item" data-animate="slide-left">
+      <div class="schedule-time">8:30 SA</div>
+      <div>
+        <span class="schedule-icon">✝</span>
+        <div class="schedule-event-title">Thánh Lễ Hôn Phối</div>
+        <div class="schedule-event-desc">Nhà Thờ Đức Bà Sài Gòn · 1 Công Xã Paris</div>
+        <span class="schedule-badge">Buộc tham dự</span>
+      </div>
+    </div>
+    <div class="schedule-item" data-animate="slide-left" style="transition-delay:0.08s">
+      <div class="schedule-time">10:30 SA</div>
+      <div>
+        <span class="schedule-icon">📸</span>
+        <div class="schedule-event-title">Chụp Ảnh Tập Thể</div>
+        <div class="schedule-event-desc">Khuôn viên Nhà Thờ Đức Bà & Bưu Điện Trung Tâm</div>
+      </div>
+    </div>
+    <div class="schedule-item" data-animate="slide-left" style="transition-delay:0.16s">
+      <div class="schedule-time">11:30 SA</div>
+      <div>
+        <span class="schedule-icon">🎶</span>
+        <div class="schedule-event-title">Cocktail & Âm Nhạc Sống</div>
+        <div class="schedule-event-desc">Trà mạn sen · Âm nhạc truyền thống Việt Nam</div>
+      </div>
+    </div>
+    <div class="schedule-item" data-animate="slide-left" style="transition-delay:0.24s">
+      <div class="schedule-time">12:30 CH</div>
+      <div>
+        <span class="schedule-icon">🍽️</span>
+        <div class="schedule-event-title">Tiệc Cưới</div>
+        <div class="schedule-event-desc">Nhà Hàng Palace · Lầu 3 · 56 Nguyễn Huệ</div>
+        <span class="schedule-badge">Tiệc chính</span>
+      </div>
+    </div>
+    <div class="schedule-item" data-animate="slide-left" style="transition-delay:0.32s">
+      <div class="schedule-time">3:30 CH</div>
+      <div>
+        <span class="schedule-icon">🎂</span>
+        <div class="schedule-event-title">Cắt Bánh Cưới & Ném Hoa Cưới</div>
+        <div class="schedule-event-desc">Cùng nhau chia sẻ niềm vui và lời chúc phúc</div>
+      </div>
+    </div>
+    <div class="schedule-item" data-animate="slide-left" style="transition-delay:0.4s">
+      <div class="schedule-time">5:00 CH</div>
+      <div>
+        <span class="schedule-icon">🕊️</span>
+        <div class="schedule-event-title">Kinh Chiều & Chia Tay</div>
+        <div class="schedule-event-desc">Cầu nguyện bình an cho đôi tân hôn lên đường hưởng tuần trăng mật</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Venue ── -->
+<section id="venue">
+  <p class="section-subtitle">✦ Địa Điểm ✦</p>
+  <h2 class="section-title">Nơi Tổ Chức</h2>
+
+  <div class="venue-cards">
+    <div class="venue-card">
+      <div class="venue-card-header">
+        <h3>Nhà Thờ Đức Bà Sài Gòn</h3>
+        <p>Thánh Lễ Hôn Phối · 8:30 SA</p>
+      </div>
+      <div class="venue-card-body">
+        <div class="venue-info-row"><span class="icon">📍</span><span>1 Công Xã Paris, Phường Bến Nghé, Quận 1, TP.HCM</span></div>
+        <div class="venue-info-row"><span class="icon">⏰</span><span>Xin có mặt trước 8:00 SA — cửa đóng lúc 8:25 SA</span></div>
+        <div class="venue-info-row"><span class="icon">👗</span><span>Trang phục lịch sự, màu sắc nhẹ nhàng (tránh trắng và đen thuần)</span></div>
+        <a href="https://maps.google.com/?q=Notre+Dame+Cathedral+Ho+Chi+Minh+City" target="_blank" class="venue-map-btn">🗺️ Xem Bản Đồ</a>
+      </div>
+    </div>
+
+    <div class="venue-card">
+      <div class="venue-card-header">
+        <h3>Nhà Hàng Palace</h3>
+        <p>Tiệc Cưới · 12:30 CH</p>
+      </div>
+      <div class="venue-card-body">
+        <div class="venue-info-row"><span class="icon">📍</span><span>56 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM · Lầu 3</span></div>
+        <div class="venue-info-row"><span class="icon">🅿️</span><span>Bãi đậu xe miễn phí cho khách mời tại tầng hầm B1</span></div>
+        <div class="venue-info-row"><span class="icon">📞</span><span>Liên hệ: 0909 123 456 (Alan) · 0912 654 321 (WIFE)</span></div>
+        <a href="https://maps.google.com/?q=56+Nguyen+Hue+Ho+Chi+Minh+City" target="_blank" class="venue-map-btn">🗺️ Xem Bản Đồ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Gallery ── -->
+<section id="gallery">
+  <p class="section-subtitle">✦ Kỷ Niệm ✦</p>
+  <h2 class="section-title">Ảnh Đôi Lứa</h2>
+  <div class="gallery-scroll">
+    <div class="gallery-item"><div class="gallery-placeholder">🪷<span>Engagement</span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">✝<span>Giáo Xứ</span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">🌸<span>Pre-Wedding</span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">🎶<span>Ca Đoàn</span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">💍<span>Proposal</span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">🕊️<span>Together</span></div></div>
+  </div>
+  <p style="text-align:center;margin-top:1.2rem;font-size:0.8rem;color:#7a5a3e;font-style:italic;">← Kéo ngang để xem thêm ảnh →</p>
+</section>
+
+<!-- ── RSVP ── -->
+<section id="rsvp">
+  <p class="section-subtitle">✦ RSVP ✦</p>
+  <h2 class="section-title">Xác Nhận Tham Dự</h2>
+  <p style="text-align:center;margin-bottom:2.5rem;font-size:0.9rem;color:#7a5a3e;font-style:italic;">Vui lòng xác nhận trước ngày <strong>15 Tháng 1, 2026</strong></p>
+
+  <div class="rsvp-wrapper">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="rsvp-form">📝 RSVP</button>
+      <button class="tab-btn" data-tab="rsvp-lookup">🔍 Tra Cứu</button>
+      <button class="tab-btn" data-tab="rsvp-wishes">💌 Lời Chúc</button>
+    </div>
+
+    <!-- RSVP Form -->
+    <div id="rsvp-form" class="tab-panel active">
+      <form id="guestForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Họ & Tên *</label>
+            <input type="text" class="form-input" id="guestName" placeholder="Nguyễn Văn A" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số Điện Thoại</label>
+            <input type="tel" class="form-input" id="guestPhone" placeholder="09xx xxx xxx" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="guestEmail" placeholder="ten@email.com" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Mối Quan Hệ</label>
+            <select class="form-select" id="guestRelation">
+              <option value="">— Chọn —</option>
+              <option value="Họ hàng Chú Rể">Họ hàng Chú Rể</option>
+              <option value="Họ hàng Cô Dâu">Họ hàng Cô Dâu</option>
+              <option value="Bạn bè Chú Rể">Bạn bè Chú Rể</option>
+              <option value="Bạn bè Cô Dâu">Bạn bè Cô Dâu</option>
+              <option value="Đồng nghiệp">Đồng nghiệp</option>
+              <option value="Giáo Xứ">Giáo Xứ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số Người Đi Kèm</label>
+            <select class="form-select" id="guestPlusOne">
+              <option value="0">Chỉ mình tôi</option>
+              <option value="1">+ 1 người</option>
+              <option value="2">+ 2 người</option>
+              <option value="3">+ 3 người</option>
+              <option value="4">+ 4 người hoặc hơn</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bạn Có Tham Dự? *</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="attendance" value="attending" /> ✅ Sẽ tham dự</label>
+            <label class="radio-label"><input type="radio" name="attendance" value="declined" /> ❌ Tiếc không đến được</label>
+            <label class="radio-label"><input type="radio" name="attendance" value="maybe" /> 🤔 Chưa chắc</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Yêu Cầu Ăn Kiêng</label>
+          <select class="form-select" id="guestDiet">
+            <option value="none">Không có</option>
+            <option value="vegetarian">Chay</option>
+            <option value="gluten-free">Không Gluten</option>
+            <option value="halal">Halal</option>
+            <option value="other">Khác (ghi chú bên dưới)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lời Chúc / Ghi Chú</label>
+          <textarea class="form-textarea" id="guestMessage" placeholder="Kính chúc cô dâu chú rể..."></textarea>
+        </div>
+        <button type="submit" class="rsvp-btn">Xác Nhận Ngay ✝</button>
+      </form>
+    </div>
+
+    <!-- Lookup -->
+    <div id="rsvp-lookup" class="tab-panel">
+      <div class="form-group">
+        <label class="form-label">Tìm Theo Tên Hoặc SĐT</label>
+        <input type="text" class="form-input" id="lookupInput" placeholder="Nhập tên hoặc số điện thoại..." />
+      </div>
+      <button class="rsvp-btn" onclick="lookupGuest()" style="margin-bottom:1.5rem">🔍 Tìm Kiếm</button>
+      <div id="lookupResult" style="font-style:italic;color:#7a5a3e;text-align:center;"></div>
+    </div>
+
+    <!-- Wishes -->
+    <div id="rsvp-wishes" class="tab-panel">
+      <div id="wishes-list" style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;"></div>
+      <div style="text-align:center;font-style:italic;color:#7a5a3e;font-size:0.85rem;" id="wishes-empty">Hãy là người đầu tiên gửi lời chúc phúc 💌</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Admin Dashboard ── -->
+<section id="admin">
+  <p class="section-subtitle">✦ Quản Lý Khách Mời ✦</p>
+  <h2 class="section-title">Bảng Điều Khiển</h2>
+
+  <div class="admin-unlock" id="adminLock">
+    <p style="font-style:italic;color:#7a5a3e;margin-bottom:0.5rem;font-size:0.9rem;">Dành cho Alan & WIFE — nhập mã PIN để tiếp tục</p>
+    <div class="admin-pin-row">
+      <input type="password" class="form-input" id="adminPin" placeholder="PIN" maxlength="6" />
+    </div>
+    <button class="admin-unlock-btn" onclick="unlockAdmin()">🔓 Mở Khóa</button>
+    <p style="margin-top:0.8rem;font-size:0.75rem;color:#7a5a3e;opacity:0.7;">(Demo PIN: 2026)</p>
+  </div>
+
+  <div class="dashboard" id="adminDash">
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Tổng Khách</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-attending">0</div><div class="stat-label">Tham Dự</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-declined">0</div><div class="stat-label">Vắng Mặt</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-pending">0</div><div class="stat-label">Chờ Xác Nhận</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-seats">0</div><div class="stat-label">Tổng Chỗ Ngồi</div></div>
+    </div>
+
+    <!-- Filters & Actions -->
+    <div class="table-actions">
+      <input type="text" class="search-input" id="adminSearch" placeholder="🔍 Tìm theo tên..." oninput="renderTable()" />
+      <select class="filter-select" id="filterStatus" onchange="renderTable()">
+        <option value="all">Tất Cả Trạng Thái</option>
+        <option value="attending">Tham Dự</option>
+        <option value="declined">Vắng Mặt</option>
+        <option value="maybe">Chưa Chắc</option>
+        <option value="pending">Chờ Xác Nhận</option>
+      </select>
+      <select class="filter-select" id="filterRelation" onchange="renderTable()">
+        <option value="all">Tất Cả Nhóm</option>
+        <option value="Họ hàng Chú Rể">Họ hàng Chú Rể</option>
+        <option value="Họ hàng Cô Dâu">Họ hàng Cô Dâu</option>
+        <option value="Bạn bè Chú Rể">Bạn bè Chú Rể</option>
+        <option value="Bạn bè Cô Dâu">Bạn bè Cô Dâu</option>
+        <option value="Giáo Xứ">Giáo Xứ</option>
+        <option value="Đồng nghiệp">Đồng nghiệp</option>
+      </select>
+      <button class="export-btn" onclick="exportCSV()">📥 Xuất CSV</button>
+    </div>
+
+    <!-- Table -->
+    <div class="guest-table-wrapper" style="margin-top:1rem;">
+      <table class="guest-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Họ & Tên</th>
+            <th>SĐT</th>
+            <th>Mối Quan Hệ</th>
+            <th>+Khách</th>
+            <th>Trạng Thái</th>
+            <th>Ăn Kiêng</th>
+            <th>Ngày Đăng Ký</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="guestTableBody">
+          <tr><td colspan="9" style="text-align:center;font-style:italic;color:#7a5a3e;padding:2rem;">Chưa có khách mời nào</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-cross">✝</div>
+  <div class="footer-names">Alan &amp; WIFE</div>
+  <p>14 Tháng 2 · 2026 · Sài Gòn</p>
+  <p style="margin-top:0.8rem;font-size:0.7rem;">"Tình yêu kiên nhẫn, tình yêu nhân hậu" — 1 Cor 13:4</p>
+  <p style="margin-top:1.5rem;opacity:0.35;">"Love is patient, love is kind." — 1 Corinthians 13:4</p>
+</footer>
+
+<!-- ── Toast ── -->
+<div class="toast" id="toast">✅ <span id="toastMsg">Đã xác nhận!</span></div>
+
+<script>
+// ─── Data Store (localStorage) ───────────────────────────────
+const STORAGE_KEY = 'alan_wife_wedding_guests';
+
+function getGuests() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+function saveGuests(list) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+}
+
+// Seed demo guests on first load
+function seedDemoGuests() {
+  if (getGuests().length > 0) return;
+  const demo = [
+    { id: uid(), name: 'Nguyễn Thị Mai',   phone: '0901234567', email: 'mai@email.com', relation: 'Họ hàng Cô Dâu',  plusOne: 1, attendance: 'attending', diet: 'none',       message: 'Chúc mừng hạnh phúc!', date: '2025-12-01' },
+    { id: uid(), name: 'Trần Văn Hùng',    phone: '0912345678', email: '',               relation: 'Bạn bè Chú Rể',   plusOne: 0, attendance: 'attending', diet: 'vegetarian', message: '', date: '2025-12-02' },
+    { id: uid(), name: 'Lê Thị Phương',    phone: '0923456789', email: '',               relation: 'Giáo Xứ',         plusOne: 2, attendance: 'maybe',     diet: 'none',       message: 'Cầu nguyện cho đôi bạn!', date: '2025-12-05' },
+    { id: uid(), name: 'Phạm Minh Khoa',   phone: '0934567890', email: '',               relation: 'Đồng nghiệp',     plusOne: 1, attendance: 'declined',  diet: 'none',       message: 'Tiếc quá! Chúc hạnh phúc nhé.', date: '2025-12-08' },
+    { id: uid(), name: 'Hoàng Thị Lan',    phone: '0945678901', email: '',               relation: 'Họ hàng Chú Rể',  plusOne: 3, attendance: 'attending', diet: 'gluten-free',message: '💕', date: '2025-12-10' },
+    { id: uid(), name: 'Vũ Thanh Tùng',    phone: '0956789012', email: '',               relation: 'Bạn bè Cô Dâu',   plusOne: 0, attendance: 'attending', diet: 'none',       message: '', date: '2025-12-11' },
+  ];
+  saveGuests(demo);
+}
+
+function uid() { return Math.random().toString(36).slice(2, 10); }
+
+// ─── Countdown ───────────────────────────────────────────────
+const weddingDate = new Date('2026-02-14T08:30:00+07:00');
+
+function updateCountdown() {
+  const now  = new Date();
+  const diff = weddingDate - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent  = '0';
+    document.getElementById('cd-hours').textContent = '0';
+    document.getElementById('cd-mins').textContent  = '0';
+    document.getElementById('cd-secs').textContent  = '0';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ─── Scroll Animations ───────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// ─── Tabs ─────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    if (target === 'rsvp-wishes') renderWishes();
+  });
+});
+
+// ─── Toast ───────────────────────────────────────────────────
+function showToast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  const m = document.getElementById('toastMsg');
+  t.style.background = isError ? '#8b1a1a' : '#1a5c2a';
+  t.children[0].textContent = isError ? '❌' : '✅';
+  m.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ─── RSVP Form ───────────────────────────────────────────────
+document.getElementById('guestForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name       = document.getElementById('guestName').value.trim();
+  const phone      = document.getElementById('guestPhone').value.trim();
+  const email      = document.getElementById('guestEmail').value.trim();
+  const relation   = document.getElementById('guestRelation').value;
+  const plusOne    = parseInt(document.getElementById('guestPlusOne').value, 10);
+  const diet       = document.getElementById('guestDiet').value;
+  const message    = document.getElementById('guestMessage').value.trim();
+  const radioEl    = document.querySelector('input[name="attendance"]:checked');
+
+  if (!name) { showToast('Vui lòng nhập họ & tên', true); return; }
+  if (!radioEl) { showToast('Vui lòng chọn trạng thái tham dự', true); return; }
+
+  const guests = getGuests();
+  const existing = guests.findIndex(g =>
+    g.name.toLowerCase() === name.toLowerCase() ||
+    (phone && g.phone === phone)
+  );
+
+  const entry = {
+    id: existing >= 0 ? guests[existing].id : uid(),
+    name, phone, email, relation,
+    plusOne, attendance: radioEl.value,
+    diet, message,
+    date: new Date().toISOString().split('T')[0]
+  };
+
+  if (existing >= 0) {
+    guests[existing] = entry;
+    showToast(`Đã cập nhật thông tin của ${name}!`);
+  } else {
+    guests.push(entry);
+    showToast(`Cảm ơn ${name}! Chúng tôi rất vui được gặp bạn 💛`);
+  }
+
+  saveGuests(guests);
+  this.reset();
+  renderStats();
+});
+
+// ─── Lookup ──────────────────────────────────────────────────
+function lookupGuest() {
+  const q = document.getElementById('lookupInput').value.trim().toLowerCase();
+  const resultEl = document.getElementById('lookupResult');
+  if (!q) { resultEl.textContent = 'Vui lòng nhập tên hoặc số điện thoại'; return; }
+
+  const found = getGuests().filter(g =>
+    g.name.toLowerCase().includes(q) || g.phone.includes(q)
+  );
+
+  if (!found.length) {
+    resultEl.innerHTML = '<span style="color:#8b1a1a">Không tìm thấy khách mời này.</span>';
+    return;
+  }
+
+  resultEl.innerHTML = found.map(g => {
+    const badge = badgeFor(g.attendance);
+    return `<div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:4px;padding:1rem;margin-bottom:0.8rem;text-align:left;">
+      <strong>${g.name}</strong> &nbsp; ${badge}
+      <br/><span style="font-size:0.82rem;color:#7a5a3e;">${g.phone || '—'} · ${g.relation || '—'} · +${g.plusOne} người</span>
+      ${g.message ? `<br/><em style="font-size:0.82rem;">"${g.message}"</em>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ─── Wishes ──────────────────────────────────────────────────
+function renderWishes() {
+  const list = getGuests().filter(g => g.message);
+  const el = document.getElementById('wishes-list');
+  const empty = document.getElementById('wishes-empty');
+  if (!list.length) { el.innerHTML = ''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  el.innerHTML = list.map(g => `
+    <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:4px;padding:1.2rem;backdrop-filter:blur(8px);">
+      <p style="font-style:italic;color:var(--brown-dark);line-height:1.7;">"${g.message}"</p>
+      <p style="font-size:0.78rem;color:var(--gold-dark);margin-top:0.5rem;font-family:'Cormorant Garamond',serif;font-weight:600;">— ${g.name}</p>
+    </div>
+  `).join('');
+}
+
+// ─── Admin Dashboard ─────────────────────────────────────────
+function unlockAdmin() {
+  const pin = document.getElementById('adminPin').value;
+  if (pin === '2026') {
+    document.getElementById('adminLock').style.display = 'none';
+    document.getElementById('adminDash').classList.add('active');
+    renderStats();
+    renderTable();
+  } else {
+    showToast('PIN không đúng. Vui lòng thử lại.', true);
+  }
+}
+
+document.getElementById('adminPin').addEventListener('keydown', e => {
+  if (e.key === 'Enter') unlockAdmin();
+});
+
+function badgeFor(status) {
+  const map = {
+    attending: '<span class="badge badge-attending">Tham Dự</span>',
+    declined:  '<span class="badge badge-declined">Vắng Mặt</span>',
+    maybe:     '<span class="badge badge-pending">Chưa Chắc</span>',
+    pending:   '<span class="badge badge-pending">Chờ XN</span>',
+  };
+  return map[status] || map['pending'];
+}
+
+function renderStats() {
+  const guests = getGuests();
+  const attending = guests.filter(g => g.attendance === 'attending');
+  const declined  = guests.filter(g => g.attendance === 'declined');
+  const maybe     = guests.filter(g => g.attendance === 'maybe' || g.attendance === 'pending');
+  const seats     = attending.reduce((acc, g) => acc + 1 + (g.plusOne || 0), 0);
+
+  document.getElementById('stat-total').textContent     = guests.length;
+  document.getElementById('stat-attending').textContent = attending.length;
+  document.getElementById('stat-declined').textContent  = declined.length;
+  document.getElementById('stat-pending').textContent   = maybe.length;
+  document.getElementById('stat-seats').textContent     = seats;
+}
+
+function renderTable() {
+  const q        = (document.getElementById('adminSearch')?.value || '').toLowerCase();
+  const status   = document.getElementById('filterStatus')?.value || 'all';
+  const relation = document.getElementById('filterRelation')?.value || 'all';
+
+  const guests = getGuests().filter(g => {
+    const nameMatch = g.name.toLowerCase().includes(q);
+    const stMatch   = status   === 'all' || g.attendance === status;
+    const relMatch  = relation === 'all' || g.relation === relation;
+    return nameMatch && stMatch && relMatch;
+  });
+
+  const tbody = document.getElementById('guestTableBody');
+  if (!guests.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;font-style:italic;color:#7a5a3e;padding:2rem;">Không tìm thấy khách mời</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = guests.map((g, i) => `
+    <tr>
+      <td style="color:#b0906a;font-size:0.8rem;">${i + 1}</td>
+      <td><strong>${g.name}</strong>${g.email ? `<br/><span style="font-size:0.75rem;color:#7a5a3e;">${g.email}</span>` : ''}</td>
+      <td style="white-space:nowrap;">${g.phone || '—'}</td>
+      <td style="font-size:0.85rem;">${g.relation || '—'}</td>
+      <td style="text-align:center;">+${g.plusOne || 0}</td>
+      <td>${badgeFor(g.attendance)}</td>
+      <td style="font-size:0.82rem;">${dietLabel(g.diet)}</td>
+      <td style="font-size:0.75rem;white-space:nowrap;">${g.date || '—'}</td>
+      <td><button class="del-btn" onclick="deleteGuest('${g.id}')" title="Xóa">🗑️</button></td>
+    </tr>
+  `).join('');
+}
+
+function dietLabel(d) {
+  const map = { none: '—', vegetarian: '🥦 Chay', 'gluten-free': '🌾 GF', halal: '☪️ Halal', other: '⚠️ Khác' };
+  return map[d] || d || '—';
+}
+
+function deleteGuest(id) {
+  if (!confirm('Xóa khách mời này?')) return;
+  const updated = getGuests().filter(g => g.id !== id);
+  saveGuests(updated);
+  renderStats();
+  renderTable();
+  showToast('Đã xóa khách mời.');
+}
+
+function exportCSV() {
+  const guests = getGuests();
+  const header = ['Tên','SĐT','Email','Mối Quan Hệ','+Khách','Trạng Thái','Ăn Kiêng','Ngày Đăng Ký'];
+  const rows   = guests.map(g => [
+    g.name, g.phone, g.email, g.relation, g.plusOne,
+    g.attendance, g.diet, g.date
+  ].map(v => `"${String(v || '').replace(/"/g, '""')}"`));
+
+  const csv  = [header, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'alan_wife_wedding_guests.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── Init ─────────────────────────────────────────────────────
+seedDemoGuests();
+renderStats();
+</script>
+</body>
+</html>
