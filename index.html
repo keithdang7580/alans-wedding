@@ -531,7 +531,7 @@
       </div>
     </div>
     <div class="schedule-item">
-      <div class="schedule-time">11:30 AM</div>
+      <div class="schedule-time">1:00 PM</div>
       <div>
         <span class="schedule-icon">🎶</span>
         <div class="schedule-event-title" data-i18n="sch_3_title">Cocktail &amp; Đón Khách</div>
@@ -539,7 +539,7 @@
       </div>
     </div>
     <div class="schedule-item">
-      <div class="schedule-time">12:30 PM</div>
+      <div class="schedule-time">2:00 PM</div>
       <div>
         <span class="schedule-icon">🍽️</span>
         <div class="schedule-event-title" data-i18n="sch_4_title">Tiệc Cưới</div>
@@ -577,7 +577,7 @@
     <div class="venue-card tilt-card">
       <div class="venue-card-header">
         <h3 data-i18n="v2_title">White Palace Banquet Restaurant</h3>
-        <p data-i18n="v2_sub">Tiệc Cưới · 12:30 PM</p>
+        <p data-i18n="v2_sub">Tiệc Cưới · 2:00 PM</p>
       </div>
       <div class="venue-card-body">
         <div class="venue-info-row"><span class="icon">📍</span><span data-i18n="v2_addr">15351 Brookhurst St #104, Westminster, CA 92683 (Little Saigon)</span></div>
@@ -1240,7 +1240,7 @@ const translations = {
     v1_title: "Christ Our Savior Catholic Parish", v1_sub: "Thánh Lễ Hôn Phối · 8:30 AM",
     v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_time: "Xin có mặt trước 8:00 AM — cửa đóng lúc 8:25 AM",
     v1_contact: "Điện thoại nhà thờ: (714) 444-1500 · www.coscp.org",
-    v2_title: "White Palace Banquet Restaurant", v2_sub: "Tiệc Cưới · 12:30 PM",
+    v2_title: "White Palace Banquet Restaurant", v2_sub: "Tiệc Cưới · 2:00 PM",
     v2_addr: "15351 Brookhurst St #104, Westminster, CA 92683 (Little Saigon)", v2_park: "Bãi đậu xe rộng rãi, miễn phí dành cho khách mời",
     v2_contact: "Điện thoại nhà hàng: (714) 775-8828 · (714) 123-4567 (Alan)",
     map_btn: "🗺️ Bản Đồ", gcal_btn: "📅 Google Cal", ical_btn: " Apple Cal", uber_btn: "🚗 Đặt Xe Uber/Lyft",
@@ -1298,7 +1298,7 @@ const translations = {
     v1_title: "Christ Our Savior Catholic Parish", v1_sub: "Holy Matrimony · 8:30 AM",
     v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_time: "Please arrive by 8:00 AM — doors close at 8:25 AM",
     v1_contact: "Church Phone: (714) 444-1500 · www.coscp.org",
-    v2_title: "White Palace Banquet Restaurant", v2_sub: "Wedding Reception · 12:30 PM",
+    v2_title: "White Palace Banquet Restaurant", v2_sub: "Wedding Reception · 2:00 PM",
     v2_addr: "15351 Brookhurst St #104, Westminster, CA 92683 (Little Saigon)", v2_park: "Free guest parking on premises",
     v2_contact: "Restaurant Phone: (714) 775-8828 · (714) 123-4567 (Alan)",
     map_btn: "🗺️ Open Map", gcal_btn: "📅 Google Cal", ical_btn: " Apple Cal", uber_btn: "🚗 Book Uber/Lyft",
@@ -1368,7 +1368,7 @@ function addToGoogleCalendar(type) {
     title = encodeURIComponent("Alan & WIFE - Wedding Reception at White Palace");
     details = encodeURIComponent("Tiệc Cưới của Alan & WIFE tại Nhà Hàng White Palace");
     location = encodeURIComponent("White Palace Banquet Restaurant, 15351 Brookhurst St #104, Westminster, CA 92683");
-    st = "20260214T203000Z"; et = "20260215T003000Z";
+    st = "20260214T220000Z"; et = "20260215T020000Z";
   }
   window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${st}/${et}`, '_blank');
 }
@@ -1381,7 +1381,7 @@ function downloadICS(type) {
     dtStart = "20260214T083000"; dtEnd   = "20260214T100000";
   } else {
     title = "Alan & WIFE - Wedding Reception at White Palace"; desc  = "Wedding Reception of Alan & WIFE";
-    loc   = "15351 Brookhurst St #104, Westminster, CA 92683"; dtStart = "20260214T123000"; dtEnd   = "20260214T163000";
+    loc   = "15351 Brookhurst St #104, Westminster, CA 92683"; dtStart = "20260214T140000"; dtEnd   = "20260214T180000";
   }
   const icsData = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AlanWifeWedding//EN\nBEGIN:VEVENT\nSUMMARY:${title}\nDESCRIPTION:${desc}\nLOCATION:${loc}\nDTSTART:${dtStart}\nDTEND:${dtEnd}\nEND:VEVENT\nEND:VCALENDAR`;
   const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
