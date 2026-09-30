@@ -420,11 +420,36 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* ─── Mobile Bottom Glassmorphic Dock (Phase 2) ─── */
+    .mobile-bottom-dock {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
+      background: rgba(44, 24, 16, 0.94);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--gold);
+      border-radius: 18px 18px 0 0;
+      padding: 0.5rem 0.8rem 0.6rem;
+      box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .mobile-bottom-dock { display: flex; justify-content: space-around; align-items: center; }
+      .floating-rsvp-fab { display: none !important; }
+      .music-widget { bottom: 4.8rem; left: 1rem; }
+      body { padding-bottom: 4rem; }
+    }
+    .dock-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--gold-light); text-decoration: none; border: none; background: transparent;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer; transition: transform 0.2s; flex: 1;
+    }
+    .dock-item:active { transform: scale(0.92); }
+    .dock-icon { font-size: 1.25rem; margin-bottom: 0.15rem; }
+    .dock-rsvp { color: var(--gold); font-weight: 700; }
+
     @media (max-width: 600px) {
       nav { padding: 0.6rem 1rem; flex-direction: column; gap: 0.6rem; }
       .nav-links { gap: 0.8rem; font-size: 0.72rem; flex-wrap: wrap; justify-content: center; }
-      .music-widget { bottom: 1rem; left: 1rem; padding: 0.3rem 0.8rem 0.3rem 0.5rem; }
-      .floating-rsvp-fab { bottom: 1rem; right: 1rem; padding: 0.6rem 1rem; font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -451,6 +476,26 @@
     <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
   </div>
   <span class="music-text" id="musicStatusText">Nhạc Nền: Canon in D</span>
+</div>
+
+<!-- ── Mobile Bottom Glassmorphic Dock ── -->
+<div class="mobile-bottom-dock" id="mobileDock">
+  <a href="#cathedralBanner" class="dock-item">
+    <span class="dock-icon">✝</span>
+    <span class="dock-label" data-i18n="dock_mass">Thánh Lễ</span>
+  </a>
+  <a href="#venue" class="dock-item">
+    <span class="dock-icon">🍷</span>
+    <span class="dock-label" data-i18n="dock_party">Tiệc Cưới</span>
+  </a>
+  <a href="#rsvp" class="dock-item dock-rsvp">
+    <span class="dock-icon">💌</span>
+    <span class="dock-label" data-i18n="dock_rsvp">RSVP</span>
+  </a>
+  <button class="dock-item" onclick="toggleLangMobile()">
+    <span class="dock-icon">🌐</span>
+    <span class="dock-label" id="dockLangText">VI | EN</span>
+  </button>
 </div>
 
 <!-- ── Navigation ── -->
@@ -615,7 +660,8 @@
           <a href="https://maps.google.com/?q=Christ+Our+Savior+Catholic+Parish+2002+W+Alton+Ave+Santa+Ana+CA+92704" target="_blank" class="btn-sm" data-i18n="map_btn">🗺️ Bản Đồ</a>
           <button class="btn-sm" onclick="addToGoogleCalendar('mass')" data-i18n="gcal_btn">📅 Google Cal</button>
           <button class="btn-sm" onclick="downloadICS('mass')" data-i18n="ical_btn"> Apple Cal</button>
-          <a href="https://m.uber.com" target="_blank" class="btn-sm" data-i18n="uber_btn">🚗 Đặt Xe Uber/Lyft</a>
+          <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=33.7226&dropoff[longitude]=-117.8967&dropoff[nickname]=Christ%20Our%20Savior%20Parish&dropoff[formatted_address]=2002%20W%20Alton%20Ave%2C%20Santa%20Ana%2C%20CA%2092704" target="_blank" class="btn-sm">🚗 Uber</a>
+          <a href="https://lyft.com/ride?id=lyft&destination[latitude]=33.7226&destination[longitude]=-117.8967" target="_blank" class="btn-sm">🚘 Lyft</a>
         </div>
       </div>
     </div>
@@ -634,7 +680,8 @@
           <a href="https://maps.google.com/?q=White+Palace+15351+Brookhurst+St+104+Westminster+CA+92683" target="_blank" class="btn-sm" data-i18n="map_btn">🗺️ Bản Đồ</a>
           <button class="btn-sm" onclick="addToGoogleCalendar('reception')" data-i18n="gcal_btn">📅 Google Cal</button>
           <button class="btn-sm" onclick="downloadICS('reception')" data-i18n="ical_btn"> Apple Cal</button>
-          <a href="https://m.uber.com" target="_blank" class="btn-sm" data-i18n="uber_btn">🚗 Đặt Xe Uber/Lyft</a>
+          <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=33.7486&dropoff[longitude]=-117.9545&dropoff[nickname]=White%20Palace%20Banquet&dropoff[formatted_address]=15351%20Brookhurst%20St%20%23104%2C%20Westminster%2C%20CA%2092683" target="_blank" class="btn-sm">🚗 Uber</a>
+          <a href="https://lyft.com/ride?id=lyft&destination[latitude]=33.7486&destination[longitude]=-117.9545" target="_blank" class="btn-sm">🚘 Lyft</a>
         </div>
       </div>
     </div>
@@ -1268,7 +1315,7 @@ const translations = {
   vi: {
     nav_home: "Trang Chủ", nav_story: "Câu Chuyện", nav_schedule: "Chương Trình", nav_venue: "Địa Điểm",
     nav_etiquette: "Trang Phục", nav_seating: "Bàn Tiệc", nav_photos: "Góc Ảnh", nav_rsvp: "RSVP", nav_admin: "Quản Lý",
-    fab_rsvp: "Xác Nhận Tham Dự",
+    fab_rsvp: "Xác Nhận Tham Dự", dock_mass: "Thánh Lễ", dock_party: "Tiệc Cưới", dock_rsvp: "RSVP",
     hero_eyebrow: "Thiệp Mời Hôn Lễ Công Giáo", groom_name: "Alan", bride_name: "Bảo Huỳnh",
     hero_date: "Thứ Bảy · 14 Tháng 2 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "Xác Nhận Tham Dự →",
     flyover_title: "Christ Our Savior Catholic Parish", flyover_sub: "Santa Ana, California ✝ Linh mục Chủ tế: Rev. Thanh-Tai Nguyen · (714) 444-1500",
@@ -1328,7 +1375,7 @@ const translations = {
   en: {
     nav_home: "Home", nav_story: "Our Story", nav_schedule: "Schedule", nav_venue: "Venues",
     nav_etiquette: "Dress Code", nav_seating: "Seating", nav_photos: "Photos", nav_rsvp: "RSVP", nav_admin: "Admin",
-    fab_rsvp: "RSVP Now",
+    fab_rsvp: "RSVP Now", dock_mass: "Holy Mass", dock_party: "Reception", dock_rsvp: "RSVP",
     hero_eyebrow: "Catholic Holy Matrimony Invitation", groom_name: "Alan", bride_name: "Bao Huynh",
     hero_date: "Saturday · February 14 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "Confirm Attendance →",
     flyover_title: "Christ Our Savior Catholic Parish", flyover_sub: "Santa Ana, California ✝ Officiating Priest: Rev. Thanh-Tai Nguyen · (714) 444-1500",
@@ -1404,8 +1451,49 @@ function setLanguage(lang) {
     }
   });
 
+  const dockText = document.getElementById('dockLangText');
+  if (dockText) dockText.textContent = lang === 'vi' ? '🇻🇳 VI' : '🇬🇧 EN';
+
   if (typeof renderStats === 'function') renderStats();
   if (typeof renderTable === 'function') renderTable();
+}
+
+function toggleLangMobile() {
+  const nextLang = currentLang === 'vi' ? 'en' : 'vi';
+  setLanguage(nextLang);
+}
+
+function selectPaletteColor(el, colorKey) {
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+  if (el) el.classList.add('selected');
+  const infoEl = document.getElementById('paletteTesterInfo');
+  if (!infoEl) return;
+  const colorData = {
+    gold: {
+      vi: "✨ <strong>Vàng Ánh Kim / Champagne Gold</strong>: Quý phái &amp; Thanh lịch. Đầm dạ hội Champagne Gold, Vàng Ánh Kim hoặc Suit kết hợp gài áo tone Vàng.",
+      en: "✨ <strong>Champagne Gold</strong>: Noble &amp; Elegant. Champagne gold evening dresses, metallic gold accents, or suits with gold lapel pins."
+    },
+    sage: {
+      vi: "🌿 <strong>Xanh Thẫm / Sage Green</strong>: Trang nhã &amp; Tự nhiên. Tông Xanh Thẫm/Xanh Olive nhẹ nhàng, phù hợp không gian ấm cúng của Giáo xứ.",
+      en: "🌿 <strong>Sage / Olive Green</strong>: Subtle &amp; Natural. Muted Sage or Olive tones, perfect for the sacred parish ambiance."
+    },
+    rose: {
+      vi: "🌸 <strong>Hồng Đất / Rose Dust</strong>: Lãng mạn &amp; Ấm áp. Đầm Rose Dust, Hồng Đất hoặc Nude Pink kết hợp phụ kiện ánh kim.",
+      en: "🌸 <strong>Rose Dust / Blush Pink</strong>: Romantic &amp; Warm. Dusty Rose or Nude Pink dresses paired with subtle metallic accessories."
+    },
+    ivory: {
+      vi: "📜 <strong>Kem Ấm / Warm Cream &amp; Ivory</strong>: Trang trọng. Tông Kem Ấm, Kem Be (Lưu ý tránh màu Trắng Thuần dành riêng cho Cô Dâu).",
+      en: "📜 <strong>Warm Cream &amp; Ivory</strong>: Formal Warm Cream or Beige. (Kindly avoid solid white reserved for the Bride)."
+    },
+    navy: {
+      vi: "🌌 <strong>Xanh Đen / Midnight Navy</strong>: Lịch lãm &amp; Sang trọng. Vest Nam Xanh Đen Navy hoặc Đầm Dạ Hội Xanh Đêm huyền bí.",
+      en: "🌌 <strong>Midnight Navy</strong>: Classic &amp; Sharp. Navy Blue suits or Midnight Blue evening gowns."
+    }
+  };
+  const data = colorData[colorKey] || colorData['gold'];
+  infoEl.innerHTML = currentLang === 'vi' ? data.vi : data.en;
+  infoEl.style.borderStyle = 'solid';
+  infoEl.style.background = 'rgba(201,168,76,0.18)';
 }
 
 function addToGoogleCalendar(type) {
