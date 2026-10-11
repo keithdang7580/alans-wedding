@@ -1,0 +1,17 @@
+{
+	// Alan Duong & Hoang Huynh Wedding Invitation — Cloudflare Worker & D1 Database
+	"name": "alan-duong-hoang-huynh",
+	"compatibility_date": "2025-06-01",
+	"main": "src/index.js",
+	"assets": {
+		"directory": "public",
+		"html_handling": "auto-trailing-slash"
+	},
+	"d1_databases": [
+		{
+			"binding": "wedding_db",
+			"database_name": "wedding-db",
+			"database_id": "f323f678-6700-494c-8b16-e62da45d2b00"
+		}
+	]
+}
