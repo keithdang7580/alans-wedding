@@ -1686,7 +1686,9 @@ let cachedGuests = [];
 
 async function fetchGuests() {
   try {
-    const res = await fetch(`${API_BASE}/api/rsvps`);
+    const adminPin = localStorage.getItem('admin_pin_token');
+    const headers = adminPin ? { 'X-Admin-PIN': adminPin } : {};
+    const res = await fetch(`${API_BASE}/api/rsvps`, { headers });
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -1826,23 +1828,40 @@ function renderWishes() {
 
 async function unlockAdmin(isAuto = false) {
   const pinInput = document.getElementById('adminPin');
-  if (isAuto || (pinInput && pinInput.value === '19677142246466')) {
-    localStorage.setItem('admin_unlocked', '1');
-    document.getElementById('adminLock').style.display = 'none';
-    document.getElementById('adminDash').classList.add('active');
-    await fetchGuests();
-    renderStats(); renderTable();
-    renderAdminPhotos();
-    if (!isAuto) showToast(currentLang === 'vi' ? 'Chào mừng Alan & Hoàng Huỳnh!' : 'Welcome Alan & Hoang Huynh!');
-  } else { 
-    showToast(currentLang === 'vi' ? 'PIN không đúng' : 'Incorrect PIN', true); 
+  const pin = isAuto ? localStorage.getItem('admin_pin_token') : (pinInput ? pinInput.value.trim() : '');
+  if (!pin) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/admin/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin })
+    });
+    const result = await res.json();
+    if (res.ok && result.success) {
+      localStorage.setItem('admin_pin_token', pin);
+      document.getElementById('adminLock').style.display = 'none';
+      document.getElementById('adminDash').classList.add('active');
+      await fetchGuests();
+      renderStats(); renderTable();
+      renderAdminPhotos();
+      if (!isAuto) showToast(currentLang === 'vi' ? 'Chào mừng Alan & Hoàng Huỳnh!' : 'Welcome Alan & Hoang Huynh!');
+    } else {
+      if (isAuto) localStorage.removeItem('admin_pin_token');
+      else showToast(currentLang === 'vi' ? 'Mã PIN không đúng' : 'Incorrect PIN', true);
+    }
+  } catch (err) {
+    console.warn('Admin verify failed', err);
+    if (!isAuto) showToast('Lỗi kết nối máy chủ.', true);
   }
 }
 
 function lockAdmin() {
-  localStorage.removeItem('admin_unlocked');
+  localStorage.removeItem('admin_pin_token');
   document.getElementById('adminLock').style.display = 'block';
   document.getElementById('adminDash').classList.remove('active');
+  const pinInput = document.getElementById('adminPin');
+  if (pinInput) pinInput.value = '';
   showToast(currentLang === 'vi' ? 'Đã khóa bảng điều khiển' : 'Admin locked');
 }
 
@@ -1904,11 +1923,20 @@ async function renderAdminPhotos() {
 
 async function deletePhoto(id) {
   if (!confirm(currentLang === 'vi' ? 'Bạn có chắc chắn muốn xóa ảnh này khỏi thiệp cưới?' : 'Are you sure you want to delete this photo?')) return;
+  const pin = localStorage.getItem('admin_pin_token');
   try {
-    await fetch(`${API_BASE}/api/photos/${id}`, { method: 'DELETE' });
-    showToast(currentLang === 'vi' ? 'Đã xóa ảnh.' : 'Photo deleted.');
-    renderAdminPhotos();
-    loadUploadedPhotos();
+    const res = await fetch(`${API_BASE}/api/photos/${id}`, {
+      method: 'DELETE',
+      headers: { 'X-Admin-PIN': pin || '' }
+    });
+    if (res.ok) {
+      showToast(currentLang === 'vi' ? 'Đã xóa ảnh.' : 'Photo deleted.');
+      renderAdminPhotos();
+      loadUploadedPhotos();
+    } else {
+      const err = await res.json();
+      showToast(err.error || 'Quyền truy cập bị từ chối.', true);
+    }
   } catch (err) {
     showToast('Lỗi khi xóa ảnh.', true);
   }
@@ -1916,6 +1944,7 @@ async function deletePhoto(id) {
 
 async function handleAdminPhotoUpload(e) {
   const files = e.target.files; if (!files || !files.length) return;
+  const pin = localStorage.getItem('admin_pin_token');
   const progressEl = document.getElementById('adminUploadProgress');
   if (progressEl) progressEl.style.display = 'block';
   showToast(`Đang tải lên ${files.length} ảnh...`);
@@ -1925,7 +1954,7 @@ async function handleAdminPhotoUpload(e) {
       const dataUrl = await resizeImage(f, 1600, 1600, 0.85);
       await fetch(`${API_BASE}/api/photos`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-Admin-PIN': pin || '' },
         body: JSON.stringify({ image_data: dataUrl, caption: f.name || 'Alan & Hoàng Huỳnh Photo' })
       });
     } catch (err) {
@@ -1979,14 +2008,25 @@ function renderTable() {
 }
 
 async function deleteGuest(id) {
-  cachedGuests = cachedGuests.filter(g => g.id !== id);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cachedGuests));
+  if (!confirm(currentLang === 'vi' ? 'Bạn có chắc chắn muốn xóa khách mời này?' : 'Are you sure you want to delete this guest?')) return;
+  const pin = localStorage.getItem('admin_pin_token');
   try {
-    await fetch(`${API_BASE}/api/rsvps/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API_BASE}/api/rsvps/${id}`, {
+      method: 'DELETE',
+      headers: { 'X-Admin-PIN': pin || '' }
+    });
+    if (res.ok) {
+      cachedGuests = cachedGuests.filter(g => g.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cachedGuests));
+      showToast(currentLang === 'vi' ? 'Đã xóa khách mời.' : 'Guest deleted.');
+      renderStats(); renderTable();
+    } else {
+      const err = await res.json();
+      showToast(err.error || 'Quyền truy cập bị từ chối.', true);
+    }
   } catch (err) {
-    console.warn('Delete on backend failed', err);
+    showToast('Lỗi khi xóa khách mời.', true);
   }
-  renderStats(); renderTable(); showToast('Deleted.');
 }
 
 function exportCSV() {
@@ -2004,7 +2044,7 @@ loadUploadedPhotos();
 setLanguage(currentLang);
 
 // Auto-unlock if previously authenticated on Alan or his wife's device
-if (localStorage.getItem('admin_unlocked') === '1') {
+if (localStorage.getItem('admin_pin_token')) {
   unlockAdmin(true);
 }
 

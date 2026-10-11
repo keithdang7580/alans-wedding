@@ -1,6 +1,12 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const ADMIN_PIN = env.ADMIN_PIN || '19677142246466';
+
+    function isAdmin(req) {
+      const pin = req.headers.get('X-Admin-PIN') || req.headers.get('x-admin-pin');
+      return pin === ADMIN_PIN;
+    }
 
     // CORS preflight
     if (request.method === 'OPTIONS') {
@@ -8,17 +14,46 @@ export default {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Headers': 'Content-Type, X-Admin-PIN, Authorization',
         },
       });
     }
 
-    // API: GET /api/rsvps - fetch all guests from D1 database
+    // API: POST /api/admin/verify - securely verify admin PIN
+    if (url.pathname === '/api/admin/verify' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        if (body.pin === ADMIN_PIN) {
+          return new Response(JSON.stringify({ success: true }), {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+            },
+          });
+        }
+        return new Response(JSON.stringify({ success: false, error: 'Mã PIN không đúng' }), {
+          status: 401,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
+    // API: GET /api/rsvps - fetch guests (Admin gets full data; public gets sanitized fields)
     if (url.pathname === '/api/rsvps' && request.method === 'GET') {
       try {
-        const { results } = await env.wedding_db.prepare(
-          "SELECT id, name, phone, email, relation, plus_one as plusOne, attendance, song, diet, message, created_at as date FROM rsvps ORDER BY created_at DESC"
-        ).all();
+        const admin = isAdmin(request);
+        const sql = admin
+          ? "SELECT id, name, phone, email, relation, plus_one as plusOne, attendance, song, diet, message, created_at as date FROM rsvps ORDER BY created_at DESC"
+          : "SELECT id, name, relation, plus_one as plusOne, attendance, message, created_at as date FROM rsvps ORDER BY created_at DESC";
+        const { results } = await env.wedding_db.prepare(sql).all();
         return new Response(JSON.stringify(results || []), {
           headers: {
             'Content-Type': 'application/json',
@@ -79,8 +114,14 @@ export default {
       }
     }
 
-    // API: DELETE /api/rsvps/:id - delete a guest record
+    // API: DELETE /api/rsvps/:id - STRICTLY ADMIN ONLY
     if (url.pathname.startsWith('/api/rsvps/') && request.method === 'DELETE') {
+      if (!isAdmin(request)) {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Hoàng Huỳnh mới có quyền xóa khách mời (Admin PIN required).' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
       try {
         const id = url.pathname.replace('/api/rsvps/', '');
         await env.wedding_db.prepare("DELETE FROM rsvps WHERE id = ?").bind(id).run();
@@ -148,8 +189,14 @@ export default {
       }
     }
 
-    // API: DELETE /api/photos/:id - delete an uploaded photo
+    // API: DELETE /api/photos/:id - STRICTLY ADMIN ONLY
     if (url.pathname.startsWith('/api/photos/') && request.method === 'DELETE') {
+      if (!isAdmin(request)) {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Hoàng Huỳnh mới có quyền xóa ảnh (Admin PIN required).' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
       try {
         const id = url.pathname.replace('/api/photos/', '');
         await env.wedding_db.prepare("DELETE FROM photos WHERE id = ?").bind(id).run();
