@@ -148,6 +148,30 @@ export default {
       }
     }
 
+    // API: DELETE /api/photos/:id - delete an uploaded photo
+    if (url.pathname.startsWith('/api/photos/') && request.method === 'DELETE') {
+      try {
+        const id = url.pathname.replace('/api/photos/', '');
+        await env.wedding_db.prepare("DELETE FROM photos WHERE id = ?").bind(id).run();
+        return new Response(JSON.stringify({ success: true }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
+    // Direct /admin route redirect to admin dashboard anchor
+    if (url.pathname === '/admin') {
+      return Response.redirect(`${url.origin}/#admin`, 302);
+    }
+
     // Default: serve static assets from public directory
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);

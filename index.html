@@ -937,55 +937,94 @@
   </div>
 
   <div class="dashboard" id="adminDash">
-    <div class="stats-row">
-      <div class="stat-card tilt-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label" data-i18n="stat_total">Tổng Khách</div></div>
-      <div class="stat-card tilt-card"><div class="stat-num" id="stat-attending">0</div><div class="stat-label" data-i18n="stat_attending">Tham Dự</div></div>
-      <div class="stat-card tilt-card"><div class="stat-num" id="stat-declined">0</div><div class="stat-label" data-i18n="stat_declined">Vắng Mặt</div></div>
-      <div class="stat-card tilt-card"><div class="stat-num" id="stat-pending">0</div><div class="stat-label" data-i18n="stat_pending">Chờ Xác Nhận</div></div>
-      <div class="stat-card tilt-card"><div class="stat-num" id="stat-seats">0</div><div class="stat-label" data-i18n="stat_seats">Tổng Chỗ Ngồi</div></div>
+    <!-- Admin Top Nav Bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto 1.5rem;flex-wrap:wrap;gap:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,168,76,0.25);">
+      <div style="display:flex;gap:0.6rem;">
+        <button class="btn-sm" id="btnAdminTabGuests" onclick="switchAdminTab('guests')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:var(--gold-dark);color:#fff;">👥 Danh Sách Khách Mời</button>
+        <button class="btn-sm" id="btnAdminTabPhotos" onclick="switchAdminTab('photos')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:rgba(201,168,76,0.15);color:var(--brown-dark);">📸 Quản Lý Ảnh Cưới</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.8rem;">
+        <span style="font-size:0.85rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">👑 Alan &amp; Hoàng Huỳnh</span>
+        <button onclick="lockAdmin()" style="background:none;border:1px solid #8b1a1a;color:#8b1a1a;padding:0.35rem 0.9rem;border-radius:4px;cursor:pointer;font-size:0.8rem;">🔒 Đăng Xuất</button>
+      </div>
     </div>
 
-    <div class="table-actions">
-      <input type="text" class="search-input" id="adminSearch" placeholder="🔍 Tìm theo tên..." oninput="renderTable()" />
-      <select class="filter-select" id="filterStatus" onchange="renderTable()">
-        <option value="all" data-i18n="flt_all_status">Tất Cả Trạng Thái</option>
-        <option value="attending" data-i18n="flt_attending">Tham Dự</option>
-        <option value="declined" data-i18n="flt_declined">Vắng Mặt</option>
-        <option value="maybe" data-i18n="flt_maybe">Chưa Chắc</option>
-        <option value="pending" data-i18n="flt_pending">Chờ Xác Nhận</option>
-      </select>
-      <select class="filter-select" id="filterRelation" onchange="renderTable()">
-        <option value="all" data-i18n="flt_all_groups">Tất Cả Nhóm</option>
-        <option value="Họ hàng Chú Rể" data-i18n="opt_rel_groom_family">Họ hàng Chú Rể</option>
-        <option value="Họ hàng Cô Dâu" data-i18n="opt_rel_bride_family">Họ hàng Cô Dâu</option>
-        <option value="Bạn bè Chú Rể" data-i18n="opt_rel_groom_friends">Bạn bè Chú Rể</option>
-        <option value="Bạn bè Cô Dâu" data-i18n="opt_rel_bride_friends">Bạn bè Cô Dâu</option>
-        <option value="Giáo Xứ" data-i18n="opt_rel_parish">Giáo Xứ</option>
-        <option value="Đồng nghiệp" data-i18n="opt_rel_coworkers">Đồng nghiệp</option>
-      </select>
-      <button class="export-btn" onclick="exportCSV()" data-i18n="btn_export">📥 Xuất CSV</button>
+    <!-- Tab 1: Guest RSVP management -->
+    <div id="adminTabGuests">
+      <div class="stats-row">
+        <div class="stat-card tilt-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label" data-i18n="stat_total">Tổng Khách</div></div>
+        <div class="stat-card tilt-card"><div class="stat-num" id="stat-attending">0</div><div class="stat-label" data-i18n="stat_attending">Tham Dự</div></div>
+        <div class="stat-card tilt-card"><div class="stat-num" id="stat-declined">0</div><div class="stat-label" data-i18n="stat_declined">Vắng Mặt</div></div>
+        <div class="stat-card tilt-card"><div class="stat-num" id="stat-pending">0</div><div class="stat-label" data-i18n="stat_pending">Chờ Xác Nhận</div></div>
+        <div class="stat-card tilt-card"><div class="stat-num" id="stat-seats">0</div><div class="stat-label" data-i18n="stat_seats">Tổng Chỗ Ngồi</div></div>
+      </div>
+
+      <div class="table-actions">
+        <input type="text" class="search-input" id="adminSearch" placeholder="🔍 Tìm theo tên..." oninput="renderTable()" />
+        <select class="filter-select" id="filterStatus" onchange="renderTable()">
+          <option value="all" data-i18n="flt_all_status">Tất Cả Trạng Thái</option>
+          <option value="attending" data-i18n="flt_attending">Tham Dự</option>
+          <option value="declined" data-i18n="flt_declined">Vắng Mặt</option>
+          <option value="maybe" data-i18n="flt_maybe">Chưa Chắc</option>
+          <option value="pending" data-i18n="flt_pending">Chờ Xác Nhận</option>
+        </select>
+        <select class="filter-select" id="filterRelation" onchange="renderTable()">
+          <option value="all" data-i18n="flt_all_groups">Tất Cả Nhóm</option>
+          <option value="Họ hàng Chú Rể" data-i18n="opt_rel_groom_family">Họ hàng Chú Rể</option>
+          <option value="Họ hàng Cô Dâu" data-i18n="opt_rel_bride_family">Họ hàng Cô Dâu</option>
+          <option value="Bạn bè Chú Rể" data-i18n="opt_rel_groom_friends">Bạn bè Chú Rể</option>
+          <option value="Bạn bè Cô Dâu" data-i18n="opt_rel_bride_friends">Bạn bè Cô Dâu</option>
+          <option value="Giáo Xứ" data-i18n="opt_rel_parish">Giáo Xứ</option>
+          <option value="Đồng nghiệp" data-i18n="opt_rel_coworkers">Đồng nghiệp</option>
+        </select>
+        <button class="export-btn" onclick="exportCSV()" data-i18n="btn_export">📥 Xuất CSV</button>
+      </div>
+
+      <div class="guest-table-wrapper" style="margin-top:1rem;">
+        <table class="guest-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th data-i18n="th_name">Họ & Tên</th>
+              <th data-i18n="th_phone">SĐT</th>
+              <th data-i18n="th_relation">Mối Quan Hệ</th>
+              <th data-i18n="th_plusone">+Khách</th>
+              <th data-i18n="th_status">Trạng Thái</th>
+              <th data-i18n="th_song">Bài Hát</th>
+              <th data-i18n="th_diet">Ăn Kiêng</th>
+              <th data-i18n="th_date">Ngày Đăng Ký</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="guestTableBody">
+            <tr><td colspan="10" style="text-align:center;padding:2rem;" data-i18n="tbl_empty">Chưa có khách mời nào</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="guest-table-wrapper" style="margin-top:1rem;">
-      <table class="guest-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th data-i18n="th_name">Họ & Tên</th>
-            <th data-i18n="th_phone">SĐT</th>
-            <th data-i18n="th_relation">Mối Quan Hệ</th>
-            <th data-i18n="th_plusone">+Khách</th>
-            <th data-i18n="th_status">Trạng Thái</th>
-            <th data-i18n="th_song">Bài Hát</th>
-            <th data-i18n="th_diet">Ăn Kiêng</th>
-            <th data-i18n="th_date">Ngày Đăng Ký</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="guestTableBody">
-          <tr><td colspan="10" style="text-align:center;padding:2rem;" data-i18n="tbl_empty">Chưa có khách mời nào</td></tr>
-        </tbody>
-      </table>
+    <!-- Tab 2: Dedicated Photo Management & Upload -->
+    <div id="adminTabPhotos" style="display:none;">
+      <div style="background:rgba(255,252,240,0.85);border:2px dashed var(--gold);border-radius:8px;padding:2.5rem 1.5rem;text-align:center;max-width:720px;margin:0 auto 2.5rem;box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+        <span style="font-size:3rem;display:block;margin-bottom:0.6rem;">📸</span>
+        <h3 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.6rem;font-weight:600;margin-bottom:0.4rem;">Tải Ảnh Cưới Lên Cloudflare</h3>
+        <p style="font-size:0.9rem;color:#7a5a3e;max-width:540px;margin:0 auto 1.5rem;line-height:1.6;">Alan &amp; Hoàng Huỳnh có thể tải trực tiếp ảnh cưới, ảnh lễ đính hôn hoặc ảnh gia đình từ điện thoại/máy tính lên đây. Ảnh sẽ được lưu vĩnh viễn trên Cloudflare và xuất hiện ngay lập tức trên trang chủ.</p>
+        <button class="export-btn" style="padding:0.9rem 2.2rem;font-size:1.05rem;cursor:pointer;" onclick="document.getElementById('adminDirectPhotoInput').click()">
+          ➕ Tải Ảnh Lên (Chọn Nhiều Ảnh)
+        </button>
+        <input type="file" id="adminDirectPhotoInput" accept="image/*" multiple style="display:none;" onchange="handleAdminPhotoUpload(event)" />
+        <div id="adminUploadProgress" style="display:none;margin-top:1rem;color:var(--gold-dark);font-size:0.9rem;font-weight:600;">⏳ Đang xử lý và tải ảnh lên Cloudflare...</div>
+      </div>
+
+      <div style="max-width:960px;margin:0 auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:0.5rem;">
+          <h4 style="font-family:'Cormorant Garamond',serif;color:var(--gold-dark);font-size:1.4rem;font-weight:600;">🖼️ Danh Sách Ảnh Đã Tải Lên (<span id="adminPhotoCount">0</span> ảnh)</h4>
+          <button class="btn-sm" onclick="renderAdminPhotos()" style="font-size:0.8rem;padding:0.3rem 0.8rem;cursor:pointer;">🔄 Làm Mới</button>
+        </div>
+        <div id="adminPhotoList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));gap:1.2rem;">
+          <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh nào được tải lên. Bấm nút phía trên để bắt đầu tải ảnh!</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1785,13 +1824,119 @@ function renderWishes() {
   `).join('');
 }
 
-async function unlockAdmin() {
-  if (document.getElementById('adminPin').value === '19677142246466') {
+async function unlockAdmin(isAuto = false) {
+  const pinInput = document.getElementById('adminPin');
+  if (isAuto || (pinInput && pinInput.value === '19677142246466')) {
+    localStorage.setItem('admin_unlocked', '1');
     document.getElementById('adminLock').style.display = 'none';
     document.getElementById('adminDash').classList.add('active');
     await fetchGuests();
     renderStats(); renderTable();
-  } else { showToast(currentLang === 'vi' ? 'PIN không đúng' : 'Incorrect PIN', true); }
+    renderAdminPhotos();
+    if (!isAuto) showToast(currentLang === 'vi' ? 'Chào mừng Alan & Hoàng Huỳnh!' : 'Welcome Alan & Hoang Huynh!');
+  } else { 
+    showToast(currentLang === 'vi' ? 'PIN không đúng' : 'Incorrect PIN', true); 
+  }
+}
+
+function lockAdmin() {
+  localStorage.removeItem('admin_unlocked');
+  document.getElementById('adminLock').style.display = 'block';
+  document.getElementById('adminDash').classList.remove('active');
+  showToast(currentLang === 'vi' ? 'Đã khóa bảng điều khiển' : 'Admin locked');
+}
+
+function switchAdminTab(tab) {
+  const tabGuests = document.getElementById('adminTabGuests');
+  const tabPhotos = document.getElementById('adminTabPhotos');
+  const btnGuests = document.getElementById('btnAdminTabGuests');
+  const btnPhotos = document.getElementById('btnAdminTabPhotos');
+
+  if (tab === 'guests') {
+    tabGuests.style.display = 'block';
+    tabPhotos.style.display = 'none';
+    btnGuests.style.background = 'var(--gold-dark)';
+    btnGuests.style.color = '#fff';
+    btnPhotos.style.background = 'rgba(201,168,76,0.15)';
+    btnPhotos.style.color = 'var(--brown-dark)';
+  } else {
+    tabGuests.style.display = 'none';
+    tabPhotos.style.display = 'block';
+    btnPhotos.style.background = 'var(--gold-dark)';
+    btnPhotos.style.color = '#fff';
+    btnGuests.style.background = 'rgba(201,168,76,0.15)';
+    btnGuests.style.color = 'var(--brown-dark)';
+    renderAdminPhotos();
+  }
+}
+
+let cachedAdminPhotos = [];
+
+async function renderAdminPhotos() {
+  try {
+    const res = await fetch(`${API_BASE}/api/photos`);
+    if (res.ok) {
+      cachedAdminPhotos = await res.json();
+      const countEl = document.getElementById('adminPhotoCount');
+      if (countEl) countEl.textContent = cachedAdminPhotos.length;
+      const listEl = document.getElementById('adminPhotoList');
+      if (!listEl) return;
+      if (!cachedAdminPhotos.length) {
+        listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh nào được tải lên. Bấm nút phía trên để bắt đầu tải ảnh!</div>`;
+        return;
+      }
+      listEl.innerHTML = cachedAdminPhotos.map(p => `
+        <div style="background:#fff;border:1px solid rgba(201,168,76,0.3);border-radius:6px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
+          <div style="height:170px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.image_data}', '${p.caption || 'Wedding Photo'}')">
+            <img src="${p.image_data}" alt="${p.caption || 'Photo'}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+          </div>
+          <div style="padding:0.75rem;display:flex;justify-content:space-between;align-items:center;background:#fff;">
+            <span style="font-size:0.75rem;color:#7a5a3e;">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Photo'}</span>
+            <button onclick="deletePhoto('${p.id}')" style="background:#8b1a1a;color:#fff;border:none;padding:0.35rem 0.75rem;border-radius:3px;font-size:0.75rem;cursor:pointer;">🗑️ Xóa</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  } catch (err) {
+    console.warn('Could not render admin photos', err);
+  }
+}
+
+async function deletePhoto(id) {
+  if (!confirm(currentLang === 'vi' ? 'Bạn có chắc chắn muốn xóa ảnh này khỏi thiệp cưới?' : 'Are you sure you want to delete this photo?')) return;
+  try {
+    await fetch(`${API_BASE}/api/photos/${id}`, { method: 'DELETE' });
+    showToast(currentLang === 'vi' ? 'Đã xóa ảnh.' : 'Photo deleted.');
+    renderAdminPhotos();
+    loadUploadedPhotos();
+  } catch (err) {
+    showToast('Lỗi khi xóa ảnh.', true);
+  }
+}
+
+async function handleAdminPhotoUpload(e) {
+  const files = e.target.files; if (!files || !files.length) return;
+  const progressEl = document.getElementById('adminUploadProgress');
+  if (progressEl) progressEl.style.display = 'block';
+  showToast(`Đang tải lên ${files.length} ảnh...`);
+
+  for (const f of Array.from(files)) {
+    try {
+      const dataUrl = await resizeImage(f, 1600, 1600, 0.85);
+      await fetch(`${API_BASE}/api/photos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_data: dataUrl, caption: f.name || 'Alan & Hoàng Huỳnh Photo' })
+      });
+    } catch (err) {
+      console.warn('Error uploading admin photo:', err);
+    }
+  }
+  if (progressEl) progressEl.style.display = 'none';
+  showToast(`Đã tải thành công ${files.length} ảnh lên Cloudflare!`);
+  e.target.value = '';
+  renderAdminPhotos();
+  loadUploadedPhotos();
 }
 
 function badgeFor(s) {
@@ -1857,6 +2002,19 @@ fetchGuests().then(() => {
 });
 loadUploadedPhotos();
 setLanguage(currentLang);
+
+// Auto-unlock if previously authenticated on Alan or his wife's device
+if (localStorage.getItem('admin_unlocked') === '1') {
+  unlockAdmin(true);
+}
+
+// Auto-scroll if navigated to #admin or /admin
+if (window.location.hash === '#admin') {
+  setTimeout(() => {
+    const el = document.getElementById('admin');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 400);
+}
 </script>
 </body>
 </html>
