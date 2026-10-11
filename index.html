@@ -931,7 +931,7 @@
   <div class="admin-unlock" id="adminLock">
     <p style="font-style:italic;color:#7a5a3e;margin-bottom:0.5rem;font-size:0.9rem;" data-i18n="admin_hint">Dành cho Alan & Hoàng Huỳnh — nhập mã PIN để tiếp tục</p>
     <div class="admin-pin-row">
-      <input type="password" class="form-input" id="adminPin" placeholder="PIN" maxlength="6" />
+      <input type="password" class="form-input" id="adminPin" placeholder="PIN" maxlength="20" onkeydown="if(event.key==='Enter') unlockAdmin()" />
     </div>
     <button class="admin-unlock-btn" onclick="unlockAdmin()" data-i18n="admin_unlock_btn">🔓 Mở Khóa</button>
   </div>
@@ -1786,12 +1786,12 @@ function renderWishes() {
 }
 
 async function unlockAdmin() {
-  if (document.getElementById('adminPin').value === '2026') {
+  if (document.getElementById('adminPin').value === '19677142246466') {
     document.getElementById('adminLock').style.display = 'none';
     document.getElementById('adminDash').classList.add('active');
     await fetchGuests();
     renderStats(); renderTable();
-  } else { showToast(currentLang === 'vi' ? 'PIN sai' : 'Incorrect PIN', true); }
+  } else { showToast(currentLang === 'vi' ? 'PIN không đúng' : 'Incorrect PIN', true); }
 }
 
 function badgeFor(s) {
