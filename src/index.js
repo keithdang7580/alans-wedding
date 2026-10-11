@@ -98,6 +98,56 @@ export default {
       }
     }
 
+    // API: GET /api/photos - fetch uploaded photos
+    if (url.pathname === '/api/photos' && request.method === 'GET') {
+      try {
+        const { results } = await env.wedding_db.prepare(
+          "SELECT id, image_data, caption, created_at FROM photos ORDER BY created_at DESC LIMIT 50"
+        ).all();
+        return new Response(JSON.stringify(results || []), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-store',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
+    // API: POST /api/photos - upload a photo
+    if (url.pathname === '/api/photos' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        if (!body.image_data) {
+          return new Response(JSON.stringify({ error: 'Missing image_data' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          });
+        }
+        const id = body.id || crypto.randomUUID();
+        await env.wedding_db.prepare(
+          "INSERT INTO photos (id, image_data, caption) VALUES (?, ?, ?)"
+        ).bind(id, body.image_data, body.caption || '').run();
+
+        return new Response(JSON.stringify({ success: true, id }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
     // Default: serve static assets from public directory
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);

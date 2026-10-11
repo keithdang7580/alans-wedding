@@ -934,7 +934,6 @@
       <input type="password" class="form-input" id="adminPin" placeholder="PIN" maxlength="6" />
     </div>
     <button class="admin-unlock-btn" onclick="unlockAdmin()" data-i18n="admin_unlock_btn">🔓 Mở Khóa</button>
-    <p style="margin-top:0.8rem;font-size:0.75rem;color:#7a5a3e;opacity:0.7;">(Demo PIN: 2026)</p>
   </div>
 
   <div class="dashboard" id="adminDash">
@@ -1539,49 +1538,100 @@ function downloadICS(type) {
 }
 
 function searchSeating() {
-  const q = document.getElementById('seatingInput').value.trim().toLowerCase();
+  const q = document.getElementById('seatingInput').value.trim();
   const res = document.getElementById('seatingResult');
   if (!q) { showToast(currentLang === 'vi' ? 'Vui lòng nhập tên' : 'Please enter a name', true); return; }
 
-  const demoTables = [
-    { name: 'Nguyễn Thị Mai', table: 'Bàn 1 (Table 1)', zone: 'Họ hàng Cô Dâu (Bride Family)' },
-    { name: 'Trần Văn Hùng', table: 'Bàn 5 (Table 5)', zone: 'Bạn bè Chú Rể (Groom Friends)' },
-    { name: 'Lê Thị Phương', table: 'Bàn 8 (Table 8)', zone: 'Giáo Xứ (Parish Choir)' },
-    { name: 'Vũ Thanh Tùng', table: 'Bàn 3 (Table 3)', zone: 'Bạn bè Cô Dâu (Bride Friends)' },
-  ];
-
-  const found = demoTables.filter(t => t.name.toLowerCase().includes(q));
   res.style.display = 'block';
-  if (found.length) {
-    res.innerHTML = found.map(t => `
-      <div style="font-size:1.1rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">✨ ${t.name}</div>
-      <div style="margin-top:0.4rem;font-size:0.95rem;color:var(--brown-dark);">📍 <strong>${t.table}</strong> — ${t.zone}</div>
-    `).join('');
+  const match = cachedGuests.find(g => g.name.toLowerCase().includes(q.toLowerCase()));
+  if (match && match.table) {
+    res.innerHTML = `
+      <div style="font-size:1.15rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">✨ ${match.name}</div>
+      <div style="margin-top:0.4rem;font-size:0.95rem;color:var(--brown-dark);">📍 <strong>${match.table}</strong></div>
+    `;
   } else {
     res.innerHTML = `
-      <div style="font-size:1rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">✨ ${q.toUpperCase()}</div>
-      <div style="margin-top:0.4rem;font-size:0.9rem;color:#7a5a3e;font-style:italic;">
-        ${currentLang === 'vi' ? '📍 Bàn VIP Main Hall — Xin vui lòng báo lại bàn đón khách để xếp chỗ.' : '📍 VIP Main Hall — Please check in at the reception desk for your seat.'}
+      <div style="font-size:1.15rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">✨ ${q.toUpperCase()}</div>
+      <div style="margin-top:0.5rem;font-size:0.9rem;color:#7a5a3e;line-height:1.5;">
+        ${currentLang === 'vi' 
+          ? '📍 Sơ đồ bàn tiệc chính thức sẽ được hoàn thiện trước ngày cưới. Xin quý khách vui lòng liên hệ bàn đón tiếp tại sảnh White Palace để được hướng dẫn vị trí bàn chu đáo.' 
+          : '📍 The official seating chart will be finalized closer to the wedding date. Please check in at the welcoming desk at White Palace for your table assignment.'}
       </div>
     `;
   }
 }
 
-function handlePhotoUpload(e) {
+async function handlePhotoUpload(e) {
   const files = e.target.files; if (!files || !files.length) return;
   const grid = document.getElementById('guestPhotoGrid');
-  Array.from(files).forEach(f => {
-    const reader = new FileReader();
-    reader.onload = (ev) => {
+  showToast(currentLang === 'vi' ? 'Đang tải ảnh lên Cloudflare...' : 'Uploading photos to Cloudflare...');
+
+  for (const f of Array.from(files)) {
+    try {
+      const dataUrl = await resizeImage(f, 1200, 1200, 0.82);
       const item = document.createElement('div');
       item.className = 'photo-grid-item';
-      item.onclick = () => openLightbox(ev.target.result, f.name);
-      item.innerHTML = `<img src="${ev.target.result}" alt="Guest photo" />`;
+      item.onclick = () => openLightbox(dataUrl, f.name || 'Wedding Photo');
+      item.innerHTML = `<img src="${dataUrl}" alt="Wedding Photo" loading="lazy" />`;
       grid.prepend(item);
+
+      await fetch(`${API_BASE}/api/photos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_data: dataUrl, caption: f.name || '' })
+      });
+    } catch (err) {
+      console.warn('Error uploading photo:', err);
+    }
+  }
+  showToast(currentLang === 'vi' ? `Đã lưu ${files.length} ảnh lên Cloudflare!` : `Saved ${files.length} photos to Cloudflare!`);
+}
+
+function resizeImage(file, maxWidth, maxHeight, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width, height = img.height;
+        if (width > height) {
+          if (width > maxWidth) { height = Math.round((height * maxWidth) / width); width = maxWidth; }
+        } else {
+          if (height > maxHeight) { width = Math.round((width * maxHeight) / height); height = maxHeight; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
     };
-    reader.readAsDataURL(f);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
-  showToast(currentLang === 'vi' ? `Đã tải lên ${files.length} ảnh!` : `Uploaded ${files.length} photos!`);
+}
+
+async function loadUploadedPhotos() {
+  try {
+    const res = await fetch(`${API_BASE}/api/photos`);
+    if (res.ok) {
+      const photos = await res.json();
+      if (Array.isArray(photos) && photos.length) {
+        const grid = document.getElementById('guestPhotoGrid');
+        photos.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'photo-grid-item';
+          item.onclick = () => openLightbox(p.image_data, p.caption || 'Wedding Photo');
+          item.innerHTML = `<img src="${p.image_data}" alt="${p.caption || 'Wedding Photo'}" loading="lazy" />`;
+          grid.appendChild(item);
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Could not load photos from Cloudflare', err);
+  }
 }
 
 function openTicketModal(guest) {
@@ -1801,10 +1851,11 @@ function exportCSV() {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'alan_duong_hoang_huynh_wedding_guests.csv'; a.click();
 }
 
-// Initialize guests from backend on page load
+// Initialize guests and photos from backend on page load
 fetchGuests().then(() => {
   renderStats();
 });
+loadUploadedPhotos();
 setLanguage(currentLang);
 </script>
 </body>
