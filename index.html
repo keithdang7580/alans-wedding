@@ -1017,12 +1017,32 @@
       </div>
 
       <div style="max-width:960px;margin:0 auto;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:0.5rem;">
-          <h4 style="font-family:'Cormorant Garamond',serif;color:var(--gold-dark);font-size:1.4rem;font-weight:600;">🖼️ Danh Sách Ảnh Đã Tải Lên (<span id="adminPhotoCount">0</span> ảnh)</h4>
-          <button class="btn-sm" onclick="renderAdminPhotos()" style="font-size:0.8rem;padding:0.3rem 0.8rem;cursor:pointer;">🔄 Làm Mới</button>
+        <!-- Current Gallery Photos -->
+        <div style="margin-bottom:2.5rem;padding:1.5rem;background:#fff;border:1px solid rgba(201,168,76,0.3);border-radius:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+            <div>
+              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--gold-dark);font-size:1.35rem;font-weight:600;">🌟 4 Ảnh Hiện Tại Trên Trang Chủ (Gallery)</h4>
+              <p style="font-size:0.8rem;color:#7a5a3e;margin-top:0.2rem;">Đây là 4 bức ảnh đang được hiển thị trong mục "Góc Ảnh Kỷ Niệm" trên trang chủ.</p>
+            </div>
+            <a href="#photo-wall" class="btn-sm" style="font-size:0.8rem;text-decoration:none;padding:0.4rem 0.9rem;">👁️ Xem Trên Trang Chủ</a>
+          </div>
+          <div id="adminDefaultPhotoList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:1rem;">
+            <!-- Populated with the 4 default photos -->
+          </div>
         </div>
-        <div id="adminPhotoList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));gap:1.2rem;">
-          <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh nào được tải lên. Bấm nút phía trên để bắt đầu tải ảnh!</div>
+
+        <!-- Additional Cloudflare Uploaded Photos -->
+        <div style="padding:1.5rem;background:#fff;border:1px solid rgba(201,168,76,0.3);border-radius:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+            <div>
+              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--gold-dark);font-size:1.35rem;font-weight:600;">☁️ Ảnh Tải Lên Thêm Trên Cloudflare (<span id="adminPhotoCount">0</span> ảnh)</h4>
+              <p style="font-size:0.8rem;color:#7a5a3e;margin-top:0.2rem;">Các bức ảnh mới do Alan hoặc cô dâu tải lên thêm sẽ lưu trữ tại đây và có thể xóa bất cứ lúc nào.</p>
+            </div>
+            <button class="btn-sm" onclick="renderAdminPhotos()" style="font-size:0.8rem;padding:0.3rem 0.8rem;cursor:pointer;">🔄 Làm Mới</button>
+          </div>
+          <div id="adminPhotoList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:1rem;">
+            <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh tải lên thêm nào. Bấm nút "Tải Ảnh Lên" phía trên để thêm ảnh mới!</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1889,9 +1909,31 @@ function switchAdminTab(tab) {
   }
 }
 
+const defaultGalleryPhotos = [
+  { img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Ảnh Bìa (Cover)' },
+  { img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' },
+  { img: 'alan_portrait.jpg', title: 'Alan Dương - Chú Rể (Groom)', tag: 'Chân Dung Chú Rể' },
+  { img: 'wife_portrait.jpg', title: 'Hoàng Huỳnh - Cô Dâu (Bride)', tag: 'Chân Dung Cô Dâu' }
+];
+
 let cachedAdminPhotos = [];
 
 async function renderAdminPhotos() {
+  const defEl = document.getElementById('adminDefaultPhotoList');
+  if (defEl) {
+    defEl.innerHTML = defaultGalleryPhotos.map(p => `
+      <div style="background:#faf7f0;border:1px solid rgba(201,168,76,0.35);border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
+        <div style="height:150px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.img}', '${p.title}')">
+          <img src="${p.img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+        </div>
+        <div style="padding:0.6rem 0.8rem;background:#fff;">
+          <div style="font-size:0.75rem;font-weight:600;color:var(--gold-dark);">${p.tag}</div>
+          <div style="font-size:0.75rem;color:#7a5a3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${p.title}">${p.title}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
   try {
     const res = await fetch(`${API_BASE}/api/photos`);
     if (res.ok) {
@@ -1901,17 +1943,17 @@ async function renderAdminPhotos() {
       const listEl = document.getElementById('adminPhotoList');
       if (!listEl) return;
       if (!cachedAdminPhotos.length) {
-        listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh nào được tải lên. Bấm nút phía trên để bắt đầu tải ảnh!</div>`;
+        listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh tải lên thêm nào. Bấm nút "Tải Ảnh Lên" phía trên để thêm ảnh mới!</div>`;
         return;
       }
       listEl.innerHTML = cachedAdminPhotos.map(p => `
         <div style="background:#fff;border:1px solid rgba(201,168,76,0.3);border-radius:6px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
-          <div style="height:170px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.image_data}', '${p.caption || 'Wedding Photo'}')">
+          <div style="height:150px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.image_data}', '${p.caption || 'Wedding Photo'}')">
             <img src="${p.image_data}" alt="${p.caption || 'Photo'}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
-          <div style="padding:0.75rem;display:flex;justify-content:space-between;align-items:center;background:#fff;">
-            <span style="font-size:0.75rem;color:#7a5a3e;">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Photo'}</span>
-            <button onclick="deletePhoto('${p.id}')" style="background:#8b1a1a;color:#fff;border:none;padding:0.35rem 0.75rem;border-radius:3px;font-size:0.75rem;cursor:pointer;">🗑️ Xóa</button>
+          <div style="padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;background:#fff;">
+            <span style="font-size:0.72rem;color:#7a5a3e;">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Cloudflare'}</span>
+            <button onclick="deletePhoto('${p.id}')" style="background:#8b1a1a;color:#fff;border:none;padding:0.3rem 0.7rem;border-radius:3px;font-size:0.72rem;cursor:pointer;">🗑️ Xóa</button>
           </div>
         </div>
       `).join('');
