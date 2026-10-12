@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Alan Dương & Hoàng Huỳnh · Thiệp Mời Hôn Lễ Công Giáo" />
   <meta property="og:description" content="Thánh Lễ Hôn Phối tại Christ Our Savior Catholic Parish & Tiệc Cưới tại White Palace · Thứ Bảy, 28.11.2026." />
-  <meta property="og:image" content="https://alan-duong-hoang-huynh.ersona--ocial-edia.workers.dev/wife_portrait.jpg" />
+  <meta property="og:image" content="https://alan-duong-hoang-huynh.ersona--ocial-edia.workers.dev/couple_stage.jpg" />
   <meta property="og:url" content="https://alan-duong-hoang-huynh.ersona--ocial-edia.workers.dev" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✝</text></svg>">
 
@@ -244,6 +244,21 @@
     }
     .portrait-card img:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 22px 50px rgba(201,168,76,0.6); }
     .portrait-card .portrait-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.12em; color: var(--gold-dark); text-transform: uppercase; }
+    .single-couple-card img {
+      width: clamp(290px, 86vw, 440px);
+      height: 300px;
+      object-fit: cover;
+      object-position: center 30%;
+      border-radius: 170px 170px 16px 16px;
+      border: 4px solid var(--gold);
+      box-shadow: 0 18px 48px rgba(201,168,76,0.45), inset 0 0 24px rgba(201,168,76,0.15);
+      cursor: pointer;
+    }
+    .single-couple-card::before {
+      border-radius: 180px 180px 22px 22px;
+      top: -10px; left: -10px; right: -10px; bottom: 32px;
+      border: 1.5px dashed rgba(201,168,76,0.55);
+    }
     .portrait-ampersand { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--gold); align-self: center; line-height: 1; margin-bottom: 2rem; opacity: 0.8; filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
     .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dark); font-family: 'Cormorant Garamond', serif; font-weight: 600; margin-bottom: 1.5rem; }
     .divider-ornament { display: flex; align-items: center; gap: 0.8rem; margin: 1rem auto; width: fit-content; }
@@ -534,15 +549,10 @@
 
   <div class="divider-ornament"><span>✦</span></div>
 
-  <div class="couple-portraits">
-    <div class="portrait-card tilt-card">
-      <img src="alan_portrait.jpg" alt="Alan Dương - Groom" />
-      <span class="portrait-name" data-i18n="groom_name">Alan Dương</span>
-    </div>
-    <div class="portrait-ampersand">&</div>
-    <div class="portrait-card tilt-card">
-      <img src="wife_portrait.jpg" alt="Hoàng Huỳnh - Bride" />
-      <span class="portrait-name" data-i18n="bride_name">Hoàng Huỳnh</span>
+  <div class="couple-portraits" style="gap:0;margin:1.8rem 0 1.2rem;">
+    <div class="portrait-card single-couple-card tilt-card" onclick="openLightbox('couple_stage.jpg', 'Alan Dương & Hoàng Huỳnh')">
+      <img src="couple_stage.jpg" alt="Alan Dương & Hoàng Huỳnh" />
+      <span class="portrait-name"><span data-i18n="groom_name">Alan Dương</span> &amp; <span data-i18n="bride_name">Hoàng Huỳnh</span></span>
     </div>
   </div>
 
@@ -755,17 +765,14 @@
     <p style="text-align:center;max-width:640px;margin:0 auto 2rem;font-style:italic;color:#6a4e3b;font-size:0.92rem;" data-i18n="official_photo_intro">Những khoảnh khắc hạnh phúc trên hành trình tình yêu của chúng tôi:</p>
     
     <div class="photo-grid" id="homepagePhotoGrid">
+      <div class="photo-grid-item" onclick="openLightbox('couple_stage.jpg', 'Alan Dương & Hoàng Huỳnh')">
+        <img src="couple_stage.jpg" alt="Alan Dương & Hoàng Huỳnh" />
+      </div>
       <div class="photo-grid-item" onclick="openLightbox('couple_beach.jpg', 'Alan Dương & Hoàng Huỳnh - Beach Sunset')">
         <img src="couple_beach.jpg" alt="Alan Dương & Hoàng Huỳnh - Beach Sunset" />
       </div>
       <div class="photo-grid-item" onclick="openLightbox('couple_dodgers.jpg', 'Alan Dương & Hoàng Huỳnh - Dodger Stadium')">
         <img src="couple_dodgers.jpg" alt="Alan Dương & Hoàng Huỳnh - Dodger Stadium" />
-      </div>
-      <div class="photo-grid-item" onclick="openLightbox('alan_portrait.jpg', 'Alan Dương - Groom')">
-        <img src="alan_portrait.jpg" alt="Alan Dương - Groom" />
-      </div>
-      <div class="photo-grid-item" onclick="openLightbox('wife_portrait.jpg', 'Hoàng Huỳnh - Bride')">
-        <img src="wife_portrait.jpg" alt="Hoàng Huỳnh - Bride" />
       </div>
     </div>
   </div>
@@ -2049,10 +2056,9 @@ function switchAdminTab(tab) {
 
 // ─── PHOTO MANAGEMENT: HOMEPAGE ALBUM & GUEST WALL ──────────────
 const defaultOfficialPhotos = [
-  { id: 'def-1', img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Ảnh Bìa (Cover)' },
-  { id: 'def-2', img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' },
-  { id: 'def-3', img: 'alan_portrait.jpg', title: 'Alan Dương - Chú Rể (Groom)', tag: 'Chân Dung Chú Rể' },
-  { id: 'def-4', img: 'wife_portrait.jpg', title: 'Hoàng Huỳnh - Cô Dâu (Bride)', tag: 'Chân Dung Cô Dâu' }
+  { id: 'def-1', img: 'couple_stage.jpg', title: 'Alan & Hoàng Huỳnh', tag: 'Ảnh Bìa (Cover)' },
+  { id: 'def-2', img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Kỷ Niệm (Beach)' },
+  { id: 'def-3', img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' }
 ];
 
 let cachedHomepagePhotos = [...defaultOfficialPhotos];

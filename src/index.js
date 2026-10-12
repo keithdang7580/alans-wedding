@@ -156,10 +156,9 @@ export default {
         }
         // Default official photos if none saved yet
         const defaultPhotos = [
-          { id: 'def-1', img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Ảnh Bìa (Cover)' },
-          { id: 'def-2', img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' },
-          { id: 'def-3', img: 'alan_portrait.jpg', title: 'Alan Dương - Chú Rể (Groom)', tag: 'Chân Dung Chú Rể' },
-          { id: 'def-4', img: 'wife_portrait.jpg', title: 'Hoàng Huỳnh - Cô Dâu (Bride)', tag: 'Chân Dung Cô Dâu' }
+          { id: 'def-1', img: 'couple_stage.jpg', title: 'Alan & Hoàng Huỳnh', tag: 'Ảnh Bìa (Cover)' },
+          { id: 'def-2', img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Kỷ Niệm (Beach)' },
+          { id: 'def-3', img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' }
         ];
         return new Response(JSON.stringify(defaultPhotos), {
           headers: {
