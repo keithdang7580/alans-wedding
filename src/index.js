@@ -139,11 +139,80 @@ export default {
       }
     }
 
-    // API: GET /api/photos - fetch uploaded photos
+    // API: GET /api/homepage-photos - fetch homepage official gallery photos
+    if (url.pathname === '/api/homepage-photos' && request.method === 'GET') {
+      try {
+        const row = await env.wedding_db.prepare(
+          "SELECT caption FROM photos WHERE id = 'config:homepage_photos' LIMIT 1"
+        ).first();
+        if (row && row.caption) {
+          return new Response(row.caption, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'Cache-Control': 'no-store',
+            },
+          });
+        }
+        // Default official photos if none saved yet
+        const defaultPhotos = [
+          { id: 'def-1', img: 'couple_beach.jpg', title: 'Alan & Hoàng Huỳnh - Beach Sunset', tag: 'Ảnh Bìa (Cover)' },
+          { id: 'def-2', img: 'couple_dodgers.jpg', title: 'Alan & Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' },
+          { id: 'def-3', img: 'alan_portrait.jpg', title: 'Alan Dương - Chú Rể (Groom)', tag: 'Chân Dung Chú Rể' },
+          { id: 'def-4', img: 'wife_portrait.jpg', title: 'Hoàng Huỳnh - Cô Dâu (Bride)', tag: 'Chân Dung Cô Dâu' }
+        ];
+        return new Response(JSON.stringify(defaultPhotos), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-store',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
+    // API: POST /api/homepage-photos - update homepage official gallery photos (Admin PIN only)
+    if (url.pathname === '/api/homepage-photos' && request.method === 'POST') {
+      if (!isAdmin(request)) {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Hoàng Huỳnh mới có quyền chỉnh sửa ảnh trang chủ (Admin PIN required).' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+      try {
+        const body = await request.json();
+        const photosJson = JSON.stringify(body.photos || []);
+        // Save using SQLite ON CONFLICT replacement
+        await env.wedding_db.prepare(`
+          INSERT INTO photos (id, image_data, caption)
+          VALUES ('config:homepage_photos', 'meta', ?)
+          ON CONFLICT(id) DO UPDATE SET caption = excluded.caption
+        `).bind(photosJson).run();
+
+        return new Response(JSON.stringify({ success: true }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+    }
+
+    // API: GET /api/photos - fetch guest uploaded photos (strictly excluding homepage config)
     if (url.pathname === '/api/photos' && request.method === 'GET') {
       try {
         const { results } = await env.wedding_db.prepare(
-          "SELECT id, image_data, caption, created_at FROM photos ORDER BY created_at DESC LIMIT 50"
+          "SELECT id, image_data, caption, created_at FROM photos WHERE id NOT LIKE 'config:%' ORDER BY created_at DESC LIMIT 60"
         ).all();
         return new Response(JSON.stringify(results || []), {
           headers: {
@@ -160,7 +229,7 @@ export default {
       }
     }
 
-    // API: POST /api/photos - upload a photo
+    // API: POST /api/photos - upload a guest photo
     if (url.pathname === '/api/photos' && request.method === 'POST') {
       try {
         const body = await request.json();
