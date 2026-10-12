@@ -117,7 +117,7 @@ export default {
     // API: DELETE /api/rsvps/:id - STRICTLY ADMIN ONLY
     if (url.pathname.startsWith('/api/rsvps/') && request.method === 'DELETE') {
       if (!isAdmin(request)) {
-        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng mới có quyền xóa khách mời (Admin PIN required).' }), {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng Huỳnh mới có quyền xóa khách mời (Admin PIN required).' }), {
           status: 403,
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         });
@@ -156,9 +156,9 @@ export default {
         }
         // Default official photos if none saved yet
         const defaultPhotos = [
-          { id: 'def-1', img: 'couple_stage.jpg', title: 'Alan & Bảo Hoàng', tag: 'Ảnh Bìa (Cover)' },
-          { id: 'def-2', img: 'couple_beach.jpg', title: 'Alan & Bảo Hoàng - Beach Sunset', tag: 'Kỷ Niệm (Beach)' },
-          { id: 'def-3', img: 'couple_dodgers.jpg', title: 'Alan & Bảo Hoàng - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' }
+          { id: 'def-1', img: 'couple_stage.jpg', title: 'Alan & Bảo Hoàng Huỳnh', tag: 'Ảnh Bìa (Cover)' },
+          { id: 'def-2', img: 'couple_beach.jpg', title: 'Alan & Bảo Hoàng Huỳnh - Beach Sunset', tag: 'Kỷ Niệm (Beach)' },
+          { id: 'def-3', img: 'couple_dodgers.jpg', title: 'Alan & Bảo Hoàng Huỳnh - Dodger Stadium', tag: 'Kỷ Niệm (Stadium)' }
         ];
         return new Response(JSON.stringify(defaultPhotos), {
           headers: {
@@ -178,7 +178,7 @@ export default {
     // API: POST /api/homepage-photos - update homepage official gallery photos (Admin PIN only)
     if (url.pathname === '/api/homepage-photos' && request.method === 'POST') {
       if (!isAdmin(request)) {
-        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng mới có quyền chỉnh sửa ảnh trang chủ (Admin PIN required).' }), {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng Huỳnh mới có quyền chỉnh sửa ảnh trang chủ (Admin PIN required).' }), {
           status: 403,
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         });
@@ -260,7 +260,7 @@ export default {
     // API: DELETE /api/photos/:id - STRICTLY ADMIN ONLY
     if (url.pathname.startsWith('/api/photos/') && request.method === 'DELETE') {
       if (!isAdmin(request)) {
-        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng mới có quyền xóa ảnh (Admin PIN required).' }), {
+        return new Response(JSON.stringify({ error: 'Quyền truy cập bị từ chối: Chỉ có Alan & Bảo Hoàng Huỳnh mới có quyền xóa ảnh (Admin PIN required).' }), {
           status: 403,
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         });
