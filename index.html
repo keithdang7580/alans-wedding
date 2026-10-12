@@ -1058,19 +1058,13 @@ if (banner && cathedralBg) {
   });
 }
 
-// ─── Scroll Progress & Floating FAB Visibility ───────────────
+// ─── Scroll Progress ──────────────────────────────────────────
 window.addEventListener('scroll', () => {
   const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   const scrolled = (winScroll / height) * 100;
-  document.getElementById('progress-bar').style.width = scrolled + '%';
-
-  const fab = document.getElementById('floatingRsvpFab');
-  if (winScroll > 320) {
-    fab.classList.add('visible');
-  } else {
-    fab.classList.remove('visible');
-  }
+  const pb = document.getElementById('progress-bar');
+  if (pb) pb.style.width = scrolled + '%';
 });
 
 // ─── Photo Wall Lightbox ─────────────────────────────────────
@@ -1085,39 +1079,6 @@ function openLightbox(src, title) {
 function closeLightbox(e) {
   if (e.target.id === 'photoLightbox' || e.target.classList.contains('lightbox-close')) {
     document.getElementById('photoLightbox').classList.remove('active');
-  }
-}
-
-// ─── Dress Code Interactive Palette Tester ────────────────────
-const paletteTips = {
-  gold: {
-    vi: "✨ <strong>Màu Vàng Ánh Kim (Gold / Champagne):</strong> Gợi ý Đầm dạ tiệc ánh kim hoặc Suit đen phối nơ lụa vàng sang trọng.",
-    en: "✨ <strong>Gold / Champagne:</strong> Elegant metallic evening gowns or dark suits with a golden bow tie/accent."
-  },
-  sage: {
-    vi: "🌿 <strong>Màu Xanh Sage (Sage Green):</strong> Tông màu thanh lịch, nhã nhặn. Phù hợp cho váy midi xếp ly hoặc áo sơ mi pastel.",
-    en: "🌿 <strong>Sage Green:</strong> Graceful, refreshing tones ideal for pleated midi dresses or soft pastel shirts."
-  },
-  rose: {
-    vi: "🌸 <strong>Màu Hồng Rose (Dusty Rose):</strong> Mang nét dịu dàng, lãng mạn. Rất tôn da trong các khung hình chụp tập thể.",
-    en: "🌸 <strong>Dusty Rose:</strong> Romantic and soft tones that look stunning in group photographs."
-  },
-  ivory: {
-    vi: "🕊️ <strong>Màu Kem / Ivory:</strong> Màu sắc ấm áp, trang trọng cho sơ mi hoặc phụ kiện (vui lòng không mặc váy trắng thuần).",
-    en: "🕊️ <strong>Ivory / Cream:</strong> Warm formal shirts or accessories (kindly avoid solid pure white dresses)."
-  },
-  navy: {
-    vi: "🌃 <strong>Màu Xanh Navy / Đen Tuyền:</strong> Sự lựa chọn cổ điển hoàn hảo cho các bộ Vest nam và váy dạ tiệc tối.",
-    en: "🌃 <strong>Navy Blue:</strong> Classic & timeless choice for men's tailored suits and formal evening attire."
-  }
-};
-
-function selectPaletteColor(el, color) {
-  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
-  el.classList.add('selected');
-  const info = document.getElementById('paletteTesterInfo');
-  if (paletteTips[color]) {
-    info.innerHTML = paletteTips[color][currentLang] || paletteTips[color]['vi'];
   }
 }
 
