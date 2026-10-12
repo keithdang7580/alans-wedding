@@ -959,12 +959,12 @@
     <!-- Admin Top Nav Bar -->
     <div style="display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto 1.5rem;flex-wrap:wrap;gap:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,168,76,0.25);">
       <div style="display:flex;gap:0.6rem;">
-        <button class="btn-sm" id="btnAdminTabGuests" onclick="switchAdminTab('guests')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:var(--gold-dark);color:#fff;">👥 Danh Sách Khách Mời</button>
-        <button class="btn-sm" id="btnAdminTabPhotos" onclick="switchAdminTab('photos')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:rgba(201,168,76,0.15);color:var(--brown-dark);">📸 Quản Lý Ảnh Cưới</button>
+        <button class="btn-sm" id="btnAdminTabGuests" onclick="switchAdminTab('guests')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:var(--gold-dark);color:#fff;" data-i18n="admin_tab_guests">👥 Danh Sách Khách Mời</button>
+        <button class="btn-sm" id="btnAdminTabPhotos" onclick="switchAdminTab('photos')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:rgba(201,168,76,0.15);color:var(--brown-dark);" data-i18n="admin_tab_photos">📸 Quản Lý Ảnh Cưới</button>
       </div>
       <div style="display:flex;align-items:center;gap:0.8rem;">
         <span style="font-size:0.85rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">👑 Alan &amp; Hoàng Huỳnh</span>
-        <button onclick="lockAdmin()" style="background:none;border:1px solid #8b1a1a;color:#8b1a1a;padding:0.35rem 0.9rem;border-radius:4px;cursor:pointer;font-size:0.8rem;">🔒 Đăng Xuất</button>
+        <button onclick="lockAdmin()" style="background:none;border:1px solid #8b1a1a;color:#8b1a1a;padding:0.35rem 0.9rem;border-radius:4px;cursor:pointer;font-size:0.8rem;" data-i18n="admin_logout_btn">🔒 Đăng Xuất</button>
       </div>
     </div>
 
@@ -1030,27 +1030,29 @@
         <div style="margin-bottom:2.5rem;padding:1.8rem;background:#fff;border:1.5px solid var(--gold);border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,0.06);">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem;">
             <div>
-              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;">✦ Dành Riêng Cho Alan & Hoàng Huỳnh ✦</span>
-              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.5rem;font-weight:600;margin-top:0.2rem;">🌟 Quản Lý Album Ảnh Trang Chủ (<span id="adminHomepageCount">4</span> ảnh)</h4>
-              <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;">
-                Đây là các bức ảnh chính thức xuất hiện tại mục <strong>"Album Ảnh Cưới"</strong> trên trang chủ. Alan và Hoàng Huỳnh có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.
+              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;" data-i18n="admin_official_badge">✦ Dành Riêng Cho Alan & Hoàng Huỳnh ✦</span>
+              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.5rem;font-weight:600;margin-top:0.2rem;">
+                <span data-i18n="admin_official_title">🌟 Quản Lý Album Ảnh Trang Chủ</span> (<span id="adminHomepageCount">4</span> <span data-i18n="th_photos_count">ảnh</span>)
+              </h4>
+              <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;" data-i18n="admin_official_desc">
+                Đây là các bức ảnh chính thức xuất hiện tại mục "Album Ảnh Cưới" trên trang chủ. Alan và Hoàng Huỳnh có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.
               </p>
             </div>
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-              <button class="export-btn" style="padding:0.5rem 1rem;font-size:0.85rem;cursor:pointer;" onclick="document.getElementById('adminHomepagePhotoInput').click()">
+              <button class="export-btn" style="padding:0.5rem 1rem;font-size:0.85rem;cursor:pointer;" onclick="document.getElementById('adminHomepagePhotoInput').click()" data-i18n="admin_btn_add_hp">
                 ➕ Thêm Ảnh Vào Trang Chủ
               </button>
               <input type="file" id="adminHomepagePhotoInput" accept="image/*" multiple style="display:none;" onchange="handleAdminHomepageUpload(event)" />
-              <button class="btn-sm" style="font-size:0.8rem;padding:0.5rem 0.9rem;cursor:pointer;" onclick="resetDefaultHomepagePhotos()">
+              <button class="btn-sm" style="font-size:0.8rem;padding:0.5rem 0.9rem;cursor:pointer;" onclick="resetDefaultHomepagePhotos()" data-i18n="admin_btn_reset_hp">
                 ↺ Khôi Phục 4 Ảnh Gốc
               </button>
-              <a href="#photo-wall" class="btn-sm" style="font-size:0.8rem;text-decoration:none;padding:0.5rem 0.9rem;">
+              <a href="#photo-wall" class="btn-sm" style="font-size:0.8rem;text-decoration:none;padding:0.5rem 0.9rem;" data-i18n="admin_btn_view_hp">
                 👁️ Xem Trên Web
               </a>
             </div>
           </div>
 
-          <div id="adminHomepageUploadProgress" style="display:none;margin-bottom:1rem;color:var(--gold-dark);font-size:0.85rem;font-weight:600;">
+          <div id="adminHomepageUploadProgress" style="display:none;margin-bottom:1rem;color:var(--gold-dark);font-size:0.85rem;font-weight:600;" data-i18n="admin_progress_hp">
             ⏳ Đang tải ảnh lên Cloudflare và cập nhật trang chủ...
           </div>
 
@@ -1064,21 +1066,23 @@
         <div style="padding:1.8rem;background:#faf7f0;border:1px solid rgba(201,168,76,0.4);border-radius:8px;box-shadow:0 3px 12px rgba(0,0,0,0.04);">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem;">
             <div>
-              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;">✦ Khách Mời Tải Lên ✦</span>
-              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.4rem;font-weight:600;margin-top:0.2rem;">👥 Ảnh Khách Mời Đóng Góp (<span id="adminGuestPhotoCount">0</span> ảnh)</h4>
-              <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;">
+              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;" data-i18n="admin_guest_badge">✦ Khách Mời Tải Lên ✦</span>
+              <h4 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.4rem;font-weight:600;margin-top:0.2rem;">
+                <span data-i18n="admin_guest_title">👥 Ảnh Khách Mời Đóng Góp</span> (<span id="adminGuestPhotoCount">0</span> <span data-i18n="th_photos_count">ảnh</span>)
+              </h4>
+              <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;" data-i18n="admin_guest_desc">
                 Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Hoàng Huỳnh mới có quyền xóa các ảnh không phù hợp.
               </p>
             </div>
             <div style="display:flex;gap:0.5rem;">
-              <button class="btn-sm" onclick="loadGuestPhotosAdmin()" style="font-size:0.8rem;padding:0.4rem 0.8rem;cursor:pointer;">
+              <button class="btn-sm" onclick="loadGuestPhotosAdmin()" style="font-size:0.8rem;padding:0.4rem 0.8rem;cursor:pointer;" data-i18n="admin_btn_refresh">
                 🔄 Làm Mới
               </button>
             </div>
           </div>
 
           <div id="adminGuestPhotoList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:1rem;">
-            <div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:#7a5a3e;font-style:italic;">
+            <div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:#7a5a3e;font-style:italic;" data-i18n="admin_empty_guest">
               Chưa có khách mời nào tải ảnh lên. Khách có thể tải trực tiếp ở mục "Góc Ảnh Kỷ Niệm Của Khách Mời".
             </div>
           </div>
@@ -1478,10 +1482,28 @@ const translations = {
     lbl_message: "Lời Chúc / Ghi Chú", btn_submit: "Xác Nhận Ngay ✝", lbl_lookup: "Tìm Theo Tên Hoặc SĐT", btn_search: "🔍 Tìm Kiếm",
     wishes_empty: "Hãy là người đầu tiên gửi lời chúc phúc 💌", admin_subtitle: "✦ Quản Lý Khách Mời ✦", admin_title: "Bảng Điều Khiển",
     admin_hint: "Dành cho Alan Dương & Hoàng Huỳnh — nhập mã PIN để tiếp tục", admin_unlock_btn: "🔓 Mở Khóa",
+    admin_tab_guests: "👥 Danh Sách Khách Mời", admin_tab_photos: "📸 Quản Lý Ảnh Cưới", admin_logout_btn: "🔒 Đăng Xuất",
+    admin_official_badge: "✦ Dành Riêng Cho Alan & Hoàng Huỳnh ✦",
+    admin_official_title: "🌟 Quản Lý Album Ảnh Trang Chủ",
+    admin_official_desc: "Đây là các bức ảnh chính thức xuất hiện tại mục \"Album Ảnh Cưới\" trên trang chủ. Alan và Hoàng Huỳnh có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.",
+    admin_btn_add_hp: "➕ Thêm Ảnh Vào Trang Chủ",
+    admin_btn_reset_hp: "↺ Khôi Phục 4 Ảnh Gốc",
+    admin_btn_view_hp: "👁️ Xem Trên Web",
+    admin_progress_hp: "⏳ Đang tải ảnh lên Cloudflare và cập nhật trang chủ...",
+    admin_empty_hp: "Chưa có ảnh nào trên trang chủ. Bấm \"Thêm Ảnh Vào Trang Chủ\" để đăng ảnh mới!",
+    admin_tag_cover: "Ảnh Bìa (Cover)", admin_tag_stadium: "Kỷ Niệm (Stadium)", admin_tag_groom: "Chân Dung Chú Rể", admin_tag_bride: "Chân Dung Cô Dâu", admin_tag_new: "Ảnh Mới (Album)",
+    admin_btn_del_hp: "🗑️ Xóa Khỏi Web",
+    admin_guest_badge: "✦ Khách Mời Tải Lên ✦",
+    admin_guest_title: "👥 Ảnh Khách Mời Đóng Góp",
+    admin_guest_desc: "Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Hoàng Huỳnh mới có quyền xóa các ảnh không phù hợp.",
+    admin_btn_refresh: "🔄 Làm Mới",
+    admin_empty_guest: "Chưa có khách mời nào tải ảnh lên. Khách có thể tải trực tiếp ở mục \"Góc Ảnh Kỷ Niệm Của Khách Mời\".",
+    admin_btn_del_guest: "🗑️ Xóa Ảnh Khách",
     stat_total: "Tổng Khách", stat_attending: "Tham Dự", stat_declined: "Vắng Mặt", stat_pending: "Chờ Xác Nhận", stat_seats: "Tổng Chỗ Ngồi",
     flt_all_status: "Tất Cả Trạng Thái", flt_attending: "Tham Dự", flt_declined: "Vắng Mặt", flt_maybe: "Chưa Chắc", flt_pending: "Chờ Xác Nhận",
     flt_all_groups: "Tất Cả Nhóm", btn_export: "📥 Xuất CSV", th_name: "Họ & Tên", th_phone: "SĐT", th_relation: "Mối Quan Hệ",
     th_plusone: "+Khách", th_status: "Trạng Thái", th_song: "Bài Hát", th_diet: "Ăn Kiêng", th_date: "Ngày Đăng Ký", tbl_empty: "Chưa có khách mời nào",
+    th_photos_count: "ảnh",
     footer_date: "14 Tháng 2 · 2026 · California"
   },
   en: {
@@ -1542,10 +1564,28 @@ const translations = {
     lbl_message: "Wishes / Note for Couple", btn_submit: "Submit RSVP ✝", lbl_lookup: "Search by Name or Phone", btn_search: "🔍 Search Guest",
     wishes_empty: "Be the first to leave a blessing for the couple 💌", admin_subtitle: "✦ Guest Management ✦", admin_title: "Admin Dashboard",
     admin_hint: "For Alan Duong & Hoang Huynh — enter PIN to unlock", admin_unlock_btn: "🔓 Unlock",
+    admin_tab_guests: "👥 Guest RSVP List", admin_tab_photos: "📸 Wedding Photos Manager", admin_logout_btn: "🔒 Log Out",
+    admin_official_badge: "✦ Exclusive For Alan & Hoang Huynh ✦",
+    admin_official_title: "🌟 Manage Homepage Photo Album",
+    admin_official_desc: "These official photos appear in the \"Official Wedding Album\" section on the front page. Alan and Hoang Huynh can add new photos, reorder, or delete anytime.",
+    admin_btn_add_hp: "➕ Add Photos To Homepage",
+    admin_btn_reset_hp: "↺ Reset 4 Original Photos",
+    admin_btn_view_hp: "👁️ View On Website",
+    admin_progress_hp: "⏳ Optimizing and uploading photos to Cloudflare...",
+    admin_empty_hp: "No photos in homepage album. Click \"Add Photos To Homepage\" to publish new photos!",
+    admin_tag_cover: "Cover Photo", admin_tag_stadium: "Stadium Memories", admin_tag_groom: "Groom Portrait", admin_tag_bride: "Bride Portrait", admin_tag_new: "New Photo (Album)",
+    admin_btn_del_hp: "🗑️ Remove From Web",
+    admin_guest_badge: "✦ Guest Uploads ✦",
+    admin_guest_title: "👥 Photos Shared By Guests",
+    admin_guest_desc: "All candid photos snapped and shared by guests appear here. Only Alan & Hoang Huynh can delete unwanted or inappropriate photos.",
+    admin_btn_refresh: "🔄 Refresh",
+    admin_empty_guest: "No guest photos uploaded yet. Guests can upload directly in the \"Guest Photo Wall\" section.",
+    admin_btn_del_guest: "🗑️ Delete Guest Photo",
     stat_total: "Total Guests", stat_attending: "Attending", stat_declined: "Declined", stat_pending: "Pending", stat_seats: "Total Seats",
     flt_all_status: "All Statuses", flt_attending: "Attending", flt_declined: "Declined", flt_maybe: "Maybe", flt_pending: "Pending",
     flt_all_groups: "All Groups", btn_export: "📥 Export CSV", th_name: "Full Name", th_phone: "Phone", th_relation: "Relationship",
     th_plusone: "+Guests", th_status: "Status", th_song: "Song Request", th_diet: "Dietary", th_date: "Date Added", tbl_empty: "No guest records found",
+    th_photos_count: "photos",
     footer_date: "February 14 · 2026 · California"
   }
 };
@@ -1572,6 +1612,7 @@ function setLanguage(lang) {
 
   if (typeof renderStats === 'function') renderStats();
   if (typeof renderTable === 'function') renderTable();
+  if (typeof renderAdminPhotos === 'function') renderAdminPhotos();
 }
 
 function toggleLangMobile() {
@@ -2030,26 +2071,34 @@ async function renderAdminHomepageAlbum() {
   if (!listEl) return;
 
   if (!cachedHomepagePhotos.length) {
-    listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">Chưa có ảnh nào trên trang chủ. Bấm "Thêm Ảnh Vào Trang Chủ" để đăng ảnh mới!</div>`;
+    listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#7a5a3e;font-style:italic;">${translations[currentLang].admin_empty_hp}</div>`;
     return;
   }
 
+  const tagMap = {
+    'Ảnh Bìa (Cover)': translations[currentLang].admin_tag_cover,
+    'Kỷ Niệm (Stadium)': translations[currentLang].admin_tag_stadium,
+    'Chân Dung Chú Rể': translations[currentLang].admin_tag_groom,
+    'Chân Dung Cô Dâu': translations[currentLang].admin_tag_bride,
+    'Ảnh Mới (Album)': translations[currentLang].admin_tag_new
+  };
+
   listEl.innerHTML = cachedHomepagePhotos.map((p, idx) => `
     <div style="background:#faf7f0;border:1px solid rgba(201,168,76,0.4);border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
-      <div style="height:150px;overflow:hidden;cursor:pointer;position:relative;" onclick="openLightbox('${p.img}', '${p.title || 'Ảnh Trang Chủ'}')">
+      <div style="height:150px;overflow:hidden;cursor:pointer;position:relative;" onclick="openLightbox('${p.img}', '${p.title || (currentLang === 'vi' ? 'Ảnh Trang Chủ' : 'Homepage Photo')}')">
         <img src="${p.img}" alt="${p.title || 'Photo'}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
         <span style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.65);color:#fff;font-size:0.7rem;padding:2px 6px;border-radius:3px;">#${idx + 1}</span>
       </div>
       <div style="padding:0.6rem 0.8rem;background:#fff;display:flex;flex-direction:column;gap:0.4rem;">
-        <div style="font-size:0.75rem;font-weight:600;color:var(--gold-dark);">${p.tag || 'Ảnh Album'}</div>
-        <div style="font-size:0.75rem;color:#7a5a3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${p.title || ''}">${p.title || 'Alan & Hoàng Huỳnh'}</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--gold-dark);">${tagMap[p.tag] || p.tag || translations[currentLang].admin_tag_new}</div>
+        <div style="font-size:0.75rem;color:#7a5a3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${p.title || ''}">${p.title || (currentLang === 'vi' ? 'Alan & Hoàng Huỳnh' : 'Alan & Hoang Huynh')}</div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.3rem;border-top:1px dashed rgba(201,168,76,0.3);padding-top:0.4rem;">
           <div style="display:flex;gap:0.25rem;">
-            ${idx > 0 ? `<button onclick="moveHomepagePhoto(${idx}, -1)" title="Di chuyển lên trước" style="background:#f0e6d2;border:none;border-radius:3px;padding:2px 6px;cursor:pointer;font-size:0.75rem;">⬆</button>` : ''}
-            ${idx < cachedHomepagePhotos.length - 1 ? `<button onclick="moveHomepagePhoto(${idx}, 1)" title="Di chuyển ra sau" style="background:#f0e6d2;border:none;border-radius:3px;padding:2px 6px;cursor:pointer;font-size:0.75rem;">⬇</button>` : ''}
+            ${idx > 0 ? `<button onclick="moveHomepagePhoto(${idx}, -1)" title="${currentLang === 'vi' ? 'Di chuyển lên trước' : 'Move up'}" style="background:#f0e6d2;border:none;border-radius:3px;padding:2px 6px;cursor:pointer;font-size:0.75rem;">⬆</button>` : ''}
+            ${idx < cachedHomepagePhotos.length - 1 ? `<button onclick="moveHomepagePhoto(${idx}, 1)" title="${currentLang === 'vi' ? 'Di chuyển ra sau' : 'Move down'}" style="background:#f0e6d2;border:none;border-radius:3px;padding:2px 6px;cursor:pointer;font-size:0.75rem;">⬇</button>` : ''}
           </div>
           <button onclick="removeHomepagePhoto('${p.id || idx}')" style="background:#8b1a1a;color:#fff;border:none;padding:0.25rem 0.6rem;border-radius:3px;font-size:0.72rem;cursor:pointer;">
-            🗑️ Xóa Khỏi Web
+            ${translations[currentLang].admin_btn_del_hp}
           </button>
         </div>
       </div>
@@ -2063,7 +2112,7 @@ async function handleAdminHomepageUpload(e) {
   const pin = localStorage.getItem('admin_pin_token');
   const progressEl = document.getElementById('adminHomepageUploadProgress');
   if (progressEl) progressEl.style.display = 'block';
-  showToast(`Đang nén và đăng ${files.length} ảnh lên trang chủ...`);
+  showToast(currentLang === 'vi' ? `Đang nén và đăng ${files.length} ảnh lên trang chủ...` : `Optimizing and uploading ${files.length} photos...`);
 
   const newPhotos = [...cachedHomepagePhotos];
 
@@ -2073,7 +2122,7 @@ async function handleAdminHomepageUpload(e) {
       newPhotos.push({
         id: 'hp-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
         img: dataUrl,
-        title: f.name.replace(/\.[^/.]+$/, "") || 'Alan & Hoàng Huỳnh',
+        title: f.name.replace(/\.[^/.]+$/, "") || (currentLang === 'vi' ? 'Alan & Hoàng Huỳnh' : 'Alan & Hoang Huynh'),
         tag: 'Ảnh Mới (Album)'
       });
     } catch (err) {
@@ -2089,15 +2138,15 @@ async function handleAdminHomepageUpload(e) {
     });
     if (res.ok) {
       cachedHomepagePhotos = newPhotos;
-      showToast(`Đã thêm thành công ${files.length} ảnh vào Album Trang Chủ!`);
+      showToast(currentLang === 'vi' ? `Đã thêm thành công ${files.length} ảnh vào Album Trang Chủ!` : `Successfully added ${files.length} photos to Homepage Album!`);
       renderAdminHomepageAlbum();
       renderPublicHomepageGallery();
     } else {
       const err = await res.json();
-      showToast(err.error || 'Quyền truy cập bị từ chối.', true);
+      showToast(err.error || (currentLang === 'vi' ? 'Quyền truy cập bị từ chối.' : 'Access denied.'), true);
     }
   } catch (err) {
-    showToast('Lỗi khi cập nhật album trang chủ.', true);
+    showToast(currentLang === 'vi' ? 'Lỗi khi cập nhật album trang chủ.' : 'Error updating homepage album.', true);
   } finally {
     if (progressEl) progressEl.style.display = 'none';
     e.target.value = '';
@@ -2123,10 +2172,10 @@ async function removeHomepagePhoto(idOrIdx) {
       renderPublicHomepageGallery();
     } else {
       const err = await res.json();
-      showToast(err.error || 'Quyền truy cập bị từ chối.', true);
+      showToast(err.error || (currentLang === 'vi' ? 'Quyền truy cập bị từ chối.' : 'Access denied.'), true);
     }
   } catch (err) {
-    showToast('Lỗi khi xóa ảnh.', true);
+    showToast(currentLang === 'vi' ? 'Lỗi khi xóa ảnh.' : 'Error deleting photo.', true);
   }
 }
 
@@ -2173,7 +2222,7 @@ async function resetDefaultHomepagePhotos() {
       renderPublicHomepageGallery();
     }
   } catch (err) {
-    showToast('Lỗi khi khôi phục ảnh.', true);
+    showToast(currentLang === 'vi' ? 'Lỗi khi khôi phục ảnh.' : 'Error restoring photos.', true);
   }
 }
 
@@ -2190,19 +2239,19 @@ async function loadGuestPhotosAdmin() {
       if (!listEl) return;
 
       if (!cachedGuestPhotos.length) {
-        listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:#7a5a3e;font-style:italic;">Chưa có khách mời nào tải ảnh lên. Khách có thể tải trực tiếp ở mục "Góc Ảnh Kỷ Niệm Của Khách Mời".</div>`;
+        listEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:#7a5a3e;font-style:italic;">${translations[currentLang].admin_empty_guest}</div>`;
         return;
       }
 
       listEl.innerHTML = cachedGuestPhotos.map(p => `
         <div style="background:#fff;border:1px solid rgba(201,168,76,0.3);border-radius:6px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
-          <div style="height:150px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.image_data}', '${p.caption || 'Khách Mời'}')">
+          <div style="height:150px;overflow:hidden;cursor:pointer;" onclick="openLightbox('${p.image_data}', '${p.caption || (currentLang === 'vi' ? 'Khách Mời' : 'Guest Photo')}')">
             <img src="${p.image_data}" alt="${p.caption || 'Photo'}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div style="padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;background:#fff;">
-            <span style="font-size:0.72rem;color:#7a5a3e;">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Khách mời'}</span>
+            <span style="font-size:0.72rem;color:#7a5a3e;">${p.created_at ? new Date(p.created_at).toLocaleDateString() : (currentLang === 'vi' ? 'Khách mời' : 'Guest')}</span>
             <button onclick="deleteGuestPhoto('${p.id}')" style="background:#8b1a1a;color:#fff;border:none;padding:0.3rem 0.7rem;border-radius:3px;font-size:0.72rem;cursor:pointer;">
-              🗑️ Xóa Ảnh Khách
+              ${translations[currentLang].admin_btn_del_guest}
             </button>
           </div>
         </div>
@@ -2227,10 +2276,10 @@ async function deleteGuestPhoto(id) {
       loadUploadedPhotos();
     } else {
       const err = await res.json();
-      showToast(err.error || 'Quyền truy cập bị từ chối.', true);
+      showToast(err.error || (currentLang === 'vi' ? 'Quyền truy cập bị từ chối.' : 'Access denied.'), true);
     }
   } catch (err) {
-    showToast('Lỗi khi xóa ảnh.', true);
+    showToast(currentLang === 'vi' ? 'Lỗi khi xóa ảnh.' : 'Error deleting photo.', true);
   }
 }
 
