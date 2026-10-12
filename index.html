@@ -783,7 +783,7 @@
       <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">📸</span>
       <strong style="color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-size:1.1rem;" data-i18n="photo_drop_title">Bấm vào đây để tải ảnh lên</strong>
       <p style="font-size:0.8rem;color:#7a5a3e;margin-top:0.3rem;" data-i18n="photo_drop_sub">Hỗ trợ JPG, PNG (tối đa 5MB mỗi ảnh)</p>
-      <input type="file" id="photoInput" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(event)" />
+      <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp" multiple style="display:none;" onchange="handlePhotoUpload(event)" />
     </div>
 
     <div class="photo-grid" id="guestPhotoGrid">
@@ -1042,7 +1042,7 @@
               <button class="export-btn" style="padding:0.5rem 1rem;font-size:0.85rem;cursor:pointer;" onclick="document.getElementById('adminHomepagePhotoInput').click()" data-i18n="admin_btn_add_hp">
                 ➕ Thêm Ảnh Vào Trang Chủ
               </button>
-              <input type="file" id="adminHomepagePhotoInput" accept="image/*" multiple style="display:none;" onchange="handleAdminHomepageUpload(event)" />
+              <input type="file" id="adminHomepagePhotoInput" accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp" multiple style="display:none;" onchange="handleAdminHomepageUpload(event)" />
               <button class="btn-sm" style="font-size:0.8rem;padding:0.5rem 0.9rem;cursor:pointer;" onclick="resetDefaultHomepagePhotos()" data-i18n="admin_btn_reset_hp">
                 ↺ Khôi Phục 4 Ảnh Gốc
               </button>
@@ -1712,52 +1712,92 @@ function searchSeating() {
 async function handlePhotoUpload(e) {
   const files = e.target.files; if (!files || !files.length) return;
   const grid = document.getElementById('guestPhotoGrid');
-  showToast(currentLang === 'vi' ? 'Đang tải ảnh lên Cloudflare...' : 'Uploading photos to Cloudflare...');
+  const placeholder = document.getElementById('guestEmptyPlaceholder');
+  showToast(currentLang === 'vi' ? `Đang chuẩn bị ${files.length} ảnh...` : `Preparing ${files.length} photos...`);
 
-  for (const f of Array.from(files)) {
+  let successCount = 0;
+  let lastError = null;
+
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i];
     try {
-      const dataUrl = await resizeImage(f, 1200, 1200, 0.82);
+      showToast(currentLang === 'vi' ? `Đang xử lý & lưu ảnh ${i + 1}/${files.length}...` : `Uploading ${i + 1}/${files.length}...`);
+      const dataUrl = await resizeImage(f, 1200, 1200, 0.80);
+
+      const res = await fetch(`${API_BASE}/api/photos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_data: dataUrl, caption: f.name || '' })
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || `HTTP ${res.status}`);
+      }
+
+      if (placeholder) placeholder.style.display = 'none';
+
       const item = document.createElement('div');
       item.className = 'photo-grid-item';
       item.onclick = () => openLightbox(dataUrl, f.name || 'Wedding Photo');
       item.innerHTML = `<img src="${dataUrl}" alt="Wedding Photo" loading="lazy" />`;
       grid.prepend(item);
 
-      await fetch(`${API_BASE}/api/photos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image_data: dataUrl, caption: f.name || '' })
-      });
+      successCount++;
     } catch (err) {
       console.warn('Error uploading photo:', err);
+      lastError = err.message;
     }
   }
-  showToast(currentLang === 'vi' ? `Đã lưu ${files.length} ảnh lên Cloudflare!` : `Saved ${files.length} photos to Cloudflare!`);
+
+  if (e.target) e.target.value = '';
+
+  if (successCount > 0) {
+    showToast(currentLang === 'vi' 
+      ? `Đã lưu thành công ${successCount} ảnh lên máy chủ!` 
+      : `Successfully saved ${successCount} photos!`);
+  } else if (lastError) {
+    showToast((currentLang === 'vi' ? 'Không thể tải ảnh: ' : 'Upload failed: ') + lastError, true);
+  }
 }
 
-function resizeImage(file, maxWidth, maxHeight, quality) {
+function resizeImage(file, maxWidth = 1200, maxHeight = 1200, quality = 0.80) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        let width = img.width, height = img.height;
+    if (!file || !file.type.startsWith('image/')) {
+      return reject(new Error(currentLang === 'vi' ? 'Tệp không phải là hình ảnh hợp lệ.' : 'File is not a valid image.'));
+    }
+    const blobUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(blobUrl);
+      try {
+        let width = img.naturalWidth || img.width;
+        let height = img.naturalHeight || img.height;
+        if (!width || !height) {
+          return reject(new Error('Kích thước ảnh không hợp lệ'));
+        }
         if (width > height) {
           if (width > maxWidth) { height = Math.round((height * maxWidth) / width); width = maxWidth; }
         } else {
           if (height > maxHeight) { width = Math.round((width * maxHeight) / height); height = maxHeight; }
         }
         const canvas = document.createElement('canvas');
-        canvas.width = width; canvas.height = height;
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
         resolve(canvas.toDataURL('image/jpeg', quality));
-      };
-      img.onerror = reject;
-      img.src = e.target.result;
+      } catch (err) {
+        reject(err);
+      }
     };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    img.onerror = () => {
+      URL.revokeObjectURL(blobUrl);
+      reject(new Error(currentLang === 'vi' 
+        ? `Không thể đọc ảnh "${file.name}". Định dạng ảnh (như HEIC) có thể chưa được hỗ trợ, vui lòng chọn file JPG hoặc PNG.` 
+        : `Cannot decode "${file.name}". HEIC/unsupported format, please choose JPG or PNG.`));
+    };
+    img.src = blobUrl;
   });
 }
 
@@ -2110,46 +2150,65 @@ async function renderAdminHomepageAlbum() {
 async function handleAdminHomepageUpload(e) {
   const files = e.target.files; if (!files || !files.length) return;
   const pin = localStorage.getItem('admin_pin_token');
+  if (!pin) {
+    showToast(currentLang === 'vi' ? 'Vui lòng mở khóa Admin trước khi tải ảnh.' : 'Please unlock Admin before uploading photos.', true);
+    if (e.target) e.target.value = '';
+    return;
+  }
+
   const progressEl = document.getElementById('adminHomepageUploadProgress');
   if (progressEl) progressEl.style.display = 'block';
-  showToast(currentLang === 'vi' ? `Đang nén và đăng ${files.length} ảnh lên trang chủ...` : `Optimizing and uploading ${files.length} photos...`);
+  showToast(currentLang === 'vi' ? `Đang xử lý & tối ưu ${files.length} ảnh trang chủ...` : `Optimizing ${files.length} homepage photos...`);
 
   const newPhotos = [...cachedHomepagePhotos];
+  let addedCount = 0;
+  let lastError = null;
 
-  for (const f of Array.from(files)) {
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i];
     try {
-      const dataUrl = await resizeImage(f, 1600, 1600, 0.85);
+      showToast(currentLang === 'vi' ? `Đang nén ảnh ${i + 1}/${files.length}...` : `Compressing photo ${i + 1}/${files.length}...`);
+      const dataUrl = await resizeImage(f, 1200, 1200, 0.80);
       newPhotos.push({
         id: 'hp-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
         img: dataUrl,
         title: f.name.replace(/\.[^/.]+$/, "") || (currentLang === 'vi' ? 'Alan & Hoàng Huỳnh' : 'Alan & Hoang Huynh'),
         tag: 'Ảnh Mới (Album)'
       });
+      addedCount++;
     } catch (err) {
       console.warn('Error reading homepage photo:', err);
+      lastError = err.message;
     }
+  }
+
+  if (addedCount === 0) {
+    if (progressEl) progressEl.style.display = 'none';
+    if (e.target) e.target.value = '';
+    if (lastError) showToast(lastError, true);
+    return;
   }
 
   try {
     const res = await fetch(`${API_BASE}/api/homepage-photos`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Admin-PIN': pin || '' },
+      headers: { 'Content-Type': 'application/json', 'X-Admin-PIN': pin },
       body: JSON.stringify({ photos: newPhotos })
     });
     if (res.ok) {
       cachedHomepagePhotos = newPhotos;
-      showToast(currentLang === 'vi' ? `Đã thêm thành công ${files.length} ảnh vào Album Trang Chủ!` : `Successfully added ${files.length} photos to Homepage Album!`);
+      showToast(currentLang === 'vi' ? `Đã thêm thành công ${addedCount} ảnh vào Album Trang Chủ!` : `Successfully added ${addedCount} photos to Homepage Album!`);
       renderAdminHomepageAlbum();
       renderPublicHomepageGallery();
     } else {
-      const err = await res.json();
+      const err = await res.json().catch(() => ({}));
       showToast(err.error || (currentLang === 'vi' ? 'Quyền truy cập bị từ chối.' : 'Access denied.'), true);
     }
   } catch (err) {
-    showToast(currentLang === 'vi' ? 'Lỗi khi cập nhật album trang chủ.' : 'Error updating homepage album.', true);
+    showToast((currentLang === 'vi' ? 'Lỗi khi cập nhật album trang chủ: ' : 'Error updating homepage album: ') + err.message, true);
   } finally {
     if (progressEl) progressEl.style.display = 'none';
-    e.target.value = '';
+    if (e.target) e.target.value = '';
   }
 }
 
