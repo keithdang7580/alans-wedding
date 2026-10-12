@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thiệp Mời Đám Cưới · Alan Dương & Hoàng Huỳnh · Christ Our Savior Catholic Parish & White Palace</title>
-  <meta name="description" content="Thiệp mời Lễ Hôn Phối Công Giáo của Alan Dương & Hoàng Huỳnh tại Giáo xứ Christ Our Savior Catholic Parish (Santa Ana) và Tiệc Cưới tại White Palace Banquet Restaurant (Westminster) · Thứ Bảy, 28.11.2026." />
+  <title>Thiệp Mời Đám Cưới · Alan Dương & Bảo Hoàng · Christ Our Savior Catholic Parish & White Palace</title>
+  <meta name="description" content="Thiệp mời Lễ Hôn Phối Công Giáo của Alan Dương & Bảo Hoàng tại Giáo xứ Christ Our Savior Catholic Parish (Santa Ana) và Tiệc Cưới tại White Palace Banquet Restaurant (Westminster) · Thứ Bảy, 28.11.2026." />
 
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Alan Dương & Hoàng Huỳnh · Thiệp Mời Hôn Lễ Công Giáo" />
+  <meta property="og:title" content="Alan Dương & Bảo Hoàng · Thiệp Mời Hôn Lễ Công Giáo" />
   <meta property="og:description" content="Thánh Lễ Hôn Phối tại Christ Our Savior Catholic Parish & Tiệc Cưới tại White Palace · Thứ Bảy, 28.11.2026." />
   <meta property="og:image" content="https://alan-duong-hoang-huynh.ersona--ocial-edia.workers.dev/couple_stage.jpg" />
   <meta property="og:url" content="https://alan-duong-hoang-huynh.ersona--ocial-edia.workers.dev" />
@@ -489,11 +489,6 @@
 <!-- ── Confetti Canvas ── -->
 <canvas id="confetti-canvas"></canvas>
 
-<!-- ── Floating Quick RSVP Button ── -->
-<a href="#rsvp" id="floatingRsvpFab" class="floating-rsvp-fab">
-  💌 <span data-i18n="fab_rsvp">Xác Nhận Tham Dự</span>
-</a>
-
 <!-- ── Floating Background Music Player ── -->
 <div class="music-widget" id="musicWidget" onclick="toggleMusic()">
   <div class="disc-icon">🎵</div>
@@ -513,9 +508,9 @@
     <span class="dock-icon">🍷</span>
     <span class="dock-label" data-i18n="dock_party">Tiệc Cưới</span>
   </a>
-  <a href="#rsvp" class="dock-item dock-rsvp">
-    <span class="dock-icon">💌</span>
-    <span class="dock-label" data-i18n="dock_rsvp">RSVP</span>
+  <a href="#photo-wall" class="dock-item">
+    <span class="dock-icon">📸</span>
+    <span class="dock-label" data-i18n="dock_photos">Góc Ảnh</span>
   </a>
   <button class="dock-item" onclick="toggleLangMobile()">
     <span class="dock-icon">🌐</span>
@@ -527,13 +522,10 @@
 <nav>
   <div class="nav-links">
     <a href="#hero" data-i18n="nav_home">Trang Chủ</a>
-    <a href="#story" data-i18n="nav_story">Câu Chuyện</a>
     <a href="#schedule" data-i18n="nav_schedule">Chương Trình</a>
     <a href="#venue" data-i18n="nav_venue">Địa Điểm</a>
-    <a href="#etiquette" data-i18n="nav_etiquette">Trang Phục</a>
     <a href="#seating" data-i18n="nav_seating">Bàn Tiệc</a>
     <a href="#photo-wall" data-i18n="nav_photos">Góc Ảnh</a>
-    <a href="#rsvp" data-i18n="nav_rsvp">RSVP</a>
     <a href="#admin" data-i18n="nav_admin">Quản Lý</a>
   </div>
   <div class="lang-switcher">
@@ -550,20 +542,20 @@
   <div class="divider-ornament"><span>✦</span></div>
 
   <div class="couple-portraits" style="gap:0;margin:1.8rem 0 1.2rem;">
-    <div class="portrait-card single-couple-card tilt-card" onclick="openLightbox('couple_stage.jpg', 'Alan Dương & Hoàng Huỳnh')">
-      <img src="couple_stage.jpg" alt="Alan Dương & Hoàng Huỳnh" />
-      <span class="portrait-name"><span data-i18n="groom_name">Alan Dương</span> &amp; <span data-i18n="bride_name">Hoàng Huỳnh</span></span>
+    <div class="portrait-card single-couple-card tilt-card" onclick="openLightbox('couple_stage.jpg', 'Alan Dương & Bảo Hoàng')">
+      <img src="couple_stage.jpg" alt="Alan Dương & Bảo Hoàng" />
+      <span class="portrait-name"><span data-i18n="groom_name">Alan Dương</span> &amp; <span data-i18n="bride_name">Bảo Hoàng</span></span>
     </div>
   </div>
 
-  <h1 class="hero-names"><span data-i18n="groom_name">Alan Dương</span> <span class="amp">&amp;</span> <span data-i18n="bride_name">Hoàng Huỳnh</span></h1>
+  <h1 class="hero-names"><span data-i18n="groom_name">Alan Dương</span> <span class="amp">&amp;</span> <span data-i18n="bride_name">Bảo Hoàng</span></h1>
 
   <div class="divider-ornament"><span>❧</span></div>
 
   <p class="hero-date" data-i18n="hero_date">Thứ Bảy · 28 Tháng 11 · 2026</p>
   <p class="hero-location" data-i18n="hero_location">Christ Our Savior Catholic Parish (Santa Ana) &amp; White Palace (Westminster)</p>
 
-  <a href="#rsvp" class="hero-cta" data-i18n="hero_cta">Xác Nhận Tham Dự →</a>
+  <a href="#schedule" class="hero-cta" data-i18n="hero_cta">Xem Chương Trình →</a>
 </section>
 
 <!-- ── Christ Our Savior Catholic Parish Showcase Banner ── -->
@@ -588,41 +580,25 @@
   </div>
 </div>
 
-<!-- ── Our Story ── -->
-<section id="story" class="scroll-reveal">
-  <p class="section-subtitle" data-i18n="story_subtitle">✦ Our Journey ✦</p>
-  <h2 class="section-title" data-i18n="story_title">Câu Chuyện Của Chúng Tôi</h2>
-
-  <div class="story-grid">
-    <div class="story-card tilt-card">
-      <div class="story-card-year">2019</div>
-      <div class="story-card-title" data-i18n="story_1_title">✝ Gặp Gỡ Tại Giáo Xứ</div>
-      <div class="story-card-body" data-i18n="story_1_body">Chúng tôi gặp nhau trong đội ca đoàn giáo xứ. Tiếng hát của Hoàng Huỳnh đã chạm đến trái tim Alan Dương ngay từ buổi đầu tiên.</div>
-    </div>
-    <div class="story-card tilt-card">
-      <div class="story-card-year">2020</div>
-      <div class="story-card-title" data-i18n="story_2_title">🌸 Tình Yêu Nảy Nở</div>
-      <div class="story-card-body" data-i18n="story_2_body">Qua những buổi cầu nguyện chung, những chuyến thăm từ thiện và những tách trà chiều — tình yêu lặng lẽ nảy mầm.</div>
-    </div>
-    <div class="story-card tilt-card">
-      <div class="story-card-year">2023</div>
-      <div class="story-card-title" data-i18n="story_3_title">💍 Cầu Hôn</div>
-      <div class="story-card-body" data-i18n="story_3_body">Trước mặt gia đình hai bên, bên ngọn nến lung linh của bàn thờ Đức Mẹ, Alan Dương quỳ xuống và Hoàng Huỳnh đã nói "Con đồng ý".</div>
-    </div>
-    <div class="story-card tilt-card">
-      <div class="story-card-year">2026</div>
-      <div class="story-card-title" data-i18n="story_4_title">🕊️ Hôn Lễ Thiêng Liêng</div>
-      <div class="story-card-body" data-i18n="story_4_body">Trước Thiên Chúa và những người thân yêu, chúng tôi nguyện yêu thương nhau đến trọn đời — mãi mãi.</div>
-    </div>
-  </div>
-</section>
-
 <!-- ── Schedule ── -->
 <section id="schedule" class="scroll-reveal">
   <p class="section-subtitle" data-i18n="schedule_subtitle">✦ Chương Trình ✦</p>
   <h2 class="section-title" data-i18n="schedule_title">Ngày Trọng Đại</h2>
 
   <div class="schedule-list">
+    <div class="schedule-item">
+      <div class="schedule-time">11:00 AM</div>
+      <div>
+        <span class="schedule-icon">📷</span>
+        <div class="schedule-event-title" data-i18n="sch_0_title">Chụp Ảnh Gia Đình</div>
+        <div class="schedule-event-desc" data-i18n="sch_0_desc">Khuôn viên Giáo xứ Christ Our Savior Catholic Parish · Dành cho gia đình &amp; thân nhân trước Thánh Lễ</div>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.35rem;flex-wrap:wrap;">
+          <span class="schedule-badge" data-i18n="sch_0_badge">Gia đình &amp; Thân nhân</span>
+          <button class="btn-sm" style="font-size:0.75rem;padding:0.25rem 0.6rem;" onclick="addToGoogleCalendar('family_photo')">📅 Google Cal</button>
+          <button class="btn-sm" style="font-size:0.75rem;padding:0.25rem 0.6rem;" onclick="downloadICS('family_photo')"> Apple Cal</button>
+        </div>
+      </div>
+    </div>
     <div class="schedule-item">
       <div class="schedule-time">12:00 PM</div>
       <div>
@@ -708,40 +684,6 @@
   </div>
 </section>
 
-<!-- ── Dress Code & Catholic Etiquette ── -->
-<section id="etiquette" class="scroll-reveal">
-  <p class="section-subtitle" data-i18n="eti_subtitle">✦ Dress Code & Mass Etiquette ✦</p>
-  <h2 class="section-title" data-i18n="eti_title">Trang Phục & Quy Tắc Thánh Lễ</h2>
-
-  <div class="etiquette-box">
-    <div class="etiquette-card tilt-card">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-dark);" data-i18n="dress_code_title">🎨 Dress Code Color Palette</h3>
-      <p style="font-size:0.85rem;color:#6a4e3b;margin-top:0.4rem;font-style:italic;" data-i18n="dress_code_sub">Bấm vào màu sắc để xem gợi ý phối đồ:</p>
-      <div class="palette-swatches">
-        <div class="swatch" style="background:#e8d5a3;color:#4a3800;" onclick="selectPaletteColor(this, 'gold')">Gold</div>
-        <div class="swatch" style="background:#9eb39f;color:#1e3620;" onclick="selectPaletteColor(this, 'sage')">Sage</div>
-        <div class="swatch" style="background:#e2b6b6;color:#571818;" onclick="selectPaletteColor(this, 'rose')">Rose</div>
-        <div class="swatch" style="background:#faf7f0;color:#2c1810;border:1px solid #c9a84c;" onclick="selectPaletteColor(this, 'ivory')">Ivory</div>
-        <div class="swatch" style="background:#2c1810;color:#e8d5a3;" onclick="selectPaletteColor(this, 'navy')">Navy</div>
-      </div>
-      <div class="palette-tester-info" id="paletteTesterInfo">
-        ✨ Gợi ý: Chọn một tone màu bên trên để xem chi tiết gợi ý phối đồ phù hợp với không khí Thánh Lễ.
-      </div>
-      <p style="font-size:0.82rem;color:#7a5a3e;line-height:1.6;margin-top:1rem;" data-i18n="dress_code_note">✨ Kính xin quý khách vui lòng tránh trang phục màu trắng thuần (dành riêng cho Cô Dâu) và đen thuần.</p>
-    </div>
-
-    <div class="etiquette-card tilt-card">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-dark);" data-i18n="mass_eti_title">✝ Quy Tắc Tham Dự Thánh Lễ</h3>
-      <ul style="margin-top:0.8rem;padding-left:1.2rem;font-size:0.88rem;color:#5a3e2b;line-height:1.8;">
-        <li data-i18n="mass_rule_1">Xin đến trước 15-20 phút để ổn định chỗ ngồi trước khi Thánh Lễ bắt đầu tại Giáo xứ Christ Our Savior.</li>
-        <li data-i18n="mass_rule_2">Chuyển điện thoại sang chế độ rung/im lặng trong suốt thời gian cử hành.</li>
-        <li data-i18n="mass_rule_3">Trang phục kín đáo, lịch sự khi vào nhà thờ thiêng liêng.</li>
-        <li data-i18n="mass_rule_4">Giữ trật tự & trang nghiêm trong giờ dâng lễ và chụp ảnh kỷ niệm.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <!-- ── Interactive Seating Chart ── -->
 <section id="seating" class="scroll-reveal">
   <p class="section-subtitle" data-i18n="seat_subtitle">✦ Table Assignment ✦</p>
@@ -758,10 +700,10 @@
 
 <!-- ── Official Couple Gallery & Guest Photo Wall ── -->
 <section id="photo-wall" class="scroll-reveal">
-  <!-- Section 1: Official Wedding Album (Managed by Alan & Hoang Huynh) -->
+  <!-- Section 1: Official Wedding Album (Managed by Alan & Bao-Hoang) -->
   <div style="margin-bottom: 3.5rem;">
     <p class="section-subtitle" data-i18n="official_photo_subtitle">✦ Official Wedding Album ✦</p>
-    <h2 class="section-title" data-i18n="official_photo_title">Album Ảnh Cưới Của Alan & Hoàng Huỳnh</h2>
+    <h2 class="section-title" data-i18n="official_photo_title">Album Ảnh Cưới Của Alan & Bảo Hoàng</h2>
     <p style="text-align:center;max-width:640px;margin:0 auto 2rem;font-style:italic;color:#6a4e3b;font-size:0.92rem;" data-i18n="official_photo_intro">Những khoảnh khắc hạnh phúc trên hành trình tình yêu của chúng tôi:</p>
     
     <div class="photo-grid" id="homepagePhotoGrid">
@@ -809,153 +751,13 @@
   </div>
 </div>
 
-<!-- ── RSVP ── -->
-<section id="rsvp" class="scroll-reveal">
-  <p class="section-subtitle" data-i18n="rsvp_subtitle">✦ RSVP ✦</p>
-  <h2 class="section-title" data-i18n="rsvp_title">Xác Nhận Tham Dự</h2>
-  <p style="text-align:center;margin-bottom:2.5rem;font-size:0.9rem;color:#7a5a3e;font-style:italic;" data-i18n="rsvp_deadline">Vui lòng xác nhận trước ngày <strong>1 Tháng 11, 2026</strong></p>
-
-  <div class="rsvp-wrapper">
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="rsvp-form" data-i18n="tab_form">📝 RSVP</button>
-      <button class="tab-btn" data-tab="rsvp-lookup" data-i18n="tab_lookup">🔍 Tra Cứu</button>
-      <button class="tab-btn" data-tab="rsvp-wishes" data-i18n="tab_wishes">💌 Lời Chúc</button>
-    </div>
-
-    <!-- RSVP Form -->
-    <div id="rsvp-form" class="tab-panel active">
-      <form id="guestForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" data-i18n="lbl_name">Họ & Tên *</label>
-            <input type="text" class="form-input" id="guestName" placeholder="Nguyễn Văn A" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" data-i18n="lbl_phone">Số Điện Thoại</label>
-            <input type="tel" class="form-input" id="guestPhone" placeholder="(714) xxx-xxxx" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="lbl_email">Email</label>
-          <input type="email" class="form-input" id="guestEmail" placeholder="ten@email.com" />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" data-i18n="lbl_relation">Mối Quan Hệ</label>
-            <select class="form-select" id="guestRelation">
-              <option value="" data-i18n="opt_select">— Chọn —</option>
-              <option value="Họ hàng Chú Rể" data-i18n="opt_rel_groom_family">Họ hàng Chú Rể</option>
-              <option value="Họ hàng Cô Dâu" data-i18n="opt_rel_bride_family">Họ hàng Cô Dâu</option>
-              <option value="Bạn bè Chú Rể" data-i18n="opt_rel_groom_friends">Bạn bè Chú Rể</option>
-              <option value="Bạn bè Cô Dâu" data-i18n="opt_rel_bride_friends">Bạn bè Cô Dâu</option>
-              <option value="Đồng nghiệp" data-i18n="opt_rel_coworkers">Đồng nghiệp</option>
-              <option value="Giáo Xứ" data-i18n="opt_rel_parish">Giáo Xứ</option>
-              <option value="Khác" data-i18n="opt_rel_other">Khác</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" data-i18n="lbl_plusone">Số Người Đi Kèm</label>
-            <select class="form-select" id="guestPlusOne">
-              <option value="0" data-i18n="opt_p0">Chỉ mình tôi</option>
-              <option value="1" data-i18n="opt_p1">+ 1 người</option>
-              <option value="2" data-i18n="opt_p2">+ 2 người</option>
-              <option value="3" data-i18n="opt_p3">+ 3 người</option>
-              <option value="4" data-i18n="opt_p4">+ 4 người hoặc hơn</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="lbl_attending">Bạn Có Tham Dự? *</label>
-          <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="attendance" value="attending" /> <span data-i18n="opt_attending">✅ Sẽ tham dự</span></label>
-            <label class="radio-label"><input type="radio" name="attendance" value="declined" /> <span data-i18n="opt_declined">❌ Tiếc không đến được</span></label>
-            <label class="radio-label"><input type="radio" name="attendance" value="maybe" /> <span data-i18n="opt_maybe">🤔 Chưa chắc</span></label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" data-i18n="lbl_song">🎵 Bài Hát Yêu Thích (Song Request)</label>
-          <input type="text" class="form-input" id="guestSong" placeholder="Tên bài hát / ca sĩ yêu thích..." />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" data-i18n="lbl_diet">Yêu Cầu Ăn Kiêng</label>
-          <select class="form-select" id="guestDiet">
-            <option value="none" data-i18n="opt_diet_none">Không có</option>
-            <option value="vegetarian" data-i18n="opt_diet_veg">Chay</option>
-            <option value="gluten-free" data-i18n="opt_diet_gf">Không Gluten</option>
-            <option value="halal" data-i18n="opt_diet_halal">Halal</option>
-            <option value="other" data-i18n="opt_diet_other">Khác (ghi chú bên dưới)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="lbl_message">Lời Chúc / Ghi Chú</label>
-          <textarea class="form-textarea" id="guestMessage" placeholder="Kính chúc cô dâu chú rể..."></textarea>
-        </div>
-        <button type="submit" class="rsvp-btn" data-i18n="btn_submit">Xác Nhận Ngay ✝</button>
-      </form>
-    </div>
-
-    <!-- Lookup -->
-    <div id="rsvp-lookup" class="tab-panel">
-      <div class="form-group">
-        <label class="form-label" data-i18n="lbl_lookup">Tìm Theo Tên Hoặc SĐT</label>
-        <input type="text" class="form-input" id="lookupInput" placeholder="Nhập tên hoặc số điện thoại..." />
-      </div>
-      <button class="rsvp-btn" onclick="lookupGuest()" style="margin-bottom:1.5rem" data-i18n="btn_search">🔍 Tìm Kiếm</button>
-      <div id="lookupResult" style="font-style:italic;color:#7a5a3e;text-align:center;"></div>
-    </div>
-
-    <!-- Wishes -->
-    <div id="rsvp-wishes" class="tab-panel">
-      <div id="wishes-list" style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;"></div>
-      <div style="text-align:center;font-style:italic;color:#7a5a3e;font-size:0.85rem;" id="wishes-empty" data-i18n="wishes_empty">Hãy là người đầu tiên gửi lời chúc phúc 💌</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Digital QR Ticket Modal ── -->
-<div class="ticket-modal-overlay" id="ticketModal">
-  <div class="ticket-card tilt-card">
-    <button class="ticket-close" onclick="closeTicketModal()">×</button>
-    <div style="color:var(--gold);font-size:1.8rem;margin-bottom:0.3rem;">✝</div>
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--brown-dark);" data-i18n="ticket_title">VÉ MỜI ĐIỆN TỬ</h3>
-    <p style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:1.2rem;">Alan & Hoàng Huỳnh Wedding · 28.11.2026</p>
-
-    <div style="background:rgba(201,168,76,0.1);padding:0.8rem;border-radius:4px;margin-bottom:1rem;">
-      <strong id="ticketGuestName" style="font-size:1.1rem;color:var(--brown-dark);display:block;"></strong>
-      <span id="ticketGuestDetail" style="font-size:0.82rem;color:#7a5a3e;"></span>
-    </div>
-
-    <div class="qr-box">
-      <svg width="130" height="130" viewBox="0 0 100 100" fill="var(--brown-dark)">
-        <rect x="0" y="0" width="30" height="30" fill="none" stroke="var(--gold-dark)" stroke-width="4"/>
-        <rect x="6" y="6" width="18" height="18"/>
-        <rect x="70" y="0" width="30" height="30" fill="none" stroke="var(--gold-dark)" stroke-width="4"/>
-        <rect x="76" y="6" width="18" height="18"/>
-        <rect x="0" y="70" width="30" height="30" fill="none" stroke="var(--gold-dark)" stroke-width="4"/>
-        <rect x="6" y="76" width="18" height="18"/>
-        <rect x="40" y="10" width="12" height="12"/>
-        <rect x="40" y="40" width="20" height="20"/>
-        <rect x="70" y="50" width="15" height="15"/>
-        <rect x="15" y="45" width="10" height="10"/>
-        <rect x="50" y="75" width="20" height="15"/>
-        <rect x="80" y="80" width="10" height="10"/>
-      </svg>
-    </div>
-
-    <p style="font-size:0.78rem;color:#6a4e3b;font-style:italic;" data-i18n="ticket_hint">Vui lòng xuất trình mã QR này tại bàn đón khách để làm thủ tục check-in nhanh.</p>
-    <button class="btn-sm" style="margin-top:1.2rem;width:100%;justify-content:center;" onclick="window.print()" data-i18n="btn_save_ticket">🖨️ Lưu / In Vé</button>
-  </div>
-</div>
-
 <!-- ── Admin Dashboard ── -->
 <section id="admin" class="scroll-reveal">
   <p class="section-subtitle" data-i18n="admin_subtitle">✦ Quản Lý Khách Mời ✦</p>
   <h2 class="section-title" data-i18n="admin_title">Bảng Điều Khiển</h2>
 
   <div class="admin-unlock" id="adminLock">
-    <p style="font-style:italic;color:#7a5a3e;margin-bottom:0.5rem;font-size:0.9rem;" data-i18n="admin_hint">Dành cho Alan & Hoàng Huỳnh — nhập mã PIN để tiếp tục</p>
+    <p style="font-style:italic;color:#7a5a3e;margin-bottom:0.5rem;font-size:0.9rem;" data-i18n="admin_hint">Dành cho Alan & Bảo Hoàng — nhập mã PIN để tiếp tục</p>
     <div class="admin-pin-row">
       <input type="password" class="form-input" id="adminPin" placeholder="PIN" maxlength="20" onkeydown="if(event.key==='Enter') unlockAdmin()" />
     </div>
@@ -970,7 +772,7 @@
         <button class="btn-sm" id="btnAdminTabPhotos" onclick="switchAdminTab('photos')" style="padding:0.6rem 1.4rem;font-size:0.9rem;border-radius:4px;cursor:pointer;background:rgba(201,168,76,0.15);color:var(--brown-dark);" data-i18n="admin_tab_photos">📸 Quản Lý Ảnh Cưới</button>
       </div>
       <div style="display:flex;align-items:center;gap:0.8rem;">
-        <span style="font-size:0.85rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">👑 Alan &amp; Hoàng Huỳnh</span>
+        <span style="font-size:0.85rem;color:var(--gold-dark);font-family:'Cormorant Garamond',serif;font-weight:600;">👑 Alan &amp; Bảo Hoàng</span>
         <button onclick="lockAdmin()" style="background:none;border:1px solid #8b1a1a;color:#8b1a1a;padding:0.35rem 0.9rem;border-radius:4px;cursor:pointer;font-size:0.8rem;" data-i18n="admin_logout_btn">🔒 Đăng Xuất</button>
       </div>
     </div>
@@ -1037,12 +839,12 @@
         <div style="margin-bottom:2.5rem;padding:1.8rem;background:#fff;border:1.5px solid var(--gold);border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,0.06);">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem;">
             <div>
-              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;" data-i18n="admin_official_badge">✦ Dành Riêng Cho Alan & Hoàng Huỳnh ✦</span>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;" data-i18n="admin_official_badge">✦ Dành Riêng Cho Alan & Bảo Hoàng ✦</span>
               <h4 style="font-family:'Cormorant Garamond',serif;color:var(--brown-dark);font-size:1.5rem;font-weight:600;margin-top:0.2rem;">
                 <span data-i18n="admin_official_title">🌟 Quản Lý Album Ảnh Trang Chủ</span> (<span id="adminHomepageCount">4</span> <span data-i18n="th_photos_count">ảnh</span>)
               </h4>
               <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;" data-i18n="admin_official_desc">
-                Đây là các bức ảnh chính thức xuất hiện tại mục "Album Ảnh Cưới" trên trang chủ. Alan và Hoàng Huỳnh có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.
+                Đây là các bức ảnh chính thức xuất hiện tại mục "Album Ảnh Cưới" trên trang chủ. Alan và Bảo Hoàng có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.
               </p>
             </div>
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
@@ -1078,7 +880,7 @@
                 <span data-i18n="admin_guest_title">👥 Ảnh Khách Mời Đóng Góp</span> (<span id="adminGuestPhotoCount">0</span> <span data-i18n="th_photos_count">ảnh</span>)
               </h4>
               <p style="font-size:0.85rem;color:#7a5a3e;margin-top:0.3rem;max-width:620px;" data-i18n="admin_guest_desc">
-                Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Hoàng Huỳnh mới có quyền xóa các ảnh không phù hợp.
+                Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Bảo Hoàng mới có quyền xóa các ảnh không phù hợp.
               </p>
             </div>
             <div style="display:flex;gap:0.5rem;">
@@ -1103,7 +905,7 @@
 <!-- ── Footer ── -->
 <footer>
   <div class="footer-cross">✝</div>
-  <div class="footer-names">Alan <span class="amp">&amp;</span> <span data-i18n="bride_name">Hoàng Huỳnh</span></div>
+  <div class="footer-names">Alan <span class="amp">&amp;</span> <span data-i18n="bride_name">Bảo Hoàng</span></div>
   <p data-i18n="footer_date">28 Tháng 11 · 2026 · California</p>
   <p style="margin-top:0.8rem;font-size:0.7rem;">"Tình yêu kiên nhẫn, tình yêu nhân hậu" — 1 Cor 13:4</p>
   <p style="margin-top:0.3rem;opacity:0.6;font-size:0.7rem;">"Love is patient, love is kind." — 1 Corinthians 13:4</p>
@@ -1432,26 +1234,22 @@ function stopHymnMelody() {
 // ─── i18n Translations ───────────────────────────────────────
 const translations = {
   vi: {
-    nav_home: "Trang Chủ", nav_story: "Câu Chuyện", nav_schedule: "Chương Trình", nav_venue: "Địa Điểm",
-    nav_etiquette: "Trang Phục", nav_seating: "Bàn Tiệc", nav_photos: "Góc Ảnh", nav_rsvp: "RSVP", nav_admin: "Quản Lý",
-    fab_rsvp: "Xác Nhận Tham Dự", dock_mass: "Thánh Lễ", dock_party: "Tiệc Cưới", dock_rsvp: "RSVP", music_pill: "Nhạc Nền: Canon in D",
-    hero_eyebrow: "Thiệp Mời Hôn Lễ Công Giáo", groom_name: "Alan Dương", bride_name: "Hoàng Huỳnh",
-    hero_date: "Thứ Bảy · 28 Tháng 11 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "Xác Nhận Tham Dự →",
+    nav_home: "Trang Chủ", nav_schedule: "Chương Trình", nav_venue: "Địa Điểm",
+    nav_seating: "Bàn Tiệc", nav_photos: "Góc Ảnh", nav_admin: "Quản Lý",
+    dock_mass: "Thánh Lễ", dock_party: "Tiệc Cưới", dock_photos: "Góc Ảnh", music_pill: "Nhạc Nền: Canon in D",
+    hero_eyebrow: "Thiệp Mời Hôn Lễ Công Giáo", groom_name: "Alan Dương", bride_name: "Bảo Hoàng",
+    hero_date: "Thứ Bảy · 28 Tháng 11 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "Xem Chương Trình →",
     flyover_title: "Christ Our Savior Catholic Parish", flyover_sub: "Santa Ana, California ✝ Linh mục Chủ tế: Rev. Thanh-Tai Nguyen · (714) 444-1500",
     cd_label: "Đếm Ngược Đến Ngày Trọng Đại", cd_days: "Ngày", cd_hours: "Giờ", cd_mins: "Phút", cd_secs: "Giây",
-    story_subtitle: "✦ Our Journey ✦", story_title: "Câu Chuyện Của Chúng Tôi",
-    story_1_title: "✝ Gặp Gỡ Tại Giáo Xứ", story_1_body: "Chúng tôi gặp nhau trong đội ca đoàn giáo xứ. Tiếng hát của Hoàng Huỳnh đã chạm đến trái tim Alan Dương ngay từ buổi đầu tiên.",
-    story_2_title: "🌸 Tình Yêu Nảy Nở", story_2_body: "Qua những buổi cầu nguyện chung, những chuyến thăm từ thiện và những tách trà chiều — tình yêu lặng lẽ nảy mầm.",
-    story_3_title: "💍 Cầu Hôn", story_3_body: "Trước mặt gia đình hai bên, bên ngọn nến lung linh của bàn thờ Đức Mẹ, Alan Dương quỳ xuống và Hoàng Huỳnh đã nói \"Con đồng ý\".",
-    story_4_title: "🕊️ Hôn Lễ Thiêng Liêng", story_4_body: "Trước Thiên Chúa và những người thân yêu, chúng tôi nguyện yêu thương nhau đến trọn đời — mãi mãi.",
     schedule_subtitle: "✦ Chương Trình ✦", schedule_title: "Ngày Trọng Đại",
+    sch_0_title: "Chụp Ảnh Gia Đình", sch_0_desc: "Khuôn viên Giáo xứ Christ Our Savior Catholic Parish · Dành cho gia đình & thân nhân trước Thánh Lễ", sch_0_badge: "Gia đình & Thân nhân",
     sch_1_title: "Thánh Lễ Hôn Phối", sch_1_desc: "Christ Our Savior Catholic Parish · 2002 W. Alton Ave, Santa Ana, CA 92704 · Linh mục: Rev. Thanh-Tai Nguyen", sch_1_badge: "Buộc tham dự",
     sch_2_title: "Chụp Ảnh Tập Thể", sch_2_desc: "Khuôn viên Giáo xứ Christ Our Savior Catholic Parish",
     sch_3_title: "Cocktail & Đón Khách", sch_3_desc: "Trà mạn sen · Âm nhạc acoustic tại Nhà Hàng White Palace",
     sch_4_title: "Tiệc Cưới", sch_4_desc: "White Palace Banquet Restaurant · 15351 Brookhurst St #104, Westminster, CA 92683", sch_4_badge: "Tiệc chính",
     venue_subtitle: "✦ Địa Điểm ✦", venue_title: "Nơi Tổ Chức",
     v1_title: "Christ Our Savior Catholic Parish", v1_sub: "Thánh Lễ Hôn Phối · 12:00 PM (Trưa)",
-    v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_priest: "Linh mục Chủ tế: Rev. Thanh-Tai Nguyen (Vicar)", v1_time: "Xin có mặt trước 11:30 AM — cửa đóng lúc 11:55 AM",
+    v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_priest: "Linh mục Chủ tế: Rev. Thanh-Tai Nguyen (Vicar)", v1_time: "Chụp ảnh gia đình lúc 11:00 AM · Thánh Lễ bắt đầu lúc 12:00 PM",
     v1_contact: "Điện thoại nhà thờ: (714) 444-1500 · www.coscp.org",
     v2_title: "White Palace Banquet Restaurant", v2_sub: "Tiệc Cưới · Đúng 2:00 PM",
     v2_addr: "15351 Brookhurst St #104, Westminster, CA 92683 (Little Saigon)",
@@ -1459,40 +1257,20 @@ const translations = {
     v2_park: "Bãi đậu xe rộng rãi, miễn phí dành cho khách mời",
     v2_contact: "Điện thoại nhà hàng: (714) 775-8828 · (714) 224-6466 (Alan Dương)",
     map_btn: "🗺️ Bản Đồ", gcal_btn: "📅 Google Cal", ical_btn: " Apple Cal", uber_btn: "🚗 Đặt Xe Uber/Lyft",
-    eti_subtitle: "✦ Dress Code & Mass Etiquette ✦", eti_title: "Trang Phục & Quy Tắc Thánh Lễ",
-    dress_code_title: "🎨 Dress Code Color Palette", dress_code_sub: "Bấm vào màu sắc để xem gợi ý phối đồ:",
-    dress_code_note: "✨ Kính xin quý khách vui lòng tránh trang phục màu trắng thuần (dành riêng cho Cô Dâu) và đen thuần.",
-    mass_eti_title: "✝ Quy Tắc Tham Dự Thánh Lễ",
-    mass_rule_1: "Xin đến trước 15-20 phút để ổn định chỗ ngồi trước khi Thánh Lễ bắt đầu tại Giáo xứ Christ Our Savior.",
-    mass_rule_2: "Chuyển điện thoại sang chế độ rung/im lặng trong suốt thời gian cử hành.",
-    mass_rule_3: "Trang phục kín đáo, lịch sự khi vào nhà thờ thiêng liêng.",
-    mass_rule_4: "Giữ trật tự & trang nghiêm trong giờ dâng lễ và chụp ảnh kỷ niệm.",
     seat_subtitle: "✦ Table Assignment ✦", seat_title: "Tra Cứu Bàn Tiệc", seat_hint: "Nhập họ & tên của quý khách để tra cứu vị trí bàn tiệc:",
     btn_search_seat: "🔍 Tìm Bàn",
-    official_photo_subtitle: "✦ Official Wedding Album ✦", official_photo_title: "Album Ảnh Cưới Của Alan & Hoàng Huỳnh",
+    official_photo_subtitle: "✦ Official Wedding Album ✦", official_photo_title: "Album Ảnh Cưới Của Alan & Bảo Hoàng",
     official_photo_intro: "Những khoảnh khắc hạnh phúc trên hành trình tình yêu của chúng tôi:",
     photo_subtitle: "✦ Shared Memories ✦", photo_title: "Góc Ảnh Kỷ Niệm Của Khách Mời",
     photo_intro: "Cùng chia sẻ những khoảnh khắc đẹp quý vị chụp được tại Giáo Xứ & Tiệc Cưới:",
     guest_photo_empty: "Chưa có ảnh nào từ khách mời. Hãy là người đầu tiên tải lên những bức ảnh kỷ niệm cùng cô dâu & chú rể! ✨",
     photo_drop_title: "Bấm vào đây để tải ảnh lên", photo_drop_sub: "Hỗ trợ JPG, PNG (tối đa 5MB mỗi ảnh)",
-    lbl_song: "🎵 Bài Hát Yêu Thích (Song Request)",
-    ticket_title: "VÉ MỜI ĐIỆN TỬ", ticket_hint: "Vui lòng xuất trình mã QR này tại bàn đón khách để làm thủ tục check-in nhanh.",
-    btn_save_ticket: "🖨️ Lưu / In Vé", rsvp_subtitle: "✦ RSVP ✦", rsvp_title: "Xác Nhận Tham Dự",
-    rsvp_deadline: "Vui lòng xác nhận trước ngày 1 Tháng 11, 2026", tab_form: "📝 RSVP", tab_lookup: "🔍 Tra Cứu", tab_wishes: "💌 Lời Chúc",
-    lbl_name: "Họ & Tên *", lbl_phone: "Số Điện Thoại", lbl_email: "Email", lbl_relation: "Mối Quan Hệ",
-    opt_select: "— Chọn —", opt_rel_groom_family: "Họ hàng Chú Rể", opt_rel_bride_family: "Họ hàng Cô Dâu",
-    opt_rel_groom_friends: "Bạn bè Chú Rể", opt_rel_bride_friends: "Bạn bè Cô Dâu", opt_rel_coworkers: "Đồng nghiệp",
-    opt_rel_parish: "Giáo Xứ", opt_rel_other: "Khác", lbl_plusone: "Số Người Đi Kèm",
-    opt_p0: "Chỉ mình tôi", opt_p1: "+ 1 người", opt_p2: "+ 2 người", opt_p3: "+ 3 người", opt_p4: "+ 4 người hoặc hơn",
-    lbl_attending: "Bạn Có Tham Dự? *", opt_attending: "✅ Sẽ tham dự", opt_declined: "❌ Tiếc không đến được", opt_maybe: "🤔 Chưa chắc",
-    lbl_diet: "Yêu Cầu Ăn Kiêng", opt_diet_none: "Không có", opt_diet_veg: "Chay", opt_diet_gf: "Không Gluten", opt_diet_halal: "Halal", opt_diet_other: "Khác (ghi chú bên dưới)",
-    lbl_message: "Lời Chúc / Ghi Chú", btn_submit: "Xác Nhận Ngay ✝", lbl_lookup: "Tìm Theo Tên Hoặc SĐT", btn_search: "🔍 Tìm Kiếm",
-    wishes_empty: "Hãy là người đầu tiên gửi lời chúc phúc 💌", admin_subtitle: "✦ Quản Lý Khách Mời ✦", admin_title: "Bảng Điều Khiển",
-    admin_hint: "Dành cho Alan Dương & Hoàng Huỳnh — nhập mã PIN để tiếp tục", admin_unlock_btn: "🔓 Mở Khóa",
+    admin_subtitle: "✦ Quản Lý Khách Mời ✦", admin_title: "Bảng Điều Khiển",
+    admin_hint: "Dành cho Alan & Bảo Hoàng — nhập mã PIN để tiếp tục", admin_unlock_btn: "🔓 Mở Khóa",
     admin_tab_guests: "👥 Danh Sách Khách Mời", admin_tab_photos: "📸 Quản Lý Ảnh Cưới", admin_logout_btn: "🔒 Đăng Xuất",
-    admin_official_badge: "✦ Dành Riêng Cho Alan & Hoàng Huỳnh ✦",
+    admin_official_badge: "✦ Dành Riêng Cho Alan & Bảo Hoàng ✦",
     admin_official_title: "🌟 Quản Lý Album Ảnh Trang Chủ",
-    admin_official_desc: "Đây là các bức ảnh chính thức xuất hiện tại mục \"Album Ảnh Cưới\" trên trang chủ. Alan và Hoàng Huỳnh có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.",
+    admin_official_desc: "Đây là các bức ảnh chính thức xuất hiện tại mục \"Album Ảnh Cưới\" trên trang chủ. Alan và Bảo Hoàng có thể thêm ảnh mới, thay đổi thứ tự, hoặc xóa bớt bất cứ lúc nào.",
     admin_btn_add_hp: "➕ Thêm Ảnh Vào Trang Chủ",
     admin_btn_reset_hp: "↺ Khôi Phục 4 Ảnh Gốc",
     admin_btn_view_hp: "👁️ Xem Trên Web",
@@ -1502,7 +1280,7 @@ const translations = {
     admin_btn_del_hp: "🗑️ Xóa Khỏi Web",
     admin_guest_badge: "✦ Khách Mời Tải Lên ✦",
     admin_guest_title: "👥 Ảnh Khách Mời Đóng Góp",
-    admin_guest_desc: "Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Hoàng Huỳnh mới có quyền xóa các ảnh không phù hợp.",
+    admin_guest_desc: "Tất cả hình ảnh khách mời chụp và chia sẻ sẽ xuất hiện ở đây. Chỉ Alan & Bảo Hoàng mới có quyền xóa các ảnh không phù hợp.",
     admin_btn_refresh: "🔄 Làm Mới",
     admin_empty_guest: "Chưa có khách mời nào tải ảnh lên. Khách có thể tải trực tiếp ở mục \"Góc Ảnh Kỷ Niệm Của Khách Mời\".",
     admin_btn_del_guest: "🗑️ Xóa Ảnh Khách",
@@ -1514,26 +1292,22 @@ const translations = {
     footer_date: "28 Tháng 11 · 2026 · California"
   },
   en: {
-    nav_home: "Home", nav_story: "Our Story", nav_schedule: "Schedule", nav_venue: "Venues",
-    nav_etiquette: "Dress Code", nav_seating: "Seating", nav_photos: "Photos", nav_rsvp: "RSVP", nav_admin: "Admin",
-    fab_rsvp: "RSVP Now", dock_mass: "Holy Mass", dock_party: "Reception", dock_rsvp: "RSVP", music_pill: "Background Music: Canon in D",
-    hero_eyebrow: "Catholic Holy Matrimony Invitation", groom_name: "Alan Duong", bride_name: "Hoang Huynh",
-    hero_date: "Saturday · November 28 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "Confirm Attendance →",
+    nav_home: "Home", nav_schedule: "Schedule", nav_venue: "Venues",
+    nav_seating: "Seating", nav_photos: "Photos", nav_admin: "Admin",
+    dock_mass: "Holy Mass", dock_party: "Reception", dock_photos: "Photos", music_pill: "Background Music: Canon in D",
+    hero_eyebrow: "Catholic Holy Matrimony Invitation", groom_name: "Alan Duong", bride_name: "Bao-Hoang",
+    hero_date: "Saturday · November 28 · 2026", hero_location: "Christ Our Savior Catholic Parish (Santa Ana) & White Palace (Westminster)", hero_cta: "View Schedule →",
     flyover_title: "Christ Our Savior Catholic Parish", flyover_sub: "Santa Ana, California ✝ Officiating Priest: Rev. Thanh-Tai Nguyen · (714) 444-1500",
     cd_label: "Countdown to Our Wedding Day", cd_days: "Days", cd_hours: "Hours", cd_mins: "Mins", cd_secs: "Secs",
-    story_subtitle: "✦ Our Journey ✦", story_title: "Our Love Story",
-    story_1_title: "✝ Met at Parish Choir", story_1_body: "We met in the church choir. Hoang Huynh's voice touched Alan Duong's heart from our very first rehearsal.",
-    story_2_title: "🌸 Love Blossomed", story_2_body: "Through shared prayers, charity visits, and afternoon tea, love quietly bloomed.",
-    story_3_title: "💍 The Proposal", story_3_body: "Surrounded by family by the altar of Our Lady, Alan Duong knelt down and Hoang Huynh said \"Yes!\".",
-    story_4_title: "🕊️ Holy Matrimony", story_4_body: "Before God and our beloved family and friends, we pledge eternal love to each other forever.",
     schedule_subtitle: "✦ Program Schedule ✦", schedule_title: "The Big Day",
+    sch_0_title: "Family Photography", sch_0_desc: "Christ Our Savior Catholic Parish grounds · Family & relatives gather before Mass", sch_0_badge: "Family & Relatives",
     sch_1_title: "Holy Mass & Wedding Ceremony", sch_1_desc: "Christ Our Savior Catholic Parish · 2002 W. Alton Ave, Santa Ana, CA 92704 · Officiant: Rev. Thanh-Tai Nguyen", sch_1_badge: "Ceremony",
     sch_2_title: "Group Photography", sch_2_desc: "Christ Our Savior Catholic Parish grounds",
     sch_3_title: "Cocktails & Live Traditional Music", sch_3_desc: "Lotus tea & live music at White Palace Banquet Restaurant",
     sch_4_title: "Wedding Reception & Dinner", sch_4_desc: "White Palace Banquet Restaurant · 15351 Brookhurst St #104, Westminster, CA 92683", sch_4_badge: "Main Reception",
     venue_subtitle: "✦ Location ✦", venue_title: "Wedding Venues",
     v1_title: "Christ Our Savior Catholic Parish", v1_sub: "Holy Matrimony · 12:00 PM (Noon)",
-    v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_priest: "Officiating Priest: Rev. Thanh-Tai Nguyen (Vicar)", v1_time: "Please arrive by 11:30 AM — doors close at 11:55 AM",
+    v1_addr: "2002 W. Alton Ave, Santa Ana, CA 92704 (Orange County)", v1_priest: "Officiating Priest: Rev. Thanh-Tai Nguyen (Vicar)", v1_time: "Family photography at 11:00 AM · Mass begins at 12:00 PM",
     v1_contact: "Church Phone: (714) 444-1500 · www.coscp.org",
     v2_title: "White Palace Banquet Restaurant", v2_sub: "Wedding Reception · 2:00 PM Promptly",
     v2_addr: "15351 Brookhurst St #104, Westminster, CA 92683 (Little Saigon)",
@@ -1541,40 +1315,20 @@ const translations = {
     v2_park: "Free guest parking on premises",
     v2_contact: "Restaurant Phone: (714) 775-8828 · (714) 224-6466 (Alan Duong)",
     map_btn: "🗺️ Open Map", gcal_btn: "📅 Google Cal", ical_btn: " Apple Cal", uber_btn: "🚗 Book Uber/Lyft",
-    eti_subtitle: "✦ Dress Code & Mass Etiquette ✦", eti_title: "Dress Code & Mass Etiquette",
-    dress_code_title: "🎨 Dress Code Color Palette", dress_code_sub: "Click a color to view outfit suggestions:",
-    dress_code_note: "✨ Kindly avoid solid white (reserved for the Bride) and solid black attire.",
-    mass_eti_title: "✝ Holy Mass Etiquette",
-    mass_rule_1: "Please arrive 15-20 minutes early to find your seat before Mass begins at Christ Our Savior Catholic Parish.",
-    mass_rule_2: "Silence or turn off mobile devices during the liturgy.",
-    mass_rule_3: "Modest and reverent attire inside the sacred cathedral sanctuary.",
-    mass_rule_4: "Maintain quiet devotion during Mass and photos afterwards.",
     seat_subtitle: "✦ Table Assignment ✦", seat_title: "Seating Chart Finder", seat_hint: "Type your full name to look up your assigned table:",
     btn_search_seat: "🔍 Find Table",
-    official_photo_subtitle: "✦ Official Wedding Album ✦", official_photo_title: "Alan & Hoang Huynh Wedding Gallery",
+    official_photo_subtitle: "✦ Official Wedding Album ✦", official_photo_title: "Alan & Bao-Hoang Wedding Gallery",
     official_photo_intro: "Cherished moments on our journey of love:",
     photo_subtitle: "✦ Shared Memories ✦", photo_title: "Guest Photo Wall",
     photo_intro: "Share your favorite photos snapped during the Mass & Reception:",
     guest_photo_empty: "No guest photos uploaded yet. Be the first to share your memories with the couple! ✨",
     photo_drop_title: "Click here to upload photos", photo_drop_sub: "Supports JPG, PNG (up to 5MB per photo)",
-    lbl_song: "🎵 Song Request",
-    ticket_title: "DIGITAL GUEST PASS", ticket_hint: "Present this digital QR ticket at the reception desk for fast check-in.",
-    btn_save_ticket: "🖨️ Save / Print Pass", rsvp_subtitle: "✦ RSVP ✦", rsvp_title: "Confirm Attendance",
-    rsvp_deadline: "Please RSVP before November 1, 2026", tab_form: "📝 RSVP Form", tab_lookup: "🔍 Search RSVP", tab_wishes: "💌 Well Wishes",
-    lbl_name: "Full Name *", lbl_phone: "Phone Number", lbl_email: "Email Address", lbl_relation: "Relationship",
-    opt_select: "— Select —", opt_rel_groom_family: "Groom's Family", opt_rel_bride_family: "Bride's Family",
-    opt_rel_groom_friends: "Groom's Friend", opt_rel_bride_friends: "Bride's Friend", opt_rel_coworkers: "Co-worker",
-    opt_rel_parish: "Parish Member", opt_rel_other: "Other", lbl_plusone: "Plus Ones (+Guests)",
-    opt_p0: "Just me", opt_p1: "+ 1 guest", opt_p2: "+ 2 guests", opt_p3: "+ 3 guests", opt_p4: "+ 4 guests or more",
-    lbl_attending: "Will You Attend? *", opt_attending: "✅ Joyfully Accept", opt_declined: "❌ Regretfully Decline", opt_maybe: "🤔 Not Sure Yet",
-    lbl_diet: "Dietary Requirements", opt_diet_none: "None", opt_diet_veg: "Vegetarian", opt_diet_gf: "Gluten-Free", opt_diet_halal: "Halal", opt_diet_other: "Other (note below)",
-    lbl_message: "Wishes / Note for Couple", btn_submit: "Submit RSVP ✝", lbl_lookup: "Search by Name or Phone", btn_search: "🔍 Search Guest",
-    wishes_empty: "Be the first to leave a blessing for the couple 💌", admin_subtitle: "✦ Guest Management ✦", admin_title: "Admin Dashboard",
-    admin_hint: "For Alan Duong & Hoang Huynh — enter PIN to unlock", admin_unlock_btn: "🔓 Unlock",
+    admin_subtitle: "✦ Guest Management ✦", admin_title: "Admin Dashboard",
+    admin_hint: "For Alan Duong & Bao-Hoang — enter PIN to unlock", admin_unlock_btn: "🔓 Unlock",
     admin_tab_guests: "👥 Guest RSVP List", admin_tab_photos: "📸 Wedding Photos Manager", admin_logout_btn: "🔒 Log Out",
-    admin_official_badge: "✦ Exclusive For Alan & Hoang Huynh ✦",
+    admin_official_badge: "✦ Exclusive For Alan & Bao-Hoang ✦",
     admin_official_title: "🌟 Manage Homepage Photo Album",
-    admin_official_desc: "These official photos appear in the \"Official Wedding Album\" section on the front page. Alan and Hoang Huynh can add new photos, reorder, or delete anytime.",
+    admin_official_desc: "These official photos appear in the \"Official Wedding Album\" section on the front page. Alan and Bao-Hoang can add new photos, reorder, or delete anytime.",
     admin_btn_add_hp: "➕ Add Photos To Homepage",
     admin_btn_reset_hp: "↺ Reset 4 Original Photos",
     admin_btn_view_hp: "👁️ View On Website",
@@ -1584,7 +1338,7 @@ const translations = {
     admin_btn_del_hp: "🗑️ Remove From Web",
     admin_guest_badge: "✦ Guest Uploads ✦",
     admin_guest_title: "👥 Photos Shared By Guests",
-    admin_guest_desc: "All candid photos snapped and shared by guests appear here. Only Alan & Hoang Huynh can delete unwanted or inappropriate photos.",
+    admin_guest_desc: "All candid photos snapped and shared by guests appear here. Only Alan & Bao-Hoang can delete unwanted or inappropriate photos.",
     admin_btn_refresh: "🔄 Refresh",
     admin_empty_guest: "No guest photos uploaded yet. Guests can upload directly in the \"Guest Photo Wall\" section.",
     admin_btn_del_guest: "🗑️ Delete Guest Photo",
@@ -1627,49 +1381,21 @@ function toggleLangMobile() {
   setLanguage(nextLang);
 }
 
-function selectPaletteColor(el, colorKey) {
-  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
-  if (el) el.classList.add('selected');
-  const infoEl = document.getElementById('paletteTesterInfo');
-  if (!infoEl) return;
-  const colorData = {
-    gold: {
-      vi: "✨ <strong>Vàng Ánh Kim / Champagne Gold</strong>: Quý phái &amp; Thanh lịch. Đầm dạ hội Champagne Gold, Vàng Ánh Kim hoặc Suit kết hợp gài áo tone Vàng.",
-      en: "✨ <strong>Champagne Gold</strong>: Noble &amp; Elegant. Champagne gold evening dresses, metallic gold accents, or suits with gold lapel pins."
-    },
-    sage: {
-      vi: "🌿 <strong>Xanh Thẫm / Sage Green</strong>: Trang nhã &amp; Tự nhiên. Tông Xanh Thẫm/Xanh Olive nhẹ nhàng, phù hợp không gian ấm cúng của Giáo xứ.",
-      en: "🌿 <strong>Sage / Olive Green</strong>: Subtle &amp; Natural. Muted Sage or Olive tones, perfect for the sacred parish ambiance."
-    },
-    rose: {
-      vi: "🌸 <strong>Hồng Đất / Rose Dust</strong>: Lãng mạn &amp; Ấm áp. Đầm Rose Dust, Hồng Đất hoặc Nude Pink kết hợp phụ kiện ánh kim.",
-      en: "🌸 <strong>Rose Dust / Blush Pink</strong>: Romantic &amp; Warm. Dusty Rose or Nude Pink dresses paired with subtle metallic accessories."
-    },
-    ivory: {
-      vi: "📜 <strong>Kem Ấm / Warm Cream &amp; Ivory</strong>: Trang trọng. Tông Kem Ấm, Kem Be (Lưu ý tránh màu Trắng Thuần dành riêng cho Cô Dâu).",
-      en: "📜 <strong>Warm Cream &amp; Ivory</strong>: Formal Warm Cream or Beige. (Kindly avoid solid white reserved for the Bride)."
-    },
-    navy: {
-      vi: "🌌 <strong>Xanh Đen / Midnight Navy</strong>: Lịch lãm &amp; Sang trọng. Vest Nam Xanh Đen Navy hoặc Đầm Dạ Hội Xanh Đêm huyền bí.",
-      en: "🌌 <strong>Midnight Navy</strong>: Classic &amp; Sharp. Navy Blue suits or Midnight Blue evening gowns."
-    }
-  };
-  const data = colorData[colorKey] || colorData['gold'];
-  infoEl.innerHTML = currentLang === 'vi' ? data.vi : data.en;
-  infoEl.style.borderStyle = 'solid';
-  infoEl.style.background = 'rgba(201,168,76,0.18)';
-}
-
 function addToGoogleCalendar(type) {
   let title, details, location, st, et;
-  if (type === 'mass') {
-    title = encodeURIComponent("Alan Duong & Hoang Huynh - Holy Mass & Wedding Ceremony at Christ Our Savior Catholic Parish");
-    details = encodeURIComponent("Thánh Lễ Hôn Phối của Alan Dương & Hoàng Huỳnh tại Giáo xứ Christ Our Savior Catholic Parish");
+  if (type === 'family_photo' || type === 'family') {
+    title = encodeURIComponent("Alan Duong & Bao-Hoang - Family Photography at Christ Our Savior Parish");
+    details = encodeURIComponent("Chụp ảnh gia đình trước Thánh Lễ Hôn Phối của Alan Dương & Bảo Hoàng tại Giáo xứ Christ Our Savior Catholic Parish");
+    location = encodeURIComponent("Christ Our Savior Catholic Parish, 2002 W. Alton Ave, Santa Ana, CA 92704");
+    st = "20261128T190000Z"; et = "20261128T200000Z";
+  } else if (type === 'mass') {
+    title = encodeURIComponent("Alan Duong & Bao-Hoang - Holy Mass & Wedding Ceremony at Christ Our Savior Catholic Parish");
+    details = encodeURIComponent("Thánh Lễ Hôn Phối của Alan Dương & Bảo Hoàng tại Giáo xứ Christ Our Savior Catholic Parish");
     location = encodeURIComponent("Christ Our Savior Catholic Parish, 2002 W. Alton Ave, Santa Ana, CA 92704");
     st = "20261128T200000Z"; et = "20261128T213000Z";
   } else {
-    title = encodeURIComponent("Alan Duong & Hoang Huynh - Wedding Reception at White Palace");
-    details = encodeURIComponent("Tiệc Cưới của Alan Dương & Hoàng Huỳnh tại Nhà Hàng White Palace");
+    title = encodeURIComponent("Alan Duong & Bao-Hoang - Wedding Reception at White Palace");
+    details = encodeURIComponent("Tiệc Cưới của Alan Dương & Bảo Hoàng tại Nhà Hàng White Palace");
     location = encodeURIComponent("White Palace Banquet Restaurant, 15351 Brookhurst St #104, Westminster, CA 92683");
     st = "20261128T220000Z"; et = "20261129T020000Z";
   }
@@ -1678,18 +1404,23 @@ function addToGoogleCalendar(type) {
 
 function downloadICS(type) {
   let title, desc, loc, dtStart, dtEnd;
-  if (type === 'mass') {
-    title = "Alan Duong & Hoang Huynh - Holy Mass at Christ Our Savior Catholic Parish";
-    desc  = "Nuptial Mass of Alan Duong & Hoang Huynh"; loc   = "2002 W. Alton Ave, Santa Ana, CA 92704";
+  if (type === 'family_photo' || type === 'family') {
+    title = "Alan Duong & Bao-Hoang - Family Photography at Christ Our Savior Parish";
+    desc  = "Family Photography before Holy Mass - Alan Duong & Bao-Hoang";
+    loc   = "2002 W. Alton Ave, Santa Ana, CA 92704";
+    dtStart = "20261128T110000"; dtEnd   = "20261128T120000";
+  } else if (type === 'mass') {
+    title = "Alan Duong & Bao-Hoang - Holy Mass at Christ Our Savior Catholic Parish";
+    desc  = "Nuptial Mass of Alan Duong & Bao-Hoang"; loc   = "2002 W. Alton Ave, Santa Ana, CA 92704";
     dtStart = "20261128T120000"; dtEnd   = "20261128T133000";
   } else {
-    title = "Alan Duong & Hoang Huynh - Wedding Reception at White Palace"; desc  = "Wedding Reception of Alan Duong & Hoang Huynh";
+    title = "Alan Duong & Bao-Hoang - Wedding Reception at White Palace"; desc  = "Wedding Reception of Alan Duong & Bao-Hoang";
     loc   = "15351 Brookhurst St #104, Westminster, CA 92683"; dtStart = "20261128T140000"; dtEnd   = "20261128T180000";
   }
-  const icsData = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AlanDuongHoangHuynhWedding//EN\nBEGIN:VEVENT\nSUMMARY:${title}\nDESCRIPTION:${desc}\nLOCATION:${loc}\nDTSTART:${dtStart}\nDTEND:${dtEnd}\nEND:VEVENT\nEND:VCALENDAR`;
+  const icsData = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AlanDuongBaoHoangWedding//EN\nBEGIN:VEVENT\nSUMMARY:${title}\nDESCRIPTION:${desc}\nLOCATION:${loc}\nDTSTART:${dtStart}\nDTEND:${dtEnd}\nEND:VEVENT\nEND:VCALENDAR`;
   const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
   const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = `${type}_alan_duong_hoang_huynh_wedding.ics`; a.click(); URL.revokeObjectURL(url);
+  a.href = url; a.download = `${type}_alan_duong_bao_hoang_wedding.ics`; a.click(); URL.revokeObjectURL(url);
 }
 
 function searchSeating() {
@@ -1913,82 +1644,17 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000); updateCountdown();
 
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active'); document.getElementById(target).classList.add('active');
-    if (target === 'rsvp-wishes') renderWishes();
-  });
-});
-
 function showToast(msg, isError = false) {
   const t = document.getElementById('toast'), m = document.getElementById('toastMsg');
   t.style.background = isError ? '#8b1a1a' : '#1a5c2a'; t.children[0].textContent = isError ? '❌' : '✅';
   m.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-document.getElementById('guestForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const name     = document.getElementById('guestName').value.trim();
-  const phone    = document.getElementById('guestPhone').value.trim();
-  const email    = document.getElementById('guestEmail').value.trim();
-  const relation = document.getElementById('guestRelation').value;
-  const plusOne  = parseInt(document.getElementById('guestPlusOne').value, 10) || 0;
-  const song     = document.getElementById('guestSong').value.trim();
-  const diet     = document.getElementById('guestDiet').value;
-  const message  = document.getElementById('guestMessage').value.trim();
-  const radioEl  = document.querySelector('input[name="attendance"]:checked');
-
-  if (!name) { showToast(currentLang === 'vi' ? 'Vui lòng nhập họ & tên' : 'Please enter your full name', true); return; }
-  if (!radioEl) { showToast(currentLang === 'vi' ? 'Vui lòng chọn trạng thái tham dự' : 'Please select attendance status', true); return; }
-
-  const entry = {
-    id: uid(),
-    name, phone, email, relation, plusOne, song, attendance: radioEl.value, diet, message,
-    date: new Date().toISOString().split('T')[0]
-  };
-
-  await saveGuest(entry);
-
-  showToast(currentLang === 'vi' ? `Xác nhận thành công!` : `RSVP Confirmed!`);
-  fireConfetti();
-  this.reset();
-  renderStats();
-
-  if (entry.attendance === 'attending') {
-    openTicketModal(entry);
-  }
-});
-
-function lookupGuest() {
-  const q = document.getElementById('lookupInput').value.trim().toLowerCase();
-  const resultEl = document.getElementById('lookupResult');
-  if (!q) { resultEl.textContent = currentLang === 'vi' ? 'Vui lòng nhập tên hoặc số điện thoại' : 'Please enter name or phone'; return; }
-  const found = getGuests().filter(g => g.name.toLowerCase().includes(q) || (g.phone && g.phone.includes(q)));
-  if (!found.length) { resultEl.innerHTML = `<span style="color:#8b1a1a">${currentLang === 'vi' ? 'Không tìm thấy.' : 'No guest found.'}</span>`; return; }
-  resultEl.innerHTML = found.map(g => `
-    <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:4px;padding:1rem;margin-bottom:0.8rem;text-align:left;">
-      <strong>${g.name}</strong> &nbsp; ${badgeFor(g.attendance)}
-      <br/><span style="font-size:0.82rem;color:#7a5a3e;">${g.phone || '—'} · ${g.relation || '—'} · +${g.plusOne} ${currentLang === 'vi' ? 'người' : 'guests'}</span>
-      ${g.song ? `<br/><span style="font-size:0.82rem;color:var(--gold-dark);">🎵 ${g.song}</span>` : ''}
-      ${g.message ? `<br/><em style="font-size:0.82rem;">"${g.message}"</em>` : ''}
-    </div>
-  `).join('');
-}
-
-function renderWishes() {
-  const list = getGuests().filter(g => g.message);
-  const el = document.getElementById('wishes-list'), empty = document.getElementById('wishes-empty');
-  if (!list.length) { el.innerHTML = ''; empty.style.display='block'; return; }
-  empty.style.display = 'none';
-  el.innerHTML = list.map(g => `
-    <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:4px;padding:1.2rem;">
-      <p style="font-style:italic;color:var(--brown-dark);line-height:1.7;">"${g.message}"</p>
-      <p style="font-size:0.78rem;color:var(--gold-dark);margin-top:0.5rem;font-weight:600;">— ${g.name}</p>
-    </div>
-  `).join('');
+const guestFormEl = document.getElementById('guestForm');
+if (guestFormEl) {
+  guestFormEl.addEventListener('submit', async function(e) {
+    e.preventDefault();
+  });
 }
 
 async function unlockAdmin(isAuto = false) {
@@ -2010,7 +1676,7 @@ async function unlockAdmin(isAuto = false) {
       await fetchGuests();
       renderStats(); renderTable();
       renderAdminPhotos();
-      if (!isAuto) showToast(currentLang === 'vi' ? 'Chào mừng Alan & Hoàng Huỳnh!' : 'Welcome Alan & Hoang Huynh!');
+      if (!isAuto) showToast(currentLang === 'vi' ? 'Chào mừng Alan & Bảo Hoàng!' : 'Welcome Alan & Bao-Hoang!');
     } else {
       if (isAuto) localStorage.removeItem('admin_pin_token');
       else showToast(currentLang === 'vi' ? 'Mã PIN không đúng' : 'Incorrect PIN', true);
@@ -2137,7 +1803,7 @@ async function renderAdminHomepageAlbum() {
       </div>
       <div style="padding:0.6rem 0.8rem;background:#fff;display:flex;flex-direction:column;gap:0.4rem;">
         <div style="font-size:0.75rem;font-weight:600;color:var(--gold-dark);">${tagMap[p.tag] || p.tag || translations[currentLang].admin_tag_new}</div>
-        <div style="font-size:0.75rem;color:#7a5a3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${p.title || ''}">${p.title || (currentLang === 'vi' ? 'Alan & Hoàng Huỳnh' : 'Alan & Hoang Huynh')}</div>
+        <div style="font-size:0.75rem;color:#7a5a3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${p.title || ''}">${p.title || (currentLang === 'vi' ? 'Alan & Bảo Hoàng' : 'Alan & Bao-Hoang')}</div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.3rem;border-top:1px dashed rgba(201,168,76,0.3);padding-top:0.4rem;">
           <div style="display:flex;gap:0.25rem;">
             ${idx > 0 ? `<button onclick="moveHomepagePhoto(${idx}, -1)" title="${currentLang === 'vi' ? 'Di chuyển lên trước' : 'Move up'}" style="background:#f0e6d2;border:none;border-radius:3px;padding:2px 6px;cursor:pointer;font-size:0.75rem;">⬆</button>` : ''}
@@ -2178,7 +1844,7 @@ async function handleAdminHomepageUpload(e) {
       newPhotos.push({
         id: 'hp-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
         img: dataUrl,
-        title: f.name.replace(/\.[^/.]+$/, "") || (currentLang === 'vi' ? 'Alan & Hoàng Huỳnh' : 'Alan & Hoang Huynh'),
+        title: f.name.replace(/\.[^/.]+$/, "") || (currentLang === 'vi' ? 'Alan & Bảo Hoàng' : 'Alan & Bao-Hoang'),
         tag: 'Ảnh Mới (Album)'
       });
       addedCount++;
@@ -2413,7 +2079,7 @@ function exportCSV() {
   const g = getGuests(), header = ['Tên','SĐT','Email','Mối Quan Hệ','+Khách','Trạng Thái','Bài Hát','Ăn Kiêng','Ngày Đăng Ký'];
   const rows = g.map(x => [x.name, x.phone, x.email, x.relation, x.plusOne, x.attendance, x.song, x.diet, x.date].map(v => `"${String(v || '').replace(/"/g, '""')}"`));
   const blob = new Blob(['\uFEFF' + [header, ...rows].map(r => r.join(',')).join('\n')], { type: 'text/csv;charset=utf-8;' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'alan_duong_hoang_huynh_wedding_guests.csv'; a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'alan_duong_bao_hoang_wedding_guests.csv'; a.click();
 }
 
 // Initialize guests and photos from backend on page load
