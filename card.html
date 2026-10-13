@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Thiệp Mời Thành Hôn · Alan Dương & Bảo Hoàng Huỳnh</title>
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thiệp Mời Thành Hôn · Alan Dương & Bảo Hoàng Huỳnh">
+  <meta property="og:description" content="Trân trọng kính mời quý khách tham dự Thánh Lễ Hôn Phối & Tiệc Cưới vào Thứ Bảy, 28/11/2026 tại California.">
+  <meta property="og:image" content="card_front.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #C5A059;
+      --gold-dark: #8B6508;
+      --gold-light: #F4E8C1;
+      --gold-gradient: linear-gradient(135deg, #ECC880 0%, #C5A059 50%, #99732B 100%);
+      --burgundy: #7A1C28;
+      --burgundy-dark: #500f18;
+      --burgundy-light: #9B2C3B;
+      --cream-bg: #FDFBF7;
+      --card-bg: #FCF9F2;
+      --text-dark: #2A2421;
+      --text-muted: #6E6259;
+      --shadow-soft: 0 12px 36px rgba(42, 36, 33, 0.08);
+      --shadow-card: 0 24px 50px rgba(80, 15, 24, 0.16), 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #F8F4EC radial-gradient(circle at 50% 20%, #FFFDF9 0%, #F5EFE6 60%, #EBDDCB 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.2rem 1rem 3rem;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Floral Background Petals */
+    .petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      z-index: 10;
+    }
+
+    .lang-switcher, .audio-btn, .full-web-btn {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .lang-switcher:hover, .audio-btn:hover, .full-web-btn:hover {
+      background: #FFFFFF;
+      border-color: var(--gold-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(122, 28, 40, 0.12);
+    }
+
+    .top-right-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Envelope Presentation Box */
+    .envelope-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      perspective: 1500px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Envelope Exterior (Intro state) */
+    .envelope {
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1 / 1.35;
+      background: #841E2B linear-gradient(145deg, #962332 0%, #701622 100%);
+      border-radius: 14px;
+      box-shadow: 0 25px 50px rgba(80, 15, 24, 0.35), 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      border: 2px solid #D4AF37;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(244, 232, 193, 0.5);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .envelope-stamp {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 58px;
+      height: 72px;
+      border: 1.5px dashed #F4E8C1;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      color: #F4E8C1;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .envelope-seal {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #F4E8C1 0%, #D4AF37 40%, #8B6508 100%);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 2px 5px rgba(255,255,255,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #FFF8DC;
+      margin-bottom: 1.5rem;
+      position: relative;
+      animation: pulseSeal 2.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+      50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(212, 175, 55, 0.6); }
+    }
+
+    .envelope-seal-monogram {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #500F18;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .envelope-seal-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #500F18;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .envelope-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      color: #F8E8C8;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .envelope-couple {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .envelope-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      color: #F0D9B5;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .envelope-btn {
+      background: var(--gold-gradient);
+      color: #3B1B06;
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .envelope-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+    }
+
+    /* 3D Flippable Card Stage */
+    .card-stage {
+      display: none;
+      width: 100%;
+      max-width: 480px;
+      perspective: 1600px;
+      margin: 0 auto;
+      flex-direction: column;
+      align-items: center;
+      animation: cardGlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardGlideIn {
+      0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card-flip-container {
+      width: 100%;
+      aspect-ratio: 1 / 1.5;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .card-flip-container.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-face.card-back {
+      transform: rotateY(180deg);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Flip Floating Pill Hint on Card */
+    .card-hint-pill {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(80, 15, 24, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #FFF8EA;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      pointer-events: none;
+      z-index: 4;
+      animation: bounceHint 2.5s infinite ease-in-out;
+    }
+
+    @keyframes bounceHint {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* Card Badge Indicator (Ceremony / Reception) */
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--burgundy);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(197, 160, 89, 0.5);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 4;
+    }
+
+    /* Interactive Controls Panel */
+    .controls-panel {
+      width: 100%;
+      max-width: 480px;
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      z-index: 5;
+    }
+
+    .flip-btn-main {
+      width: 100%;
+      background: var(--burgundy);
+      color: #FFFDF9;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      padding: 0.85rem 1.2rem;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: 0 6px 20px rgba(122, 28, 40, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .flip-btn-main:hover {
+      background: var(--burgundy-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(122, 28, 40, 0.35);
+    }
+
+    /* Action Grid */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+      width: 100%;
+    }
+
+    .action-btn {
+      background: #FFFFFF;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 12px;
+      padding: 0.8rem 0.6rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: #FFFDF9;
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(122, 28, 40, 0.1);
+      color: var(--burgundy);
+    }
+
+    .action-btn .icon {
+      font-size: 1.35rem;
+    }
+
+    /* Quick Detail Cards Accordion */
+    .quick-details {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 14px;
+      padding: 1.2rem;
+      margin-top: 0.3rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .event-detail-item {
+      padding: 0.9rem 0;
+      border-bottom: 1px dashed rgba(197, 160, 89, 0.3);
+    }
+
+    .event-detail-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .event-detail-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.3rem;
+    }
+
+    .event-detail-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      background: #FDF4E1;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    .event-detail-venue {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .event-detail-address {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-quick-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      background: #FFFFFF;
+      color: var(--burgundy);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover {
+      background: var(--burgundy);
+      color: #FFFFFF;
+      border-color: var(--burgundy);
+    }
+
+    /* Lightbox Modal for Fullscreen Card Zoom */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 10, 10, 0.95);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      touch-action: pinch-zoom;
+    }
+
+    .zoom-modal.active {
+      display: flex;
+    }
+
+    .zoom-img {
+      max-width: 95vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #FFFFFF;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    }
+
+    .zoom-controls {
+      position: absolute;
+      bottom: 25px;
+      display: flex;
+      gap: 0.8rem;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .zoom-switch-btn {
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .zoom-switch-btn.active {
+      background: var(--gold-primary);
+      color: #351505;
+      font-weight: 700;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(80, 15, 24, 0.95);
+      backdrop-filter: blur(8px);
+      color: #FFFDF9;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--gold-primary);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      z-index: 120;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer Note */
+    .card-footer {
+      margin-top: 1.8rem;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      z-index: 5;
+    }
+
+    .card-footer a {
+      color: var(--burgundy);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Falling Petals Canvas -->
+  <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+  <!-- Top Navigation & Tools -->
+  <nav class="top-bar">
+    <button class="lang-switcher" id="langBtn" onclick="toggleLanguage()">
+      <span id="langFlag">🇺🇸</span> <span id="langLabel">English</span>
+    </button>
+    <div class="top-right-group">
+      <button class="audio-btn" id="audioToggleBtn" onclick="toggleMusic()">
+        <span id="audioIcon">🎵</span> <span id="audioLabel">Canon in D</span>
+      </button>
+      <a href="/" class="full-web-btn" id="fullWebBtn" title="Xem Trang Cưới Đầy Đủ">
+        <span>📖</span> <span data-i18n="full_site">Chi Tiết</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Container for Envelope and Card -->
+  <main class="envelope-container">
+    
+    <!-- Initial Envelope Reveal Screen -->
+    <div class="envelope" id="envelopeBox" onclick="openInvitation()">
+      <div class="envelope-stamp">
+        <span>NOV</span>
+        <strong style="font-size: 1rem; color: #FFF;">28</strong>
+        <span>2026</span>
+      </div>
+
+      <div class="envelope-seal">
+        <span class="envelope-seal-monogram">A&B</span>
+        <span class="envelope-seal-sub">Wedding</span>
+      </div>
+
+      <h1 class="envelope-heading" data-i18n="env_heading">THIỆP MỜI THÀNH HÔN</h1>
+      <p class="envelope-couple">Alan &amp; Bảo Hoàng</p>
+      <p class="envelope-date" data-i18n="env_date">28 · 11 · 2026 · California</p>
+
+      <button class="envelope-btn" type="button" data-i18n="env_btn">
+        <span>✉️</span> Chạm Để Mở Thiệp
+      </button>
+    </div>
+
+    <!-- 3D Interactive Card Stage -->
+    <div class="card-stage" id="cardStage">
+      
+      <!-- 3D Flippable Card -->
+      <div class="card-flip-container" id="cardFlipContainer" onclick="flipCard()">
+        
+        <!-- FRONT: Nuptial Mass / Thánh Lễ -->
+        <div class="card-face card-front">
+          <span class="card-badge" data-i18n="badge_front">✝ THÁNH LỄ HÔN PHỐI</span>
+          <img src="card_front.jpg" alt="Mặt trước thiệp cưới - Thánh Lễ Hôn Phối Alan Dương & Bảo Hoàng Huỳnh" class="card-img" fetchpriority="high">
+          <div class="card-hint-pill" data-i18n="hint_flip_to_back">
+            <span>🔄</span> Chạm để xem Tiệc Cưới (Mặt sau)
+          </div>
+        </div>
+
+        <!-- BACK: Reception / Tiệc Cưới -->
+        <div class="card-face card-back">
+          <span class="card-badge" data-i18n="badge_back">🍽️ TIỆC CƯỚI</span>
+          <img src="card_back.jpg" alt="Mặt sau thiệp cưới - Tiệc Cưới White Palace Alan Dương & Bảo Hoàng Huỳnh" class="card-img" loading="lazy">
+          <div class="card-hint-pill" data-i18n="hint_flip_to_front">
+            <span>🔄</span> Chạm để xem Thánh Lễ (Mặt trước)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls Panel Under the Card -->
+      <div class="controls-panel">
+        
+        <!-- Big Flip Button -->
+        <button class="flip-btn-main" id="flipActionBtn" onclick="flipCard()">
+          <span id="flipIcon">🔄</span> <span id="flipBtnText" data-i18n="btn_flip_to_back">Lật Xem Tiệc Cưới (Mặt Sau)</span>
+        </button>
+
+        <!-- Action Grid for Quick Guest Utilities -->
+        <div class="action-grid">
+          
+          <!-- Direction / Map -->
+          <button class="action-btn" onclick="openDirections()">
+            <span class="icon">🗺️</span>
+            <span data-i18n="act_maps">Chỉ Đường Đi</span>
+          </button>
+
+          <!-- Add to Calendar -->
+          <button class="action-btn" onclick="openCalendarOptions()">
+            <span class="icon">📅</span>
+            <span data-i18n="act_calendar">Thêm Vào Lịch</span>
+          </button>
+
+          <!-- Zoom / Fullscreen -->
+          <button class="action-btn" onclick="openZoomModal()">
+            <span class="icon">🔍</span>
+            <span data-i18n="act_zoom">Phóng To Thiệp</span>
+          </button>
+
+          <!-- Share / Copy Link -->
+          <button class="action-btn" onclick="shareInvitation()">
+            <span class="icon">📤</span>
+            <span data-i18n="act_share">Chia Sẻ Thiệp</span>
+          </button>
+
+        </div>
+
+        <!-- Quick Summary Accordion Cards -->
+        <div class="quick-details">
+          
+          <!-- Mass -->
+          <div class="event-detail-item">
+            <div class="event-detail-title">
+              <span data-i18n="ev_mass_title">✝ Thánh Lễ Hôn Phối</span>
+              <span class="event-detail-time">12:00 PM</span>
+            </div>
+            <div class="event-detail-venue">Christ Our Savior Catholic Parish</div>
+            <p class="event-detail-address">2000 W Alton Ave, Santa Ana, CA 92704</p>
+            <div class="event-quick-links">
+              <a href="https://maps.google.com/?q=Christ+Our+Savior+Catholic+Parish+2000+W+Alton+Ave+Santa+Ana+CA+92704" target="_blank" class="chip-btn">🗺️ Google Maps</a>
+              <a href="https://maps.apple.com/?q=Christ+Our+Savior+Catholic+Parish+2000+W+Alton+Ave+Santa+Ana+CA+92704" target="_blank" class="chip-btn"> Apple Maps</a>
+              <button onclick="addToGoogleCalendar('mass')" class="chip-btn">📅 Google Cal</button>
+              <button onclick="downloadICS('mass')" class="chip-btn"> Cal (.ics)</button>
+              <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=33.7226&dropoff[longitude]=-117.8967&dropoff[nickname]=Christ%20Our%20Savior%20Parish&dropoff[formatted_address]=2000%20W%20Alton%20Ave%2C%20Santa%20Ana%2C%20CA%2092704" target="_blank" class="chip-btn">🚗 Uber</a>
+            </div>
+          </div>
+
+          <!-- Reception -->
+          <div class="event-detail-item">
+            <div class="event-detail-title">
+              <span data-i18n="ev_party_title">🍽️ Tiệc Cưới Thân Mật</span>
+              <span class="event-detail-time">2:00 PM</span>
+            </div>
+            <div class="event-detail-venue">White Palace Banquet Restaurant</div>
+            <p class="event-detail-address">15351 Brookhurst St #107, Westminster, CA 92683 (Little Saigon)</p>
+            <div class="event-quick-links">
+              <a href="https://maps.google.com/?q=White+Palace+15351+Brookhurst+St+107+Westminster+CA+92683" target="_blank" class="chip-btn">🗺️ Google Maps</a>
+              <a href="https://maps.apple.com/?q=White+Palace+15351+Brookhurst+St+107+Westminster+CA+92683" target="_blank" class="chip-btn"> Apple Maps</a>
+              <button onclick="addToGoogleCalendar('reception')" class="chip-btn">📅 Google Cal</button>
+              <button onclick="downloadICS('reception')" class="chip-btn"> Cal (.ics)</button>
+              <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=33.7486&dropoff[longitude]=-117.9545&dropoff[nickname]=White%20Palace%20Banquet&dropoff[formatted_address]=15351%20Brookhurst%20St%20%23107%2C%20Westminster%2C%20CA%2092683" target="_blank" class="chip-btn">🚗 Uber</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Full Website Button -->
+        <a href="/" class="flip-btn-main" style="background:#FFFFFF; color:var(--burgundy); border: 1px solid var(--gold-primary); text-decoration:none;">
+          <span>📸</span> <span data-i18n="btn_full_website">Xem Album Ảnh & Góc Ảnh Khách Mời</span>
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="card-footer">
+      <p>Alan Dương &amp; Bảo Hoàng Huỳnh · 28 Tháng 11 Năm 2026</p>
+      <p style="margin-top: 0.3rem;"><a href="/">Trang Thông Tin Chi Tiết Hôn Lễ →</a></p>
+    </footer>
+
+  </main>
+
+  <!-- Fullscreen Zoom Lightbox Modal -->
+  <div class="zoom-modal" id="zoomModal" onclick="closeZoomModal(event)">
+    <button class="zoom-close" onclick="closeZoomModal(event)" title="Đóng">&times;</button>
+    <img src="card_front.jpg" alt="Phóng to thiệp cưới" id="zoomImg" class="zoom-img">
+    <div class="zoom-controls" onclick="event.stopPropagation()">
+      <button class="zoom-switch-btn active" id="zoomFrontBtn" onclick="switchZoomSide('front')">Mặt Trước (Thánh Lễ)</button>
+      <button class="zoom-switch-btn" id="zoomBackBtn" onclick="switchZoomSide('back')">Mặt Sau (Tiệc Cưới)</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div class="toast" id="toastBox">Đã sao chép liên kết thiệp cưới!</div>
+
+  <script>
+    /* ── Multi-language Dictionary ── */
+    const translations = {
+      vi: {
+        env_heading: "THIỆP MỜI THÀNH HÔN",
+        env_date: "28 · 11 · 2026 · California",
+        env_btn: "✉️ Chạm Để Mở Thiệp",
+        badge_front: "✝ THÁNH LỄ HÔN PHỐI",
+        badge_back: "🍽️ TIỆC CƯỚI",
+        hint_flip_to_back: "🔄 Chạm để xem Tiệc Cưới (Mặt sau)",
+        hint_flip_to_front: "🔄 Chạm để xem Thánh Lễ (Mặt trước)",
+        btn_flip_to_back: "Lật Xem Tiệc Cưới (Mặt Sau)",
+        btn_flip_to_front: "Lật Xem Thánh Lễ (Mặt Trước)",
+        act_maps: "Chỉ Đường Đi",
+        act_calendar: "Thêm Vào Lịch",
+        act_zoom: "Phóng To Thiệp",
+        act_share: "Chia Sẻ Thiệp",
+        ev_mass_title: "✝ Thánh Lễ Hôn Phối",
+        ev_party_title: "🍽️ Tiệc Cưới Thân Mật",
+        btn_full_website: "Xem Album Ảnh & Góc Ảnh Khách Mời",
+        full_site: "Chi Tiết",
+        music_play: "Bật Nhạc",
+        music_playing: "Canon in D",
+        toast_copied: "Đã sao chép liên kết thiệp cưới vào bộ nhớ tạm! ✨",
+        zoom_front: "Mặt Trước (Thánh Lễ)",
+        zoom_back: "Mặt Sau (Tiệc Cưới)"
+      },
+      en: {
+        env_heading: "WEDDING INVITATION",
+        env_date: "Nov 28 · 2026 · California",
+        env_btn: "✉️ Tap To Open Invitation",
+        badge_front: "✝ HOLY MASS CEREMONY",
+        badge_back: "🍽️ WEDDING RECEPTION",
+        hint_flip_to_back: "🔄 Tap to view Reception (Back)",
+        hint_flip_to_front: "🔄 Tap to view Ceremony (Front)",
+        btn_flip_to_back: "Flip to Reception (Back)",
+        btn_flip_to_front: "Flip to Ceremony (Front)",
+        act_maps: "Get Directions",
+        act_calendar: "Add to Calendar",
+        act_zoom: "Zoom Invitation",
+        act_share: "Share Invitation",
+        ev_mass_title: "✝ Holy Matrimony Mass",
+        ev_party_title: "🍽️ Wedding Reception",
+        btn_full_website: "View Photo Album & Guest Memories",
+        full_site: "Full Site",
+        music_play: "Play Music",
+        music_playing: "Canon in D",
+        toast_copied: "Wedding invitation link copied to clipboard! ✨",
+        zoom_front: "Front (Holy Mass)",
+        zoom_back: "Back (Reception)"
+      }
+    };
+
+    let currentLang = localStorage.getItem('card_lang') || 'vi';
+    let isFlipped = false;
+    let musicPlaying = false;
+    let audioCtx = null;
+    let musicInterval = null;
+
+    /* ── Apply Language ── */
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('card_lang', lang);
+      document.documentElement.lang = lang;
+      
+      const t = translations[lang];
+      document.getElementById('langFlag').textContent = lang === 'vi' ? '🇺🇸' : '🇻🇳';
+      document.getElementById('langLabel').textContent = lang === 'vi' ? 'English' : 'Tiếng Việt';
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+
+      updateFlipBtnText();
+
+      document.getElementById('zoomFrontBtn').textContent = t.zoom_front;
+      document.getElementById('zoomBackBtn').textContent = t.zoom_back;
+    }
+
+    function toggleLanguage() {
+      applyLanguage(currentLang === 'vi' ? 'en' : 'vi');
+    }
+
+    /* ── Open Envelope Animation ── */
+    function openInvitation() {
+      const envelope = document.getElementById('envelopeBox');
+      const stage = document.getElementById('cardStage');
+      
+      envelope.style.transform = 'scale(0.9) translateY(-20px)';
+      envelope.style.opacity = '0';
+      
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        stage.style.display = 'flex';
+        // Auto-play music if possible
+        if (!musicPlaying) startMusic();
+      }, 400);
+    }
+
+    /* ── Flip Card ── */
+    function flipCard() {
+      const container = document.getElementById('cardFlipContainer');
+      isFlipped = !isFlipped;
+      container.classList.toggle('flipped', isFlipped);
+      updateFlipBtnText();
+    }
+
+    function updateFlipBtnText() {
+      const t = translations[currentLang];
+      const btnText = document.getElementById('flipBtnText');
+      btnText.textContent = isFlipped ? t.btn_flip_to_front : t.btn_flip_to_back;
+    }
+
+    /* ── Touch Swiping on Mobile ── */
+    let touchStartX = 0;
+    const cardEl = document.getElementById('cardFlipContainer');
+    cardEl.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    cardEl.addEventListener('touchend', e => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (Math.abs(touchEndX - touchStartX) > 40) {
+        flipCard();
+      }
+    }, { passive: true });
+
+    /* ── Subtle 3D Tilt on Mouse Move (Desktop) ── */
+    document.addEventListener('mousemove', e => {
+      if (window.innerWidth < 768) return;
+      const card = document.getElementById('cardFlipContainer');
+      if (!card || card.offsetParent === null) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const tiltX = (y / rect.height) * -8;
+      const tiltY = (x / rect.width) * 8;
+      const baseRotate = isFlipped ? 180 : 0;
+      card.style.transform = `rotateY(${baseRotate + tiltY}deg) rotateX(${tiltX}deg)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      const card = document.getElementById('cardFlipContainer');
+      if (!card) return;
+      card.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    });
+
+    /* ── Ambient Romantic Canon in D Synthesizer (Web Audio API) ── */
+    function startMusic() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        playCanonMelody();
+        musicPlaying = true;
+        updateAudioBtn();
+      } catch (e) {
+        console.warn('Audio autoplay blocked by browser policy:', e);
+      }
+    }
+
+    function toggleMusic() {
+      if (!audioCtx) {
+        startMusic();
+        return;
+      }
+      if (musicPlaying) {
+        if (musicInterval) clearInterval(musicInterval);
+        musicPlaying = false;
+      } else {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        playCanonMelody();
+        musicPlaying = true;
+      }
+      updateAudioBtn();
+    }
+
+    function updateAudioBtn() {
+      const btn = document.getElementById('audioToggleBtn');
+      const icon = document.getElementById('audioIcon');
+      const label = document.getElementById('audioLabel');
+      const t = translations[currentLang];
+      if (musicPlaying) {
+        icon.textContent = '🎵';
+        label.textContent = t.music_playing;
+        btn.style.borderColor = 'var(--gold-primary)';
+      } else {
+        icon.textContent = '🔇';
+        label.textContent = t.music_play;
+        btn.style.borderColor = 'rgba(197, 160, 89, 0.4)';
+      }
+    }
+
+    function playCanonMelody() {
+      if (!audioCtx) return;
+      // D major Canon chord tones and romantic chime frequencies
+      const notes = [
+        293.66, 440.00, 587.33, 739.99, // D chord
+        220.00, 329.63, 440.00, 659.25, // A chord
+        246.94, 369.99, 493.88, 739.99, // Bm chord
+        185.00, 277.18, 369.99, 554.37, // F#m chord
+        196.00, 293.66, 392.00, 587.33, // G chord
+        146.83, 220.00, 293.66, 440.00, // D chord
+        196.00, 293.66, 392.00, 587.33, // G chord
+        220.00, 329.63, 440.00, 659.25  // A chord
+      ];
+      let noteIdx = 0;
+      if (musicInterval) clearInterval(musicInterval);
+      
+      function playTone() {
+        if (!musicPlaying || !audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        const freq = notes[noteIdx % notes.length];
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.6);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.7);
+        noteIdx++;
+      }
+
+      playTone();
+      musicInterval = setInterval(playTone, 800);
+    }
+
+    /* ── Calendar Generators ── */
+    function addToGoogleCalendar(type) {
+      let title, details, location, st, et;
+      if (type === 'mass') {
+        title = encodeURIComponent("Alan Duong & Bao-Hoang Huynh - Nuptial Mass at Christ Our Savior Catholic Parish");
+        details = encodeURIComponent("Thánh Lễ Hôn Phối của Alan Dương & Bảo Hoàng Huỳnh tại Giáo xứ Christ Our Savior Catholic Parish (Santa Ana). Chụp ảnh gia đình lúc 11:00 AM.");
+        location = encodeURIComponent("Christ Our Savior Catholic Parish, 2000 W Alton Ave, Santa Ana, CA 92704");
+        st = "20261128T200000Z"; et = "20261128T213000Z";
+      } else {
+        title = encodeURIComponent("Alan Duong & Bao-Hoang Huynh - Wedding Reception at White Palace");
+        details = encodeURIComponent("Tiệc Cưới của Alan Dương & Bảo Hoàng Huỳnh tại Nhà Hàng White Palace Banquet Restaurant Suite 107");
+        location = encodeURIComponent("White Palace Banquet Restaurant, 15351 Brookhurst St #107, Westminster, CA 92683");
+        st = "20261128T220000Z"; et = "20261129T020000Z";
+      }
+      window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${st}/${et}`, '_blank');
+    }
+
+    function downloadICS(type) {
+      let title, desc, loc, dtStart, dtEnd;
+      if (type === 'mass') {
+        title = "Alan Duong & Bao-Hoang Huynh - Holy Mass at Christ Our Savior Parish";
+        desc = "Nuptial Mass of Alan Duong & Bao-Hoang Huynh (Family photos at 11 AM)";
+        loc = "2000 W Alton Ave, Santa Ana, CA 92704";
+        dtStart = "20261128T120000"; dtEnd = "20261128T133000";
+      } else {
+        title = "Alan Duong & Bao-Hoang Huynh - Wedding Reception at White Palace";
+        desc = "Wedding Reception of Alan Duong & Bao-Hoang Huynh";
+        loc = "15351 Brookhurst St #107, Westminster, CA 92683";
+        dtStart = "20261128T140000"; dtEnd = "20261128T180000";
+      }
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AlanDuongBaoHoangWeddingCard//EN\nBEGIN:VEVENT\nSUMMARY:${title}\nDESCRIPTION:${desc}\nLOCATION:${loc}\nDTSTART:${dtStart}\nDTEND:${dtEnd}\nEND:VEVENT\nEND:VCALENDAR`;
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${type}_alan_duong_bao_hoang_wedding.ics`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function openCalendarOptions() {
+      // Toggle to mass or reception depending on current view
+      if (isFlipped) {
+        addToGoogleCalendar('reception');
+      } else {
+        addToGoogleCalendar('mass');
+      }
+    }
+
+    function openDirections() {
+      if (isFlipped) {
+        window.open('https://maps.google.com/?q=White+Palace+15351+Brookhurst+St+107+Westminster+CA+92683', '_blank');
+      } else {
+        window.open('https://maps.google.com/?q=Christ+Our+Savior+Catholic+Parish+2000+W+Alton+Ave+Santa+Ana+CA+92704', '_blank');
+      }
+    }
+
+    /* ── Web Share API & Clipboard ── */
+    async function shareInvitation() {
+      const shareData = {
+        title: 'Thiệp Mời Thành Hôn · Alan Dương & Bảo Hoàng Huỳnh',
+        text: 'Trân trọng kính mời quý khách tham dự Thánh Lễ Hôn Phối & Tiệc Cưới của Alan Dương & Bảo Hoàng Huỳnh vào Thứ Bảy, 28/11/2026 tại California.',
+        url: window.location.href
+      };
+
+      if (navigator.share && /mobile|android|iphone/i.test(navigator.userAgent)) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (e) {
+          // User cancelled or share failed, fallback to clipboard
+        }
+      }
+
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast(translations[currentLang].toast_copied);
+      }).catch(() => {
+        showToast(window.location.href);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastBox');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    /* ── Fullscreen Zoom Lightbox ── */
+    function openZoomModal() {
+      const modal = document.getElementById('zoomModal');
+      modal.classList.add('active');
+      switchZoomSide(isFlipped ? 'back' : 'front');
+    }
+
+    function closeZoomModal(e) {
+      if (e.target.tagName !== 'IMG' && !e.target.classList.contains('zoom-switch-btn')) {
+        document.getElementById('zoomModal').classList.remove('active');
+      }
+    }
+
+    function switchZoomSide(side) {
+      const img = document.getElementById('zoomImg');
+      const btnF = document.getElementById('zoomFrontBtn');
+      const btnB = document.getElementById('zoomBackBtn');
+      if (side === 'front') {
+        img.src = 'card_front.jpg';
+        btnF.classList.add('active');
+        btnB.classList.remove('active');
+      } else {
+        img.src = 'card_back.jpg';
+        btnB.classList.add('active');
+        btnF.classList.remove('active');
+      }
+    }
+
+    /* ── Floating Cherry Blossom Petals Canvas ── */
+    (function initPetals() {
+      const canvas = document.getElementById('petalsCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const petals = Array.from({ length: 22 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 5 + 4,
+        dx: (Math.random() - 0.5) * 0.8 + 0.3,
+        dy: Math.random() * 1.2 + 0.6,
+        rot: Math.random() * 360,
+        dRot: (Math.random() - 0.5) * 1.2,
+        opacity: Math.random() * 0.4 + 0.2
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        petals.forEach(p => {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.r, p.r * 1.6, 0, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(224, 168, 178, ${p.opacity})`;
+          ctx.fill();
+          ctx.restore();
+
+          p.x += p.dx;
+          p.y += p.dy;
+          p.rot += p.dRot;
+
+          if (p.y > h + 20) { p.y = -20; p.x = Math.random() * w; }
+          if (p.x > w + 20) p.x = -20;
+          if (p.x < -20) p.x = w + 20;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // Initialize with preferred language
+    applyLanguage(currentLang);
+
+    // Auto open if URL has hash #card or query param
+    if (window.location.search.includes('open=true') || window.location.hash === '#card') {
+      openInvitation();
+    }
+  </script>
+</body>
+</html>

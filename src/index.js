@@ -287,6 +287,12 @@ export default {
       return Response.redirect(`${url.origin}/#admin`, 302);
     }
 
+    // Direct /card and /invitation routes serving digital invitation card
+    if (url.pathname === '/card' || url.pathname === '/invitation' || url.pathname === '/thiep' || url.pathname === '/thiep-moi') {
+      const cardReq = new Request(new URL('/card.html', request.url), request);
+      return env.ASSETS.fetch(cardReq);
+    }
+
     // Default: serve static assets from public directory
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);
