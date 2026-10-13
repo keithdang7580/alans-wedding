@@ -682,53 +682,28 @@
     </div>
   </nav>
 
-  <!-- Container for Envelope and Card -->
+  <!-- Container for Card -->
   <main class="envelope-container">
-    
-    <!-- Initial Envelope Reveal Screen -->
-    <div class="envelope" id="envelopeBox" onclick="openInvitation()">
-      <div class="envelope-stamp">
-        <span>NOV</span>
-        <strong style="font-size: 1rem; color: #FFF;">28</strong>
-        <span>2026</span>
-      </div>
-
-      <div class="envelope-seal">
-        <span class="envelope-seal-monogram">A&B</span>
-        <span class="envelope-seal-sub">Wedding</span>
-      </div>
-
-      <h1 class="envelope-heading" data-i18n="env_heading">THIỆP MỜI THÀNH HÔN</h1>
-      <p class="envelope-couple">Alan &amp; Bảo Hoàng</p>
-      <p class="envelope-date" data-i18n="env_date">28 · 11 · 2026 · California</p>
-
-      <button class="envelope-btn" type="button" data-i18n="env_btn">
-        <span>✉️</span> Chạm Để Mở Thiệp
-      </button>
-    </div>
 
     <!-- 3D Interactive Card Stage -->
-    <div class="card-stage" id="cardStage">
+    <div class="card-stage" id="cardStage" style="display: flex;">
       
+      <!-- Side Indicator Pill -->
+      <div id="sideIndicator" style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.92);padding:0.4rem 1.1rem;border-radius:999px;border:1px solid rgba(197,160,89,0.45);font-family:'Cinzel',serif;font-size:0.75rem;font-weight:700;color:var(--burgundy);box-shadow:0 3px 10px rgba(0,0,0,0.06);margin-bottom:0.9rem;">
+        ✝ MẶT TRƯỚC · THÁNH LỄ HÔN PHỐI
+      </div>
+
       <!-- 3D Flippable Card -->
       <div class="card-flip-container" id="cardFlipContainer" onclick="flipCard()">
         
         <!-- FRONT: Nuptial Mass / Thánh Lễ -->
         <div class="card-face card-front">
-          <span class="card-badge" data-i18n="badge_front">✝ THÁNH LỄ HÔN PHỐI</span>
           <img src="card_front.jpg" alt="Mặt trước thiệp cưới - Thánh Lễ Hôn Phối Alan Dương & Bảo Hoàng Huỳnh" class="card-img" fetchpriority="high">
-          <div class="card-hint-pill" data-i18n="hint_flip_to_back">
-            <span>🔄</span> Chạm để xem Tiệc Cưới (Mặt sau)
-          </div>
         </div>
 
         <!-- BACK: Reception / Tiệc Cưới -->
         <div class="card-face card-back">
-          <span class="card-badge" data-i18n="badge_back">🍽️ TIỆC CƯỚI</span>
           <img src="card_back.jpg" alt="Mặt sau thiệp cưới - Tiệc Cưới White Palace Alan Dương & Bảo Hoàng Huỳnh" class="card-img" loading="lazy">
-          <div class="card-hint-pill" data-i18n="hint_flip_to_front">
-            <span>🔄</span> Chạm để xem Thánh Lễ (Mặt trước)
-          </div>
         </div>
 
       </div>
@@ -951,6 +926,14 @@
       const t = translations[currentLang];
       const btnText = document.getElementById('flipBtnText');
       btnText.textContent = isFlipped ? t.btn_flip_to_front : t.btn_flip_to_back;
+      const indicator = document.getElementById('sideIndicator');
+      if (indicator) {
+        if (currentLang === 'vi') {
+          indicator.textContent = isFlipped ? '🍽️ MẶT SAU · TIỆC CƯỚI WHITE PALACE' : '✝ MẶT TRƯỚC · THÁNH LỄ HÔN PHỐI';
+        } else {
+          indicator.textContent = isFlipped ? '🍽️ BACK · WEDDING RECEPTION' : '✝ FRONT · HOLY MASS CEREMONY';
+        }
+      }
     }
 
     /* ── Touch Swiping on Mobile ── */
