@@ -688,6 +688,16 @@
     <!-- 3D Interactive Card Stage -->
     <div class="card-stage" id="cardStage" style="display: flex;">
       
+      <!-- Audience Selector: Friends vs Family -->
+      <div class="audience-toggle" style="display:inline-flex; align-items:center; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(197,160,89,0.45); border-radius:999px; padding:3px; margin-bottom:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+        <button id="audBtnFriends" onclick="setAudience('friends')" class="aud-btn active" style="background:var(--burgundy); color:#FFFDF9; border:none; border-radius:999px; padding:0.4rem 0.95rem; font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; cursor:pointer; transition:all 0.25s;">
+          👥 <span data-i18n="aud_friends">Bản Bạn Bè</span>
+        </button>
+        <button id="audBtnFamily" onclick="setAudience('family')" class="aud-btn" style="background:transparent; color:var(--text-muted); border:none; border-radius:999px; padding:0.4rem 0.95rem; font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:600; cursor:pointer; transition:all 0.25s;">
+          👨‍👩‍👧‍👦 <span data-i18n="aud_family">Bản Gia Đình</span>
+        </button>
+      </div>
+
       <!-- Side Indicator Pill -->
       <div id="sideIndicator" style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.92);padding:0.4rem 1.1rem;border-radius:999px;border:1px solid rgba(197,160,89,0.45);font-family:'Cinzel',serif;font-size:0.75rem;font-weight:700;color:var(--burgundy);box-shadow:0 3px 10px rgba(0,0,0,0.06);margin-bottom:0.9rem;">
         ✝ MẶT TRƯỚC · THÁNH LỄ HÔN PHỐI
@@ -703,7 +713,7 @@
 
         <!-- BACK: Reception / Tiệc Cưới -->
         <div class="card-face card-back">
-          <img src="card_back.jpg" alt="Mặt sau thiệp cưới - Tiệc Cưới White Palace Alan Dương & Bảo Hoàng Huỳnh" class="card-img" loading="lazy">
+          <img id="cardBackImg" src="card_back_friends.jpg" alt="Mặt sau thiệp cưới - Tiệc Cưới White Palace Alan Dương & Bảo Hoàng Huỳnh" class="card-img" loading="lazy">
         </div>
 
       </div>
@@ -784,10 +794,20 @@
 
         </div>
 
-        <!-- Download Printable PDF Button -->
-        <a href="wedding_invitation.pdf" target="_blank" download="Alan_Duong_Bao_Hoang_Wedding_Invitation.pdf" class="flip-btn-main" style="background:#FFFFFF; color:var(--text-dark); border: 1px solid rgba(197, 160, 89, 0.6); text-decoration:none;">
-          <span>📄</span> <span data-i18n="btn_download_pdf">Tải Bản Thiệp In PDF (2 Trang)</span>
-        </a>
+        <!-- Download Printable PDF Options (Friends & Family) -->
+        <div style="width:100%; display:flex; flex-direction:column; gap:0.45rem;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.8px; text-align:center;">
+            📄 <span data-i18n="pdf_download_title">Tải Bản In PDF (300 DPI)</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%;">
+            <a href="wedding_invitation_friends.pdf" target="_blank" download="Alan_Duong_Bao_Hoang_Wedding_Invitation_Friends.pdf" class="chip-btn" id="btnDlFriends" style="padding:0.75rem 0.5rem; justify-content:center; text-align:center; font-size:0.75rem; border-radius:10px; background:#FFFFFF; border:1px solid rgba(197, 160, 89, 0.45); box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+              👥 <span data-i18n="btn_dl_friends">PDF Bạn Bè (2 Trang)</span>
+            </a>
+            <a href="wedding_invitation_family.pdf" target="_blank" download="Alan_Duong_Bao_Hoang_Wedding_Invitation_Family.pdf" class="chip-btn" id="btnDlFamily" style="padding:0.75rem 0.5rem; justify-content:center; text-align:center; font-size:0.75rem; border-radius:10px; background:#FFFFFF; border:1px solid rgba(197, 160, 89, 0.45); box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+              👨‍👩‍👧‍👦 <span data-i18n="btn_dl_family">PDF Gia Đình (2 Trang)</span>
+            </a>
+          </div>
+        </div>
 
         <!-- Full Website Button -->
         <a href="/" class="flip-btn-main" style="background:#FFFFFF; color:var(--burgundy); border: 1px solid var(--gold-primary); text-decoration:none;">
@@ -839,7 +859,11 @@
         act_share: "Chia Sẻ Thiệp",
         ev_mass_title: "✝ Thánh Lễ Hôn Phối",
         ev_party_title: "🍽️ Tiệc Cưới Thân Mật",
-        btn_download_pdf: "Tải Bản Thiệp In PDF (2 Trang)",
+        aud_friends: "Bản Bạn Bè",
+        aud_family: "Bản Gia Đình",
+        pdf_download_title: "Tải Bản In PDF (300 DPI)",
+        btn_dl_friends: "PDF Bạn Bè (2 Trang)",
+        btn_dl_family: "PDF Gia Đình (2 Trang)",
         btn_full_website: "Xem Album Ảnh & Góc Ảnh Khách Mời",
         full_site: "Chi Tiết",
         music_play: "Bật Nhạc",
@@ -864,7 +888,11 @@
         act_share: "Share Invitation",
         ev_mass_title: "✝ Holy Matrimony Mass",
         ev_party_title: "🍽️ Wedding Reception",
-        btn_download_pdf: "Download Printable PDF (2 Pages)",
+        aud_friends: "Friends Edition",
+        aud_family: "Family Edition",
+        pdf_download_title: "Download Printable PDF (300 DPI)",
+        btn_dl_friends: "PDF Friends (2 Pages)",
+        btn_dl_family: "PDF Family (2 Pages)",
         btn_full_website: "View Photo Album & Guest Memories",
         full_site: "Full Site",
         music_play: "Play Music",
@@ -880,6 +908,71 @@
     let musicPlaying = false;
     let audioCtx = null;
     let musicInterval = null;
+    let currentAudience = 'friends';
+
+    /* ── Audience Selector (Friends vs Family) ── */
+    function setAudience(aud) {
+      currentAudience = aud;
+      const btnFriends = document.getElementById('audBtnFriends');
+      const btnFamily = document.getElementById('audBtnFamily');
+      const backImg = document.getElementById('cardBackImg');
+      const zoomImg = document.getElementById('zoomImg');
+      const btnDlFriends = document.getElementById('btnDlFriends');
+      const btnDlFamily = document.getElementById('btnDlFamily');
+      const zoomPdf = document.getElementById('zoomPdfBtn');
+
+      if (aud === 'family') {
+        if (btnFriends) {
+          btnFriends.style.background = 'transparent';
+          btnFriends.style.color = 'var(--text-muted)';
+        }
+        if (btnFamily) {
+          btnFamily.style.background = 'var(--burgundy)';
+          btnFamily.style.color = '#FFFDF9';
+        }
+        if (backImg) backImg.src = 'card_back_family.jpg';
+        if (btnDlFamily) {
+          btnDlFamily.style.borderColor = 'var(--burgundy)';
+          btnDlFamily.style.fontWeight = '700';
+        }
+        if (btnDlFriends) {
+          btnDlFriends.style.borderColor = 'rgba(197, 160, 89, 0.45)';
+          btnDlFriends.style.fontWeight = '500';
+        }
+        if (zoomPdf) {
+          zoomPdf.href = 'wedding_invitation_family.pdf';
+          zoomPdf.download = 'Alan_Duong_Bao_Hoang_Wedding_Invitation_Family.pdf';
+        }
+        if (zoomImg && currentZoomSide === 'back') {
+          zoomImg.src = 'card_back_family.jpg';
+        }
+      } else {
+        if (btnFamily) {
+          btnFamily.style.background = 'transparent';
+          btnFamily.style.color = 'var(--text-muted)';
+        }
+        if (btnFriends) {
+          btnFriends.style.background = 'var(--burgundy)';
+          btnFriends.style.color = '#FFFDF9';
+        }
+        if (backImg) backImg.src = 'card_back_friends.jpg';
+        if (btnDlFriends) {
+          btnDlFriends.style.borderColor = 'var(--burgundy)';
+          btnDlFriends.style.fontWeight = '700';
+        }
+        if (btnDlFamily) {
+          btnDlFamily.style.borderColor = 'rgba(197, 160, 89, 0.45)';
+          btnDlFamily.style.fontWeight = '500';
+        }
+        if (zoomPdf) {
+          zoomPdf.href = 'wedding_invitation_friends.pdf';
+          zoomPdf.download = 'Alan_Duong_Bao_Hoang_Wedding_Invitation_Friends.pdf';
+        }
+        if (zoomImg && currentZoomSide === 'back') {
+          zoomImg.src = 'card_back_friends.jpg';
+        }
+      }
+    }
 
     /* ── Apply Language ── */
     function applyLanguage(lang) {
@@ -1166,7 +1259,9 @@
       }
     }
 
+    let currentZoomSide = 'front';
     function switchZoomSide(side) {
+      currentZoomSide = side;
       const img = document.getElementById('zoomImg');
       const btnF = document.getElementById('zoomFrontBtn');
       const btnB = document.getElementById('zoomBackBtn');
@@ -1175,7 +1270,7 @@
         btnF.classList.add('active');
         btnB.classList.remove('active');
       } else {
-        img.src = 'card_back.jpg';
+        img.src = currentAudience === 'family' ? 'card_back_family.jpg' : 'card_back_friends.jpg';
         btnB.classList.add('active');
         btnF.classList.remove('active');
       }
@@ -1231,6 +1326,17 @@
 
     // Initialize with preferred language
     applyLanguage(currentLang);
+
+    // Initialize audience based on URL param (?type=family or ?audience=family)
+    (function initAudienceFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const t = (params.get('type') || params.get('audience') || '').toLowerCase();
+      if (t === 'family' || t === 'giadinh') {
+        setAudience('family');
+      } else {
+        setAudience('friends');
+      }
+    })();
 
     // Auto open if URL has hash #card or query param
     if (window.location.search.includes('open=true') || window.location.hash === '#card') {
